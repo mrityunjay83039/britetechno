@@ -42,14 +42,14 @@ export default function AdminSidebar() {
   ];
 
   return (
-    <aside className="w-64 bg-[#0F0F11] text-[#FAF8F5] flex flex-col border-r border-[#C5A880]/15 min-h-screen shrink-0">
+    <aside className="w-64 bg-[#1E3A8A] text-[#FFFFFF] flex flex-col border-r border-[#1E3A8A]/15 min-h-screen shrink-0">
       {/* Brand logo */}
-      <div className="h-20 border-b border-[#C5A880]/15 flex flex-col justify-center px-6">
+      <div className="h-20 border-b border-[#1E3A8A]/15 flex flex-col justify-center px-6">
         <Link href="/" className="flex flex-col">
-          <span className="font-serif text-xl font-bold tracking-[0.2em] text-[#C5A880]">
+          <span className="font-sans text-xl font-bold tracking-[0.2em] text-[#1E3A8A]">
             BHAVATSYAM
           </span>
-          <span className="font-sans text-[7px] tracking-[0.4em] text-[#8C857B] uppercase -mt-0.5 font-bold">
+          <span className="font-sans text-[7px] tracking-[0.4em] text-[#64748B] uppercase -mt-0.5 font-bold">
             Heritage & Modernity
           </span>
         </Link>
@@ -67,11 +67,11 @@ export default function AdminSidebar() {
               href={item.href}
               className={`flex items-center gap-3 px-4 py-3 rounded-sm font-sans text-xs font-bold tracking-wider transition-all duration-200 ${
                 isActive
-                  ? 'bg-[#C5A880] text-[#0F0F11]'
-                  : 'text-[#8C857B] hover:bg-white/5 hover:text-[#FAF8F5]'
+                  ? 'bg-[#1E3A8A] text-white'
+                  : 'text-[#64748B] hover:bg-white/5 hover:text-[#FFFFFF]'
               }`}
             >
-              <Icon className={`w-4 h-4 ${isActive ? 'text-[#0F0F11]' : 'text-[#C5A880]'}`} />
+              <Icon className={`w-4 h-4 ${isActive ? 'text-[#1E3A8A]' : 'text-[#1E3A8A]'}`} />
               <span className="uppercase">{item.name}</span>
             </Link>
           );
@@ -79,8 +79,8 @@ export default function AdminSidebar() {
       </nav>
 
       {/* Bottom info */}
-      <div className="p-6 border-t border-[#C5A880]/10 text-center">
-        <p className="font-sans text-[10px] text-[#8C857B]">BHAVATSYAM Admin v1.0</p>
+      <div className="p-6 border-t border-[#1E3A8A]/10 text-center">
+        <p className="font-sans text-[10px] text-[#64748B]">BHAVATSYAM Admin v1.0</p>
       </div>
     </aside>
   );

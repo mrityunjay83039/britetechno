@@ -260,7 +260,7 @@ export default function InventoryClient({ initialProducts, categories }: Invento
       <div className="flex justify-end">
         <button
           onClick={openAddModal}
-          className="flex items-center gap-2 px-5 py-3 bg-[#0F0F11] text-[#FAF8F5] border border-[#C5A880]/30 hover:bg-[#C5A880] hover:text-[#0F0F11] font-sans text-xs font-bold tracking-wider transition-all duration-300 cursor-pointer uppercase rounded-sm shadow-xs"
+          className="flex items-center gap-2 px-5 py-3 bg-[#1E3A8A] text-[#FFFFFF] border border-[#1E3A8A]/30 hover:bg-[#1E3A8A] hover:text-[#1E3A8A] font-sans text-xs font-bold tracking-wider transition-all duration-300 cursor-pointer uppercase rounded-sm shadow-xs"
         >
           <Plus className="w-4 h-4" />
           Add New Product
@@ -268,11 +268,11 @@ export default function InventoryClient({ initialProducts, categories }: Invento
       </div>
 
       {/* Inventory Products Table */}
-      <div className="bg-white border border-[#C5A880]/15 rounded-sm overflow-hidden shadow-xs">
+      <div className="bg-white border border-[#1E3A8A]/15 rounded-sm overflow-hidden shadow-xs">
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse">
             <thead>
-              <tr className="bg-[#FAF8F5] border-b border-[#C5A880]/15 text-[#8C857B] font-sans text-[10px] font-bold uppercase tracking-wider">
+              <tr className="bg-[#FFFFFF] border-b border-[#1E3A8A]/15 text-[#64748B] font-sans text-[10px] font-bold uppercase tracking-wider">
                 <th className="py-4 px-6 w-24">Image</th>
                 <th className="py-4 px-6">Product Details</th>
                 <th className="py-4 px-6">Category</th>
@@ -282,10 +282,10 @@ export default function InventoryClient({ initialProducts, categories }: Invento
                 <th className="py-4 px-6 text-right">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#C5A880]/10 font-sans text-sm">
+            <tbody className="divide-y divide-[#1E3A8A]/10 font-sans text-sm">
               {products.length === 0 ? (
                 <tr>
-                  <td colSpan={7} className="py-12 text-center text-[#8C857B] font-medium">
+                  <td colSpan={7} className="py-12 text-center text-[#64748B] font-medium">
                     No products found in the database. Click &quot;Add New Product&quot; to create one.
                   </td>
                 </tr>
@@ -297,9 +297,9 @@ export default function InventoryClient({ initialProducts, categories }: Invento
                   }, 0);
 
                   return (
-                    <tr key={product._id} className="hover:bg-[#FAF8F5]/40 transition-colors">
+                    <tr key={product._id} className="hover:bg-blue-900/40 transition-colors">
                       <td className="py-4 px-6">
-                        <div className="relative w-14 h-16 bg-[#FAF8F5] border border-[#C5A880]/10 rounded-xs overflow-hidden">
+                        <div className="relative w-14 h-16 bg-[#FFFFFF] border border-[#1E3A8A]/10 rounded-xs overflow-hidden">
                           <Image
                             src={product.images[0] || '/images/placeholder.jpg'}
                             alt={product.title}
@@ -311,23 +311,23 @@ export default function InventoryClient({ initialProducts, categories }: Invento
                         </div>
                       </td>
                       <td className="py-4 px-6">
-                        <div className="font-semibold text-[#0F0F11] text-base">{product.title}</div>
+                        <div className="font-semibold text-[#1E3A8A] text-base">{product.title}</div>
                         <div
-                          className="text-xs text-[#8C857B] truncate max-w-xs mt-0.5"
+                          className="text-xs text-[#64748B] truncate max-w-xs mt-0.5"
                           dangerouslySetInnerHTML={{ __html: product.description.replace(/<[^>]*>/g, '') }}
                         />
-                        <div className="text-[10px] text-[#C5A880] mt-1 font-mono tracking-wider">{product.slug}</div>
+                        <div className="text-[10px] text-[#1E3A8A] mt-1 font-mono tracking-wider">{product.slug}</div>
                       </td>
-                      <td className="py-4 px-6 text-[#0F0F11] font-medium">
+                      <td className="py-4 px-6 text-[#1E3A8A] font-medium">
                         {typeof product.category === 'object' && product.category
                           ? product.category.name
                           : String(product.category || '—')}
                       </td>
-                      <td className="py-4 px-6 font-semibold text-[#0F0F11]">{formatCurrency(product.price)}</td>
+                      <td className="py-4 px-6 font-semibold text-[#1E3A8A]">{formatCurrency(product.price)}</td>
                       <td className="py-4 px-6">
                         <div className="space-y-1">
                           <div className="flex items-center gap-1.5">
-                            <span className="font-semibold text-xs text-[#0F0F11]">Total Stock:</span>
+                            <span className="font-semibold text-xs text-[#1E3A8A]">Total Stock:</span>
                             <span className={`text-xs font-bold ${totalStock > 0 ? 'text-green-700' : 'text-red-600'}`}>
                               {totalStock} units
                             </span>
@@ -342,9 +342,9 @@ export default function InventoryClient({ initialProducts, categories }: Invento
                               return (
                                 <span
                                   key={i}
-                                  className="text-[10px] bg-[#FAF8F5] border border-[#C5A880]/15 text-[#8C857B] px-1.5 py-0.5 rounded-sm"
+                                  className="text-[10px] bg-[#FFFFFF] border border-[#1E3A8A]/15 text-[#64748B] px-1.5 py-0.5 rounded-sm"
                                 >
-                                  {label}: <strong className="text-[#0F0F11]">{qty}</strong>
+                                  {label}: <strong className="text-[#1E3A8A]">{qty}</strong>
                                 </span>
                               );
                             })}
@@ -356,7 +356,7 @@ export default function InventoryClient({ initialProducts, categories }: Invento
                           className={`inline-flex items-center px-2 py-1 rounded-full text-[10px] font-bold tracking-wider uppercase ${
                             product.isPublished
                               ? 'bg-green-50 text-green-700 border border-green-200'
-                              : 'bg-[#FAF8F5] text-[#8C857B] border border-[#C5A880]/15'
+                              : 'bg-[#FFFFFF] text-[#64748B] border border-[#1E3A8A]/15'
                           }`}
                         >
                           {product.isPublished ? 'Published' : 'Draft'}
@@ -365,7 +365,7 @@ export default function InventoryClient({ initialProducts, categories }: Invento
                       <td className="py-4 px-6 text-right">
                         <button
                           onClick={() => openEditModal(product)}
-                          className="inline-flex items-center gap-1.5 px-3 py-1.5 border border-[#C5A880]/40 text-[#0F0F11] hover:bg-[#C5A880] hover:text-[#0F0F11] font-sans text-xs font-bold uppercase transition-all duration-300 cursor-pointer rounded-xs"
+                          className="inline-flex items-center gap-1.5 px-3 py-1.5 border border-[#1E3A8A]/40 text-[#1E3A8A] hover:bg-[#1E3A8A] hover:text-[#1E3A8A] font-sans text-xs font-bold uppercase transition-all duration-300 cursor-pointer rounded-xs"
                         >
                           <Pencil className="w-3 h-3" />
                           Edit
@@ -383,26 +383,26 @@ export default function InventoryClient({ initialProducts, categories }: Invento
       {/* Advanced Product Form Modal (Shopify/WooCommerce Style) */}
       {isModalOpen && (
         <div className="fixed inset-0 z-50 overflow-y-auto flex items-center justify-center p-2 sm:p-4 bg-black/70 backdrop-blur-xs">
-          <div className="relative bg-[#FAFAFA] w-full max-w-5xl rounded-sm border border-[#C5A880]/30 shadow-2xl overflow-hidden flex flex-col max-h-[95vh]">
+          <div className="relative bg-[#FFFFFF] w-full max-w-5xl rounded-sm border border-[#1E3A8A]/30 shadow-2xl overflow-hidden flex flex-col max-h-[95vh]">
 
             {/* Modal Header */}
-            <div className="bg-[#0F0F11] px-6 py-4 flex items-center justify-between border-b border-[#C5A880]/20 shrink-0">
+            <div className="bg-[#1E3A8A] px-6 py-4 flex items-center justify-between border-b border-[#1E3A8A]/20 shrink-0">
               <div className="flex items-center gap-3">
-                <div className="p-2 bg-[#C5A880]/10 border border-[#C5A880]/30 rounded-xs text-[#C5A880]">
+                <div className="p-2 bg-[#1E3A8A]/10 border border-[#1E3A8A]/30 rounded-xs text-[#1E3A8A]">
                   <Package className="w-5 h-5" />
                 </div>
                 <div>
-                  <h3 className="font-serif text-lg font-bold text-[#C5A880] tracking-wide">
+                  <h3 className="font-sans text-lg font-bold text-[#1E3A8A] tracking-wide">
                     {editingProduct ? 'Edit Product Architecture' : 'Create Product Architecture'}
                   </h3>
-                  <p className="font-sans text-[10px] text-[#8C857B] uppercase tracking-widest mt-0.5">
+                  <p className="font-sans text-[10px] text-[#64748B] uppercase tracking-widest mt-0.5">
                     Industry-Standard Multi-Variant & Rich Content Management
                   </p>
                 </div>
               </div>
               <button
                 onClick={() => setIsModalOpen(false)}
-                className="text-[#8C857B] hover:text-[#FAF8F5] transition-colors cursor-pointer p-1"
+                className="text-[#64748B] hover:text-[#FFFFFF] transition-colors cursor-pointer p-1"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -428,24 +428,24 @@ export default function InventoryClient({ initialProducts, categories }: Invento
                 )}
 
                 {/* Section 1: General Info Card */}
-                <div className="bg-white border border-[#C5A880]/20 rounded-sm p-5 space-y-4 shadow-2xs">
-                  <div className="flex items-center gap-2 border-b border-[#C5A880]/15 pb-3">
-                    <Sparkles className="w-4 h-4 text-[#FF6F61]" />
-                    <h4 className="font-serif text-sm font-bold text-[#0F0F11] uppercase tracking-wider">
+                <div className="bg-white border border-[#1E3A8A]/20 rounded-sm p-5 space-y-4 shadow-2xs">
+                  <div className="flex items-center gap-2 border-b border-[#1E3A8A]/15 pb-3">
+                    <Sparkles className="w-4 h-4 text-[#1E3A8A]" />
+                    <h4 className="font-sans text-sm font-bold text-[#1E3A8A] uppercase tracking-wider">
                       General Information
                     </h4>
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="space-y-1">
-                      <label className="font-sans text-xs font-bold text-[#0F0F11] uppercase tracking-wider block">
+                      <label className="font-sans text-xs font-bold text-[#1E3A8A] uppercase tracking-wider block">
                         Product Title *
                       </label>
                       <input
                         type="text"
                         {...register('title')}
                         placeholder="e.g. Royal Silk Chinnon Co-ord Set"
-                        className="w-full px-3 py-2 bg-white border border-[#C5A880]/30 focus:border-[#C5A880] text-xs font-sans rounded-sm outline-none"
+                        className="w-full px-3 py-2 bg-white border border-[#1E3A8A]/30 focus:border-[#1E3A8A] text-xs font-sans rounded-sm outline-none"
                       />
                       {errors.title && (
                         <span className="text-[10px] text-red-600 font-semibold">{errors.title.message}</span>
@@ -453,12 +453,12 @@ export default function InventoryClient({ initialProducts, categories }: Invento
                     </div>
 
                     <div className="space-y-1">
-                      <label className="font-sans text-xs font-bold text-[#0F0F11] uppercase tracking-wider block">
+                      <label className="font-sans text-xs font-bold text-[#1E3A8A] uppercase tracking-wider block">
                         Category *
                       </label>
                       <select
                         {...register('category')}
-                        className="w-full px-3 py-2 bg-white border border-[#C5A880]/30 focus:border-[#C5A880] text-xs font-sans rounded-sm outline-none"
+                        className="w-full px-3 py-2 bg-white border border-[#1E3A8A]/30 focus:border-[#1E3A8A] text-xs font-sans rounded-sm outline-none"
                       >
                         <option value="">Select Category</option>
                         {categories.map((cat) => (
@@ -475,7 +475,7 @@ export default function InventoryClient({ initialProducts, categories }: Invento
 
                   {/* Rich Text Editor for Description */}
                   <div className="space-y-1">
-                    <label className="font-sans text-xs font-bold text-[#0F0F11] uppercase tracking-wider block">
+                    <label className="font-sans text-xs font-bold text-[#1E3A8A] uppercase tracking-wider block">
                       Description (Rich Text Formatting) *
                     </label>
                     <Controller
@@ -492,10 +492,10 @@ export default function InventoryClient({ initialProducts, categories }: Invento
                 </div>
 
                 {/* Section 2: Media Gallery Card */}
-                <div className="bg-white border border-[#C5A880]/20 rounded-sm p-5 space-y-4 shadow-2xs">
-                  <div className="flex items-center gap-2 border-b border-[#C5A880]/15 pb-3">
-                    <Tag className="w-4 h-4 text-[#FF6F61]" />
-                    <h4 className="font-serif text-sm font-bold text-[#0F0F11] uppercase tracking-wider">
+                <div className="bg-white border border-[#1E3A8A]/20 rounded-sm p-5 space-y-4 shadow-2xs">
+                  <div className="flex items-center gap-2 border-b border-[#1E3A8A]/15 pb-3">
+                    <Tag className="w-4 h-4 text-[#1E3A8A]" />
+                    <h4 className="font-sans text-sm font-bold text-[#1E3A8A] uppercase tracking-wider">
                       Media Gallery & Drag-and-Drop Uploader
                     </h4>
                   </div>
@@ -513,17 +513,17 @@ export default function InventoryClient({ initialProducts, categories }: Invento
                 </div>
 
                 {/* Section 3: Pricing & Status Card */}
-                <div className="bg-white border border-[#C5A880]/20 rounded-sm p-5 space-y-4 shadow-2xs">
-                  <div className="flex items-center gap-2 border-b border-[#C5A880]/15 pb-3">
-                    <Tag className="w-4 h-4 text-[#FF6F61]" />
-                    <h4 className="font-serif text-sm font-bold text-[#0F0F11] uppercase tracking-wider">
+                <div className="bg-white border border-[#1E3A8A]/20 rounded-sm p-5 space-y-4 shadow-2xs">
+                  <div className="flex items-center gap-2 border-b border-[#1E3A8A]/15 pb-3">
+                    <Tag className="w-4 h-4 text-[#1E3A8A]" />
+                    <h4 className="font-sans text-sm font-bold text-[#1E3A8A] uppercase tracking-wider">
                       Pricing & Visibility
                     </h4>
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
                     <div className="space-y-1">
-                      <label className="font-sans text-xs font-bold text-[#0F0F11] uppercase tracking-wider block">
+                      <label className="font-sans text-xs font-bold text-[#1E3A8A] uppercase tracking-wider block">
                         Base Product Price (₹) *
                       </label>
                       <input
@@ -531,7 +531,7 @@ export default function InventoryClient({ initialProducts, categories }: Invento
                         min="0"
                         {...register('price')}
                         placeholder="e.g. 2999"
-                        className="w-full px-3 py-2 bg-white border border-[#C5A880]/30 focus:border-[#C5A880] text-xs font-sans rounded-sm outline-none font-bold"
+                        className="w-full px-3 py-2 bg-white border border-[#1E3A8A]/30 focus:border-[#1E3A8A] text-xs font-sans rounded-sm outline-none font-bold"
                       />
                       {errors.price && (
                         <span className="text-[10px] text-red-600 font-semibold">{errors.price.message}</span>
@@ -543,9 +543,9 @@ export default function InventoryClient({ initialProducts, categories }: Invento
                         type="checkbox"
                         id="isPublished"
                         {...register('isPublished')}
-                        className="w-4 h-4 accent-[#FF6F61] cursor-pointer"
+                        className="w-4 h-4 accent-[#1E3A8A] cursor-pointer"
                       />
-                      <label htmlFor="isPublished" className="font-sans text-xs font-bold text-[#0F0F11] uppercase tracking-wider cursor-pointer select-none">
+                      <label htmlFor="isPublished" className="font-sans text-xs font-bold text-[#1E3A8A] uppercase tracking-wider cursor-pointer select-none">
                         Publish Immediately to Storefront
                       </label>
                     </div>
@@ -553,10 +553,10 @@ export default function InventoryClient({ initialProducts, categories }: Invento
                 </div>
 
                 {/* Section 4: Variant Options Generator */}
-                <div className="bg-white border border-[#C5A880]/20 rounded-sm p-5 space-y-4 shadow-2xs">
-                  <div className="flex items-center gap-2 border-b border-[#C5A880]/15 pb-3">
-                    <Layers className="w-4 h-4 text-[#FF6F61]" />
-                    <h4 className="font-serif text-sm font-bold text-[#0F0F11] uppercase tracking-wider">
+                <div className="bg-white border border-[#1E3A8A]/20 rounded-sm p-5 space-y-4 shadow-2xs">
+                  <div className="flex items-center gap-2 border-b border-[#1E3A8A]/15 pb-3">
+                    <Layers className="w-4 h-4 text-[#1E3A8A]" />
+                    <h4 className="font-sans text-sm font-bold text-[#1E3A8A] uppercase tracking-wider">
                       Option Definitions (Size, Color, Fabric)
                     </h4>
                   </div>
@@ -572,11 +572,11 @@ export default function InventoryClient({ initialProducts, categories }: Invento
                 </div>
 
                 {/* Section 5: Cartesian Variant Inventory Table */}
-                <div className="bg-white border border-[#C5A880]/20 rounded-sm p-5 space-y-4 shadow-2xs">
-                  <div className="flex items-center justify-between border-b border-[#C5A880]/15 pb-3">
+                <div className="bg-white border border-[#1E3A8A]/20 rounded-sm p-5 space-y-4 shadow-2xs">
+                  <div className="flex items-center justify-between border-b border-[#1E3A8A]/15 pb-3">
                     <div className="flex items-center gap-2">
-                      <Layers className="w-4 h-4 text-[#FF6F61]" />
-                      <h4 className="font-serif text-sm font-bold text-[#0F0F11] uppercase tracking-wider">
+                      <Layers className="w-4 h-4 text-[#1E3A8A]" />
+                      <h4 className="font-sans text-sm font-bold text-[#1E3A8A] uppercase tracking-wider">
                         Auto-Generated Variant Inventory Table ({watchVariants.length} Rows)
                       </h4>
                     </div>
@@ -596,22 +596,22 @@ export default function InventoryClient({ initialProducts, categories }: Invento
               </div>
 
               {/* Sticky Footer Bar */}
-              <div className="bg-[#0F0F11] border-t border-[#C5A880]/20 px-6 py-4 flex items-center justify-between shrink-0">
-                <div className="text-xs font-sans text-[#8C857B]">
-                  <span className="font-bold text-[#C5A880]">{watchVariants.length} Variants</span> generated
+              <div className="bg-[#1E3A8A] border-t border-[#1E3A8A]/20 px-6 py-4 flex items-center justify-between shrink-0">
+                <div className="text-xs font-sans text-[#64748B]">
+                  <span className="font-bold text-[#1E3A8A]">{watchVariants.length} Variants</span> generated
                 </div>
                 <div className="flex gap-3">
                   <button
                     type="button"
                     onClick={() => setIsModalOpen(false)}
-                    className="px-5 py-2.5 border border-[#C5A880]/30 text-[#FAF8F5] hover:bg-white/10 font-sans text-xs font-bold tracking-wider transition-colors cursor-pointer uppercase rounded-sm"
+                    className="px-5 py-2.5 border border-[#1E3A8A]/30 text-[#FFFFFF] hover:bg-white/10 font-sans text-xs font-bold tracking-wider transition-colors cursor-pointer uppercase rounded-sm"
                   >
                     Cancel
                   </button>
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="px-6 py-2.5 bg-[#FF6F61] text-white hover:bg-[#E05A47] disabled:opacity-50 font-sans text-xs font-bold tracking-wider transition-colors cursor-pointer uppercase rounded-sm flex items-center gap-2 shadow-sm"
+                    className="px-6 py-2.5 bg-[#1E3A8A] text-white hover:bg-[#1D4ED8] disabled:opacity-50 font-sans text-xs font-bold tracking-wider transition-colors cursor-pointer uppercase rounded-sm flex items-center gap-2 shadow-sm"
                   >
                     <Save className="w-4 h-4" />
                     {isSubmitting ? 'Saving Product...' : editingProduct ? 'Save Product Changes' : 'Create Product'}

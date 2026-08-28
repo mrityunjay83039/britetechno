@@ -14,12 +14,12 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || "https://bhavatsyam.com"),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || "https://britetechno.com"),
   title: {
-    default: "BHAVATSYAM | Heritage and Modernity",
-    template: "%s | BHAVATSYAM",
+    default: "BRITE TECHNO | B2B Industrial & Commercial Lighting",
+    template: "%s | BRITE TECHNO",
   },
-  description: "BHAVATSYAM - A Perfect Blend of Heritage and Modernity. Minimalist, premium, and luxury designer clothing.",
+  description: "BRITE TECHNO - Industrial & Commercial Lighting Equipment Provider across Canada & US.",
   icons: {
     icon: [
       { url: '/icon.svg', type: 'image/svg+xml' },
@@ -29,17 +29,17 @@ export const metadata: Metadata = {
     apple: '/icon.svg',
   },
   openGraph: {
-    title: "BHAVATSYAM | Heritage and Modernity",
-    description: "BHAVATSYAM - A Perfect Blend of Heritage and Modernity. Minimalist, premium, and luxury designer clothing.",
-    url: "https://bhavatsyam.com",
-    siteName: "BHAVATSYAM",
+    title: "BRITE TECHNO | B2B Industrial Lighting",
+    description: "BRITE TECHNO - Industrial & Commercial Lighting Equipment Provider across Canada & US.",
+    url: "https://britetechno.com",
+    siteName: "BRITE TECHNO",
     locale: "en_US",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "BHAVATSYAM | Heritage and Modernity",
-    description: "BHAVATSYAM - A Perfect Blend of Heritage and Modernity. Minimalist, premium, and luxury designer clothing.",
+    title: "BRITE TECHNO | B2B Industrial Lighting",
+    description: "BRITE TECHNO - Industrial & Commercial Lighting Equipment Provider across Canada & US.",
   },
 };
 
@@ -49,7 +49,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col bg-white text-slate-900 font-sans">{children}</body>
     </html>
   );
 }

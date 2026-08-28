@@ -123,7 +123,7 @@ export function ReceiptEmail({
 
 // Design System & Branding Inline Styles (BHAVATSYAM Brand Rules)
 const mainStyle: React.CSSProperties = {
-  backgroundColor: '#FAF8F5',
+  backgroundColor: '#FFFFFF',
   fontFamily: 'Inter, "Plus Jakarta Sans", -apple-system, sans-serif',
   padding: '40px 0',
 };
@@ -131,8 +131,8 @@ const mainStyle: React.CSSProperties = {
 const containerStyle: React.CSSProperties = {
   margin: '0 auto',
   width: '560px',
-  backgroundColor: '#0F0F11',
-  color: '#FAF8F5',
+  backgroundColor: '#1E3A8A',
+  color: '#FFFFFF',
   borderRadius: '0px',
   border: '1px solid rgba(197, 168, 128, 0.3)',
   padding: '40px 0',
@@ -147,7 +147,7 @@ const logoStyle: React.CSSProperties = {
   fontSize: '28px',
   fontWeight: 'bold',
   letterSpacing: '0.25em',
-  color: '#C5A880',
+  color: '#1E3A8A',
   margin: '0',
   fontFamily: 'Georgia, serif',
   textTransform: 'uppercase',
@@ -156,7 +156,7 @@ const logoStyle: React.CSSProperties = {
 const taglineStyle: React.CSSProperties = {
   fontSize: '8px',
   letterSpacing: '0.4em',
-  color: '#8C857B',
+  color: '#64748B',
   textTransform: 'uppercase',
   margin: '6px 0 0 0',
   fontWeight: 'bold',
@@ -174,7 +174,7 @@ const contentStyle: React.CSSProperties = {
 const headingStyle: React.CSSProperties = {
   fontSize: '20px',
   fontWeight: '600',
-  color: '#C5A880',
+  color: '#1E3A8A',
   fontFamily: 'Georgia, serif',
   marginBottom: '20px',
   letterSpacing: '0.05em',
@@ -183,7 +183,7 @@ const headingStyle: React.CSSProperties = {
 const subheadingStyle: React.CSSProperties = {
   fontSize: '15px',
   fontWeight: '600',
-  color: '#C5A880',
+  color: '#1E3A8A',
   fontFamily: 'Georgia, serif',
   marginTop: '30px',
   marginBottom: '15px',
@@ -193,7 +193,7 @@ const subheadingStyle: React.CSSProperties = {
 const textStyle: React.CSSProperties = {
   fontSize: '13px',
   lineHeight: '22px',
-  color: '#FAF8F5',
+  color: '#FFFFFF',
   margin: '0 0 16px 0',
 };
 
@@ -201,7 +201,7 @@ const orderIdLabelStyle: React.CSSProperties = {
   fontSize: '11px',
   textTransform: 'uppercase',
   letterSpacing: '0.1em',
-  color: '#8C857B',
+  color: '#64748B',
   margin: '16px 0 4px 0',
   fontWeight: 'bold',
 };
@@ -209,7 +209,7 @@ const orderIdLabelStyle: React.CSSProperties = {
 const orderIdStyle: React.CSSProperties = {
   fontSize: '13px',
   fontFamily: 'monospace',
-  color: '#C5A880',
+  color: '#1E3A8A',
   margin: '0 0 24px 0',
   fontWeight: 'bold',
 };
@@ -238,20 +238,20 @@ const itemPriceColStyle: React.CSSProperties = {
 const itemTitleStyle: React.CSSProperties = {
   fontSize: '13px',
   fontWeight: '600',
-  color: '#FAF8F5',
+  color: '#FFFFFF',
   margin: '0 0 4px 0',
 };
 
 const itemSubtitleStyle: React.CSSProperties = {
   fontSize: '11px',
-  color: '#8C857B',
+  color: '#64748B',
   margin: '0',
 };
 
 const itemPriceStyle: React.CSSProperties = {
   fontSize: '13px',
   fontWeight: 'bold',
-  color: '#C5A880',
+  color: '#1E3A8A',
   margin: '0',
 };
 
@@ -265,21 +265,21 @@ const totalContainerStyle: React.CSSProperties = {
 const totalLabelStyle: React.CSSProperties = {
   fontSize: '14px',
   fontWeight: 'bold',
-  color: '#FAF8F5',
+  color: '#FFFFFF',
   margin: '0',
 };
 
 const totalValueStyle: React.CSSProperties = {
   fontSize: '18px',
   fontWeight: 'bold',
-  color: '#C5A880',
+  color: '#1E3A8A',
   margin: '0',
 };
 
 const addressStyle: React.CSSProperties = {
   fontSize: '13px',
   lineHeight: '20px',
-  color: '#FAF8F5',
+  color: '#FFFFFF',
   margin: '0',
 };
 
@@ -291,12 +291,12 @@ const footerStyle: React.CSSProperties = {
 const footerTextStyle: React.CSSProperties = {
   fontSize: '11px',
   lineHeight: '18px',
-  color: '#8C857B',
+  color: '#64748B',
   margin: '0 0 16px 0',
 };
 
 const footerCopyrightStyle: React.CSSProperties = {
   fontSize: '10px',
-  color: '#8C857B',
+  color: '#64748B',
   margin: '0',
 };

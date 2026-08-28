@@ -90,7 +90,7 @@ export function VerificationEmail({
 
 // Design System & Branding Inline Styles (BHAVATSYAM Brand Rules)
 const mainStyle: React.CSSProperties = {
-  backgroundColor: '#FAF8F5',
+  backgroundColor: '#FFFFFF',
   fontFamily: 'Inter, "Plus Jakarta Sans", -apple-system, sans-serif',
   padding: '40px 0',
 };
@@ -98,8 +98,8 @@ const mainStyle: React.CSSProperties = {
 const containerStyle: React.CSSProperties = {
   margin: '0 auto',
   width: '560px',
-  backgroundColor: '#0F0F11',
-  color: '#FAF8F5',
+  backgroundColor: '#1E3A8A',
+  color: '#FFFFFF',
   borderRadius: '0px',
   border: '1px solid rgba(197, 168, 128, 0.3)',
   padding: '40px 0',
@@ -114,7 +114,7 @@ const logoStyle: React.CSSProperties = {
   fontSize: '28px',
   fontWeight: 'bold',
   letterSpacing: '0.25em',
-  color: '#C5A880',
+  color: '#1E3A8A',
   margin: '0',
   fontFamily: 'Georgia, serif',
   textTransform: 'uppercase',
@@ -123,7 +123,7 @@ const logoStyle: React.CSSProperties = {
 const taglineStyle: React.CSSProperties = {
   fontSize: '8px',
   letterSpacing: '0.4em',
-  color: '#8C857B',
+  color: '#64748B',
   textTransform: 'uppercase',
   margin: '6px 0 0 0',
   fontWeight: 'bold',
@@ -141,7 +141,7 @@ const contentStyle: React.CSSProperties = {
 const headingStyle: React.CSSProperties = {
   fontSize: '20px',
   fontWeight: '600',
-  color: '#C5A880',
+  color: '#1E3A8A',
   fontFamily: 'Georgia, serif',
   marginBottom: '20px',
   letterSpacing: '0.05em',
@@ -150,7 +150,7 @@ const headingStyle: React.CSSProperties = {
 const textStyle: React.CSSProperties = {
   fontSize: '13px',
   lineHeight: '22px',
-  color: '#FAF8F5',
+  color: '#FFFFFF',
   margin: '0 0 16px 0',
 };
 
@@ -165,7 +165,7 @@ const otpBoxStyle: React.CSSProperties = {
 const otpLabelStyle: React.CSSProperties = {
   fontSize: '9px',
   letterSpacing: '0.25em',
-  color: '#8C857B',
+  color: '#64748B',
   margin: '0 0 8px 0',
   fontWeight: 'bold',
 };
@@ -174,7 +174,7 @@ const otpCodeStyle: React.CSSProperties = {
   fontSize: '32px',
   fontWeight: 'bold',
   letterSpacing: '0.35em',
-  color: '#C5A880',
+  color: '#1E3A8A',
   margin: '0',
   fontFamily: 'monospace',
 };
@@ -182,7 +182,7 @@ const otpCodeStyle: React.CSSProperties = {
 const mutedTextStyle: React.CSSProperties = {
   fontSize: '11px',
   lineHeight: '18px',
-  color: '#8C857B',
+  color: '#64748B',
   margin: '24px 0 16px 0',
 };
 
@@ -192,8 +192,8 @@ const buttonContainerStyle: React.CSSProperties = {
 };
 
 const buttonStyle: React.CSSProperties = {
-  backgroundColor: '#C5A880',
-  color: '#0F0F11',
+  backgroundColor: '#1E3A8A',
+  color: '#1E3A8A',
   borderRadius: '0px',
   fontSize: '12px',
   fontWeight: 'bold',
@@ -213,12 +213,12 @@ const footerStyle: React.CSSProperties = {
 const footerTextStyle: React.CSSProperties = {
   fontSize: '11px',
   lineHeight: '18px',
-  color: '#8C857B',
+  color: '#64748B',
   margin: '0 0 16px 0',
 };
 
 const footerCopyrightStyle: React.CSSProperties = {
   fontSize: '10px',
-  color: '#8C857B',
+  color: '#64748B',
   margin: '0',
 };

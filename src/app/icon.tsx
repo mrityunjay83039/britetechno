@@ -14,7 +14,7 @@ export default function Icon() {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          background: '#0F0F11',
+          background: '#1E3A8A',
           borderRadius: '6px',
           border: '1px solid rgba(197, 168, 128, 0.4)',
         }}
@@ -24,7 +24,7 @@ export default function Icon() {
           height="24"
           viewBox="0 0 100 100"
           fill="none"
-          stroke="#C5A880"
+          stroke="#1E3A8A"
           strokeWidth="6"
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -42,7 +42,7 @@ export default function Icon() {
           <path d="M 41 50 C 29 60, 11 54, 15 38 C 18 28, 29 26, 35 30" />
 
           {/* Center Stamen */}
-          <circle cx="48" cy="41" r="5" fill="#C5A880" />
+          <circle cx="48" cy="41" r="5" fill="#1E3A8A" />
         </svg>
       </div>
     ),

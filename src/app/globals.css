@@ -1,8 +1,9 @@
 @import "tailwindcss";
 
 :root {
-  --background: #FAFAFA;
-  --foreground: #222222;
+  --background: #FFFFFF;
+  --foreground: #0F172A;
+  --primary: #1E3A8A;
 }
 
 @theme inline {
@@ -10,20 +11,25 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-geist-sans);
 }
 
 body {
-  background-color: #FAFAFA;
-  color: #222222;
-  font-family: var(--font-geist-sans), sans-serif;
+  background-color: #FFFFFF;
+  color: #0F172A;
+  font-family: var(--font-geist-sans), Inter, Roboto, sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-geist-sans), Inter, Roboto, sans-serif !important;
 }
 
 /* Form input contrast rules */
 input, select, textarea {
-  color: #222222 !important;
+  color: #0F172A !important;
 }
 
 input::placeholder, textarea::placeholder {
-  color: #8C857B !important;
+  color: #64748B !important;
   opacity: 0.75;
 }
