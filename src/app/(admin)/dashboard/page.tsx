@@ -1,8 +1,8 @@
 import React from 'react';
 import dbConnect from '@/lib/db';
-import { Order } from '@/models/Order';
+import { QuoteRequest } from '@/models/QuoteRequest';
 import { Product } from '@/models/Product';
-import { Landmark, ShoppingBag, Boxes } from 'lucide-react';
+import { FileText, Clock, Boxes } from 'lucide-react';
 import { getSystemSettings } from '@/app/actions/admin';
 import MaintenanceToggle from '@/components/MaintenanceToggle';
 
@@ -12,30 +12,15 @@ export default async function DashboardPage() {
   await dbConnect();
 
   // Fetch metrics
-  const orders = await Order.find({});
-  const totalOrders = orders.length;
-
-  // Calculate total revenue from PAID orders
-  const paidOrders = orders.filter((order) => order.paymentStatus === 'PAID');
-  const totalRevenue = paidOrders.reduce((acc, order) => acc + order.totalAmount, 0);
-
-  // Alternatively, count total revenue across all orders if none are PAID yet
-  const totalRevenueAll = orders.reduce((acc, order) => acc + order.totalAmount, 0);
-  const revenueToDisplay = totalRevenue > 0 ? totalRevenue : totalRevenueAll;
+  const quotes = await QuoteRequest.find({});
+  const totalQuoteRequests = quotes.length;
+  const pendingQuotesCount = quotes.filter((q) => q.status === 'Pending Review').length;
 
   // Count active products
   const totalActiveProducts = await Product.countDocuments({ isPublished: true });
 
   // Fetch current system settings for maintenance mode
   const settings = await getSystemSettings();
-
-  const formatCurrency = (val: number) => {
-    return new Intl.NumberFormat('en-IN', {
-      style: 'currency',
-      currency: 'INR',
-      maximumFractionDigits: 0,
-    }).format(val);
-  };
 
   return (
     <div className="space-y-8">
@@ -45,51 +30,45 @@ export default async function DashboardPage() {
           Dashboard Overview
         </h2>
         <p className="font-sans text-xs text-[#8C857B] mt-1 uppercase tracking-widest font-semibold">
-          High-level statistics of your storefront
+          High-level statistics of BRITE Techno Lighting catalog and quote pipeline
         </p>
       </div>
 
       {/* Grid of Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {/* Total Revenue */}
+        {/* Total Quote Requests */}
         <div className="bg-white p-6 rounded-sm border border-[#C5A880]/15 shadow-xs flex items-center justify-between">
           <div className="space-y-1">
             <p className="font-sans text-xs font-bold text-[#8C857B] uppercase tracking-wider">
-              Total Revenue
+              Total Quote Requests
             </p>
             <p className="font-sans text-3xl font-bold text-[#0F0F11]">
-              {formatCurrency(revenueToDisplay)}
+              {totalQuoteRequests}
             </p>
-            {totalRevenue > 0 ? (
-              <p className="text-[10px] text-green-600 font-sans font-medium">
-                Calculated from PAID orders
-              </p>
-            ) : (
-              <p className="text-[10px] text-[#8C857B] font-sans">
-                No orders marked as PAID yet
-              </p>
-            )}
+            <p className="text-[10px] text-[#8C857B] font-sans">
+              All submitted B2B requests
+            </p>
           </div>
           <div className="w-12 h-12 rounded-sm bg-[#C5A880]/10 flex items-center justify-center text-[#C5A880]">
-            <Landmark className="w-6 h-6" />
+            <FileText className="w-6 h-6" />
           </div>
         </div>
 
-        {/* Total Orders */}
+        {/* Pending Review */}
         <div className="bg-white p-6 rounded-sm border border-[#C5A880]/15 shadow-xs flex items-center justify-between">
           <div className="space-y-1">
             <p className="font-sans text-xs font-bold text-[#8C857B] uppercase tracking-wider">
-              Total Orders
+              Pending Review
             </p>
             <p className="font-sans text-3xl font-bold text-[#0F0F11]">
-              {totalOrders}
+              {pendingQuotesCount}
             </p>
-            <p className="text-[10px] text-[#8C857B] font-sans">
-              All processed orders
+            <p className="text-[10px] text-amber-600 font-sans font-medium">
+              Requires sales response
             </p>
           </div>
           <div className="w-12 h-12 rounded-sm bg-[#C5A880]/10 flex items-center justify-center text-[#C5A880]">
-            <ShoppingBag className="w-6 h-6" />
+            <Clock className="w-6 h-6" />
           </div>
         </div>
 
@@ -124,10 +103,10 @@ export default async function DashboardPage() {
       {/* Admin Quick Tips Card */}
       <div className="bg-white p-8 rounded-sm border border-[#C5A880]/15 shadow-xs">
         <h3 className="font-serif text-lg font-bold text-[#0F0F11] mb-2">
-          A Blend of Heritage & Modernity
+          BRITE Techno Lighting B2B Platform
         </h3>
         <p className="font-sans text-sm text-[#8C857B] leading-relaxed max-w-3xl">
-          Welcome back to the BHAVATSYAM single-seller dashboard. Here, you can monitor sales, keep your high-end inventory fresh, and manage order deliveries. Our aesthetic focuses on premium, artisanal apparel, and this management system allows you to maintain that high standard effortlessly.
+          Welcome back to the BRITE Techno Lighting administration portal. Here, you can manage industrial and commercial lighting products, inspect quote requests from contractors and enterprise clients, and respond to sales inquiries.
         </p>
       </div>
     </div>

@@ -12,10 +12,14 @@ export interface IProductVariant {
   stockQuantity: number;
   attributes: Record<string, string>;
   imageUrls: string[];
-  // Backwards compatibility helpers
-  size?: 'XS' | 'S' | 'M' | 'L' | 'XL' | 'XXL' | 'ONE_SIZE';
-  color?: string;
-  stock?: number;
+}
+
+export interface ISpecifications {
+  wattage?: string;
+  voltage?: string;
+  lumens?: string;
+  cct?: string;
+  certifications?: string[];
 }
 
 export interface IProduct extends Document {
@@ -26,6 +30,8 @@ export interface IProduct extends Document {
   images: string[];
   category: mongoose.Types.ObjectId | ICategory | string;
   isPublished: boolean;
+  specifications?: ISpecifications;
+  specSheetUrl?: string;
   options: IProductOption[];
   variants: IProductVariant[];
   averageRating: number;
@@ -34,43 +40,60 @@ export interface IProduct extends Document {
   updatedAt: Date;
 }
 
-const productOptionSchema = new Schema<IProductOption>({
-  name: {
-    type: String,
-    required: true,
+const specificationsSchema = new Schema<ISpecifications>(
+  {
+    wattage: { type: String },
+    voltage: { type: String },
+    lumens: { type: String },
+    cct: { type: String },
+    certifications: { type: [String], default: [] },
   },
-  values: {
-    type: [String],
-    required: true,
-    default: [],
-  },
-}, { _id: false });
+  { _id: false }
+);
 
-const productVariantSchema = new Schema<IProductVariant>({
-  sku: {
-    type: String,
-    required: true,
+const productOptionSchema = new Schema<IProductOption>(
+  {
+    name: {
+      type: String,
+      required: true,
+    },
+    values: {
+      type: [String],
+      required: true,
+      default: [],
+    },
   },
-  price: {
-    type: Number,
-    min: 0,
+  { _id: false }
+);
+
+const productVariantSchema = new Schema<IProductVariant>(
+  {
+    sku: {
+      type: String,
+      required: true,
+    },
+    price: {
+      type: Number,
+      min: 0,
+    },
+    stockQuantity: {
+      type: Number,
+      required: true,
+      min: 0,
+      default: 0,
+    },
+    attributes: {
+      type: Map,
+      of: String,
+      default: {},
+    },
+    imageUrls: {
+      type: [String],
+      default: [],
+    },
   },
-  stockQuantity: {
-    type: Number,
-    required: true,
-    min: 0,
-    default: 0,
-  },
-  attributes: {
-    type: Map,
-    of: String,
-    default: {},
-  },
-  imageUrls: {
-    type: [String],
-    default: [],
-  },
-}, { _id: false });
+  { _id: false }
+);
 
 const productSchema = new Schema<IProduct>(
   {
@@ -107,6 +130,13 @@ const productSchema = new Schema<IProduct>(
       type: Boolean,
       required: true,
       default: false,
+    },
+    specifications: {
+      type: specificationsSchema,
+      default: {},
+    },
+    specSheetUrl: {
+      type: String,
     },
     options: {
       type: [productOptionSchema],

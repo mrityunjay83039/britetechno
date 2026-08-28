@@ -3,11 +3,11 @@ import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/lib/auth';
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
-import { Calendar, MapPin, Package, FileText } from 'lucide-react';
+import { Calendar, Package, FileText, Building, Mail, Phone } from 'lucide-react';
 import dbConnect from '@/lib/db';
-import { Order } from '@/models/Order';
+import { QuoteRequest } from '@/models/QuoteRequest';
 
-export default async function OrdersPage() {
+export default async function AccountQuotesPage() {
   const session = await getServerSession(authOptions);
 
   if (!session || !session.user) {
@@ -23,53 +23,53 @@ export default async function OrdersPage() {
 
   await dbConnect();
 
-  // Fetch all user's orders using .lean()
-  const orders = await Order.find({ userId }).sort({ createdAt: -1 }).lean();
+  // Fetch all user's quote requests using .lean()
+  const quotes = await QuoteRequest.find({ userId }).sort({ createdAt: -1 }).lean();
 
   return (
     <div className="space-y-6">
       {/* Header Title */}
       <div>
         <h2 className="font-serif text-2xl font-semibold text-[#0F0F11] tracking-wide">
-          Your Order History
+          Your Quote Requests
         </h2>
         <p className="font-sans text-xs text-[#8C857B] mt-1">
-          View status and receipts of all your hand-crafted commissions.
+          Track the status and details of all your submitted industrial lighting quote requests.
         </p>
       </div>
 
-      {/* Orders Listing */}
-      {orders.length === 0 ? (
+      {/* Quotes Listing */}
+      {quotes.length === 0 ? (
         <div className="bg-[#FAF8F5] border border-[#C5A880]/15 rounded-sm p-12 text-center shadow-sm">
           <Package className="h-12 w-12 text-[#C5A880]/40 mx-auto mb-4" />
-          <h3 className="font-serif text-lg font-medium text-[#0F0F11]">No Orders Placed Yet</h3>
+          <h3 className="font-serif text-lg font-medium text-[#0F0F11]">No Quote Requests Submitted Yet</h3>
           <p className="font-sans text-xs text-[#8C857B] max-w-xs mx-auto mt-2 leading-relaxed">
-            When you commission our hand-crafted pieces, your complete order history will be displayed here.
+            Browse our industrial lighting catalog and submit quote requests for project volume pricing.
           </p>
           <Link
             href="/products"
             className="inline-block mt-6 bg-[#0F0F11] text-[#FAF8F5] font-sans text-xs font-bold tracking-widest uppercase border border-[#C5A880]/30 hover:bg-[#C5A880] hover:text-[#0F0F11] px-6 py-3 transition-all duration-300 rounded-sm cursor-pointer"
           >
-            Explore Collection
+            Explore Lighting Catalog
           </Link>
         </div>
       ) : (
         <div className="space-y-6">
-          {orders.map((order) => (
+          {quotes.map((quote) => (
             <div
-              key={order._id.toString()}
+              key={quote._id.toString()}
               className="bg-white border border-[#C5A880]/15 rounded-sm shadow-sm overflow-hidden"
             >
-              {/* Order Top Bar / Summary */}
+              {/* Quote Top Bar / Summary */}
               <div className="bg-[#0F0F11] text-[#FAF8F5] px-6 py-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-[#C5A880]/15">
                 <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
                   <div>
                     <span className="font-sans text-[10px] text-[#8C857B] uppercase tracking-wider block">
-                      Order Placed
+                      Submitted Date
                     </span>
                     <span className="font-sans text-xs text-[#FAF8F5] font-medium flex items-center gap-1 mt-0.5">
                       <Calendar className="h-3.5 w-3.5 text-[#C5A880]" />
-                      {new Date(order.createdAt).toLocaleDateString('en-US', {
+                      {new Date(quote.createdAt).toLocaleDateString('en-US', {
                         month: 'long',
                         day: 'numeric',
                         year: 'numeric',
@@ -78,119 +78,83 @@ export default async function OrdersPage() {
                   </div>
                   <div className="sm:border-l sm:border-white/10 sm:pl-4">
                     <span className="font-sans text-[10px] text-[#8C857B] uppercase tracking-wider block">
-                      Commission Reference
+                      Quote Reference
                     </span>
                     <span className="font-mono text-xs font-bold text-[#C5A880] mt-0.5 block select-all">
-                      #{order._id.toString().toUpperCase()}
+                      #{quote._id.toString().toUpperCase()}
                     </span>
                   </div>
                 </div>
                 <div className="text-left sm:text-right">
-                  <span className="font-sans text-[10px] text-[#8C857B] uppercase tracking-wider block">
-                    Total Amount Paid
+                  <span className="font-sans text-[10px] text-[#8C857B] uppercase tracking-wider block mb-1">
+                    Status
                   </span>
-                  <span className="font-serif text-base font-semibold text-[#C5A880] flex items-center sm:justify-end gap-0.5 mt-0.5">
-                    ₹{order.totalAmount.toLocaleString('en-IN')}
+                  <span className={`font-sans text-[10px] font-bold tracking-widest uppercase inline-block border px-2.5 py-1 rounded-sm ${
+                    quote.status === 'Quoted'
+                      ? 'bg-blue-50 text-blue-800 border-blue-200'
+                      : quote.status === 'Closed'
+                      ? 'bg-zinc-100 text-zinc-800 border-zinc-200'
+                      : 'bg-amber-50 text-amber-800 border-amber-200'
+                  }`}>
+                    {quote.status}
                   </span>
                 </div>
               </div>
 
-              {/* Order Body / Items List */}
+              {/* Quote Body / Items List */}
               <div className="p-6 divide-y divide-[#C5A880]/10">
                 <div className="pb-6">
                   <span className="font-sans text-[10px] text-[#8C857B] uppercase tracking-wider font-bold block mb-4">
-                    Items In Order
+                    Requested Items
                   </span>
                   <div className="space-y-4">
-                    {order.items.map((item, idx) => (
+                    {quote.items.map((item, idx) => (
                       <div key={idx} className="flex justify-between items-start gap-4">
                         <div className="space-y-1">
                           <span className="font-sans text-sm font-semibold text-[#0F0F11] block">
                             {item.title}
                           </span>
-                          <span className="font-sans text-xs text-[#8C857B] block">
-                            Variant: <strong className="text-[#0F0F11] font-medium">{item.color}</strong> &bull; Size: <strong className="text-[#0F0F11] font-medium">{item.size}</strong> &bull; Qty: <strong className="text-[#0F0F11] font-medium">{item.quantity}</strong>
-                          </span>
                         </div>
-                        <span className="font-serif text-sm font-medium text-[#0F0F11]">
-                          ₹{(item.priceAtPurchase * item.quantity).toLocaleString('en-IN')}
+                        <span className="font-sans text-xs font-semibold text-[#0F0F11]">
+                          Qty: {item.quantity}
                         </span>
                       </div>
                     ))}
                   </div>
                 </div>
 
-                {/* Shipping & Delivery Info */}
+                {/* Company & Lead Details */}
                 <div className="pt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="space-y-2 flex flex-col justify-between">
-                    <div>
-                      <span className="font-sans text-[10px] text-[#8C857B] uppercase tracking-wider font-bold flex items-center gap-1">
-                        <MapPin className="h-3.5 w-3.5 text-[#C5A880]" />
-                        Delivery Destination
+                  <div className="space-y-2">
+                    <span className="font-sans text-[10px] text-[#8C857B] uppercase tracking-wider font-bold flex items-center gap-1">
+                      <Building className="h-3.5 w-3.5 text-[#C5A880]" />
+                      Company Info
+                    </span>
+                    <p className="font-sans text-xs text-[#0F0F11] leading-relaxed mt-1 font-semibold">
+                      {quote.companyName}
+                    </p>
+                    <p className="font-sans text-xs text-[#8C857B]">
+                      Contact: {quote.contactName}
+                    </p>
+                    <div className="flex items-center gap-2 text-xs text-[#8C857B] pt-1">
+                      <Mail className="h-3 w-3 text-[#C5A880]" />
+                      <span>{quote.email}</span>
+                      <Phone className="h-3 w-3 text-[#C5A880] ml-2" />
+                      <span>{quote.phoneNumber}</span>
+                    </div>
+                  </div>
+
+                  {quote.projectDetails && (
+                    <div className="space-y-1 md:border-l md:border-[#C5A880]/10 md:pl-6">
+                      <span className="font-sans text-[10px] text-[#8C857B] uppercase tracking-wider font-bold flex items-center gap-1 mb-1">
+                        <FileText className="h-3.5 w-3.5 text-[#C5A880]" />
+                        Project Details
                       </span>
-                      <p className="font-sans text-xs text-[#0F0F11] leading-relaxed mt-2">
-                        {order.shippingAddress.street},<br />
-                        {order.shippingAddress.city}, {order.shippingAddress.state} {order.shippingAddress.postalCode},<br />
-                        {order.shippingAddress.country}
+                      <p className="font-sans text-xs text-[#0F0F11] leading-relaxed">
+                        {quote.projectDetails}
                       </p>
                     </div>
-
-                    <div className="pt-4">
-                      <Link
-                        href={`/account/orders/${order._id.toString()}/receipt`}
-                        className="inline-flex items-center gap-2 bg-[#0F0F11] text-[#FAF8F5] border border-[#C5A880]/30 hover:bg-[#C5A880] hover:text-[#0F0F11] font-sans text-[10px] font-bold tracking-widest py-2.5 px-4 uppercase transition-all duration-300 rounded-sm cursor-pointer"
-                      >
-                        <FileText className="h-3.5 w-3.5" />
-                        View Full Receipt
-                      </Link>
-                    </div>
-                  </div>
-
-                  <div className="space-y-3 md:border-l md:border-[#C5A880]/10 md:pl-6">
-                    <div className="grid grid-cols-2 gap-4">
-                      <div>
-                        <span className="font-sans text-[10px] text-[#8C857B] uppercase tracking-wider font-bold block mb-1">
-                          Payment Status
-                        </span>
-                        <span className={`font-sans text-[10px] font-bold tracking-widest uppercase inline-block border px-2.5 py-1 rounded-sm ${
-                          order.paymentStatus === 'PAID'
-                            ? 'bg-emerald-50 text-emerald-800 border-emerald-200/60'
-                            : order.paymentStatus === 'FAILED'
-                            ? 'bg-rose-50 text-rose-800 border-rose-200/60'
-                            : 'bg-amber-50 text-amber-800 border-amber-200/60'
-                        }`}>
-                          {order.paymentStatus}
-                        </span>
-                      </div>
-                      <div>
-                        <span className="font-sans text-[10px] text-[#8C857B] uppercase tracking-wider font-bold block mb-1">
-                          Delivery Status
-                        </span>
-                        <span className={`font-sans text-[10px] font-bold tracking-widest uppercase inline-block border px-2.5 py-1 rounded-sm ${
-                          order.orderStatus === 'DELIVERED'
-                            ? 'bg-emerald-50 text-emerald-800 border-emerald-200/60'
-                            : order.orderStatus === 'SHIPPED'
-                            ? 'bg-blue-50 text-blue-800 border-blue-200/60'
-                            : order.orderStatus === 'CANCELLED'
-                            ? 'bg-rose-50 text-rose-800 border-rose-200/60'
-                            : 'bg-zinc-100 text-zinc-800 border-zinc-200/60'
-                        }`}>
-                          {order.orderStatus}
-                        </span>
-                      </div>
-                    </div>
-
-                    {order.razorpayPaymentId && (
-                      <div className="bg-[#FAF8F5] border border-[#C5A880]/10 rounded-sm p-3">
-                        <span className="font-sans text-[9px] text-[#8C857B] uppercase tracking-wider block font-bold">
-                          Razorpay Payment reference
-                        </span>
-                        <span className="font-mono text-[10px] text-[#C5A880] mt-0.5 block select-all font-semibold">
-                          {order.razorpayPaymentId}
-                        </span>
-                      </div>
-                    )}
-                  </div>
+                  )}
                 </div>
               </div>
 

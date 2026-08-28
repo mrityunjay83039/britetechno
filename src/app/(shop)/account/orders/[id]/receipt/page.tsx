@@ -3,10 +3,9 @@ import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/lib/auth';
 import { redirect, notFound } from 'next/navigation';
 import Link from 'next/link';
-import { ChevronLeft } from 'lucide-react';
+import { ChevronLeft, Building, Mail, Phone } from 'lucide-react';
 import dbConnect from '@/lib/db';
-import { Order } from '@/models/Order';
-import { User } from '@/models/User';
+import { QuoteRequest } from '@/models/QuoteRequest';
 import PrintReceiptButton from './PrintReceiptButton';
 
 interface ReceiptPageProps {
@@ -24,25 +23,19 @@ export default async function ReceiptPage({ params }: ReceiptPageProps) {
 
   await dbConnect();
 
-  const order = await Order.findById(id).lean();
+  const quote = await QuoteRequest.findById(id).lean();
 
-  if (!order) {
+  if (!quote) {
     notFound();
   }
 
-  // Security check: Only the owner of the order OR an admin can view this receipt
-  const isOwner = order.userId.toString() === session.user.id;
+  // Security check: Only the owner of the quote OR an admin can view this details page
+  const isOwner = quote.userId ? quote.userId.toString() === session.user.id : false;
   const isAdmin = session.user.role === 'ADMIN';
 
   if (!isOwner && !isAdmin) {
     redirect('/login');
   }
-
-  // Fetch the customer details
-  const customer = await User.findById(order.userId).select('name email mobile').lean();
-  const customerName = customer?.name || session.user.name || 'Valued Customer';
-  const customerEmail = customer?.email || session.user.email || '';
-  const customerMobile = customer?.mobile || '';
 
   return (
     <div className="bg-[#FAF8F5] min-h-screen py-12 px-4 sm:px-6 lg:px-8">
@@ -82,43 +75,43 @@ export default async function ReceiptPage({ params }: ReceiptPageProps) {
             className="inline-flex items-center gap-1 font-sans text-xs font-bold text-[#8C857B] hover:text-[#C5A880] uppercase tracking-widest transition-colors"
           >
             <ChevronLeft className="h-4 w-4" />
-            Back to Orders
+            Back to Quotes
           </Link>
 
           <PrintReceiptButton />
         </div>
 
-        {/* Invoice Card Container */}
+        {/* Invoice / Details Card Container */}
         <div className="print-card bg-white border border-[#C5A880]/15 rounded-sm shadow-xl overflow-hidden">
 
-          {/* Header Banner - Luxury Branded Dark Area */}
+          {/* Header Banner - BRITE TECHNO Branding */}
           <div className="print-dark-bg bg-[#0F0F11] text-[#FAF8F5] px-8 py-10 border-b border-[#C5A880]/20 text-center space-y-2">
             <span className="font-sans text-[10px] tracking-[0.4em] text-[#8C857B] uppercase font-bold block">
-              Luxury Craftsmanship
+              Industrial & Commercial Lighting
             </span>
             <h1 className="font-serif text-3xl sm:text-4xl font-bold text-[#C5A880] tracking-widest uppercase">
-              BHAVATSYAM
+              BRITE TECHNO LIGHTING
             </h1>
             <p className="font-sans text-[9px] tracking-[0.25em] text-[#FAF8F5]/60 uppercase">
-              Heritage & Modernity
+              Official B2B Quotation Request Summary
             </p>
           </div>
 
           <div className="p-8 sm:p-10 space-y-8">
 
-            {/* Invoice Details Grid */}
+            {/* Quote Reference & Customer Details Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 text-xs font-sans border-b border-[#C5A880]/15 pb-6">
               <div className="space-y-1">
                 <span className="text-[#8C857B] uppercase tracking-wider block font-bold text-[10px]">
-                  Order Details
+                  Quote Details
                 </span>
                 <p className="text-[#0F0F11]">
-                  <strong className="font-semibold text-gray-500 uppercase">Receipt Reference:</strong><br />
-                  <span className="font-mono text-xs font-bold text-[#C5A880]">#{order._id.toString().toUpperCase()}</span>
+                  <strong className="font-semibold text-gray-500 uppercase">Quote Reference:</strong><br />
+                  <span className="font-mono text-xs font-bold text-[#C5A880]">#{quote._id.toString().toUpperCase()}</span>
                 </p>
                 <p className="text-[#0F0F11]">
-                  <strong className="font-semibold text-gray-500 uppercase">Date of Purchase:</strong><br />
-                  {new Date(order.createdAt).toLocaleDateString('en-US', {
+                  <strong className="font-semibold text-gray-500 uppercase">Submission Date:</strong><br />
+                  {new Date(quote.createdAt).toLocaleDateString('en-US', {
                     month: 'long',
                     day: 'numeric',
                     year: 'numeric',
@@ -126,54 +119,52 @@ export default async function ReceiptPage({ params }: ReceiptPageProps) {
                     minute: '2-digit',
                   })}
                 </p>
+                <p className="text-[#0F0F11]">
+                  <strong className="font-semibold text-gray-500 uppercase">Status:</strong><br />
+                  <span className="font-bold text-[#0F0F11] uppercase">{quote.status}</span>
+                </p>
               </div>
 
               <div className="space-y-1 sm:text-right">
                 <span className="text-[#8C857B] uppercase tracking-wider block font-bold text-[10px]">
-                  Customer Profile
+                  Company / Lead Profile
                 </span>
-                <p className="text-[#0F0F11] font-semibold text-sm">
-                  {customerName}
+                <p className="text-[#0F0F11] font-semibold text-sm flex items-center sm:justify-end gap-1">
+                  <Building className="h-3.5 w-3.5 text-[#C5A880]" />
+                  {quote.companyName}
                 </p>
-                <p className="text-gray-500 font-medium select-all">
-                  {customerEmail}
+                <p className="text-gray-700 font-medium">
+                  Contact: {quote.contactName}
                 </p>
-                {customerMobile && (
-                  <p className="text-gray-500">
-                    Phone: {customerMobile}
-                  </p>
-                )}
+                <p className="text-gray-500 font-medium flex items-center sm:justify-end gap-1">
+                  <Mail className="h-3 w-3 text-[#C5A880]" />
+                  {quote.email}
+                </p>
+                <p className="text-gray-500 flex items-center sm:justify-end gap-1">
+                  <Phone className="h-3 w-3 text-[#C5A880]" />
+                  {quote.phoneNumber}
+                </p>
               </div>
             </div>
 
-            {/* Items Ordered List Table */}
+            {/* Requested Line Items Table */}
             <div className="space-y-3">
               <span className="font-sans text-[10px] text-[#8C857B] uppercase tracking-wider font-bold block mb-4">
-                Items Commissioned
+                Requested Products
               </span>
               <div className="overflow-x-auto">
                 <table className="w-full text-left border-collapse font-sans text-xs">
                   <thead>
                     <tr className="border-b border-[#C5A880]/20 text-[#8C857B] uppercase tracking-wider text-[10px] font-bold">
                       <th className="py-2.5">Product Title</th>
-                      <th className="py-2.5 text-center">Color</th>
-                      <th className="py-2.5 text-center">Size</th>
-                      <th className="py-2.5 text-center">Qty</th>
-                      <th className="py-2.5 text-right">Unit Price</th>
-                      <th className="py-2.5 text-right">Total Price</th>
+                      <th className="py-2.5 text-center">Quantity</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-100">
-                    {order.items.map((item, index) => (
+                    {quote.items.map((item, index) => (
                       <tr key={index} className="text-[#0F0F11]">
                         <td className="py-3 font-semibold text-sm">{item.title}</td>
-                        <td className="py-3 text-center text-gray-500">{item.color}</td>
-                        <td className="py-3 text-center text-gray-500">{item.size}</td>
-                        <td className="py-3 text-center font-bold">{item.quantity}</td>
-                        <td className="py-3 text-right text-gray-500">₹{item.priceAtPurchase.toLocaleString('en-IN')}</td>
-                        <td className="py-3 text-right font-serif text-sm font-semibold">
-                          ₹{(item.priceAtPurchase * item.quantity).toLocaleString('en-IN')}
-                        </td>
+                        <td className="py-3 text-center font-bold text-sm">{item.quantity}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -181,87 +172,25 @@ export default async function ReceiptPage({ params }: ReceiptPageProps) {
               </div>
             </div>
 
-            {/* Totals Summary */}
-            <div className="border-t border-[#C5A880]/15 pt-6 flex justify-end">
-              <div className="w-full sm:w-64 space-y-2.5 text-xs font-sans text-right">
-                <div className="flex justify-between text-gray-500">
-                  <span>Subtotal</span>
-                  <span>₹{order.totalAmount.toLocaleString('en-IN')}</span>
-                </div>
-                <div className="flex justify-between text-gray-500">
-                  <span>Shipping & Delivery</span>
-                  <span className="uppercase text-[10px] font-bold text-emerald-600">Complimentary</span>
-                </div>
-                <div className="flex justify-between border-t border-[#C5A880]/10 pt-2.5 font-serif text-base font-bold text-[#0F0F11]">
-                  <span>Total Amount Paid</span>
-                  <span className="text-[#C5A880]">₹{order.totalAmount.toLocaleString('en-IN')}</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Shipping details and payment references */}
-            <div className="border-t border-[#C5A880]/15 pt-6 grid grid-cols-1 sm:grid-cols-2 gap-6 text-xs font-sans">
-
-              {/* Delivery destination */}
-              <div className="space-y-2">
+            {/* Project Details */}
+            {quote.projectDetails && (
+              <div className="border-t border-[#C5A880]/15 pt-6 space-y-2">
                 <span className="text-[#8C857B] uppercase tracking-wider block font-bold text-[10px]">
-                  Shipping Address
+                  Project Specifications & Notes
                 </span>
-                <p className="text-[#0F0F11] leading-relaxed">
-                  <strong>{customerName}</strong><br />
-                  {order.shippingAddress.street},<br />
-                  {order.shippingAddress.city}, {order.shippingAddress.state} {order.shippingAddress.postalCode},<br />
-                  {order.shippingAddress.country}
+                <p className="text-[#0F0F11] text-xs leading-relaxed bg-[#FAF8F5] p-4 rounded border border-[#C5A880]/15">
+                  {quote.projectDetails}
                 </p>
               </div>
+            )}
 
-              {/* Payment Details */}
-              <div className="space-y-3">
-                <span className="text-[#8C857B] uppercase tracking-wider block font-bold text-[10px]">
-                  Payment Information
-                </span>
-                <div className="space-y-1.5 text-[#0F0F11]">
-                  <p className="flex justify-between">
-                    <span className="text-gray-500">Payment Status:</span>
-                    <span className="font-bold text-emerald-600 tracking-wider uppercase text-[10px]">
-                      {order.paymentStatus}
-                    </span>
-                  </p>
-                  <p className="flex justify-between">
-                    <span className="text-gray-500">Commission Status:</span>
-                    <span className="font-bold text-gray-700 tracking-wider uppercase text-[10px]">
-                      {order.orderStatus}
-                    </span>
-                  </p>
-                  {order.razorpayOrderId && (
-                    <p className="flex justify-between">
-                      <span className="text-gray-500">Razorpay Order ID:</span>
-                      <span className="font-mono text-xs text-gray-700 select-all font-semibold">
-                        {order.razorpayOrderId}
-                      </span>
-                    </p>
-                  )}
-                  {order.razorpayPaymentId && (
-                    <p className="flex justify-between">
-                      <span className="text-gray-500">Razorpay Payment ID:</span>
-                      <span className="font-mono text-xs text-[#C5A880] select-all font-semibold">
-                        {order.razorpayPaymentId}
-                      </span>
-                    </p>
-                  )}
-                </div>
-              </div>
-
-            </div>
-
-            {/* Quality assurance note / Footer */}
+            {/* Footer */}
             <div className="border-t border-[#C5A880]/10 pt-8 text-center space-y-2">
               <p className="font-serif italic text-xs text-[#8C857B]">
-                &ldquo;A perfect blend of heritage and modernity.&rdquo;
+                &ldquo;BRITE Techno Lighting Inc. - Industrial & Commercial Lighting Solutions&rdquo;
               </p>
               <p className="font-sans text-[10px] text-gray-400">
-                Each BHAVATSYAM piece is meticulously hand-crafted by master artisans with the finest care. Thank you for your commission.<br />
-                For enquiries, please contact <a href="mailto:info@bhavatsyam.com" className="text-[#C5A880] underline">info@bhavatsyam.com</a>
+                For urgent quote updates, please email <a href="mailto:quotes@brite.com" className="text-[#C5A880] underline">quotes@brite.com</a>
               </p>
             </div>
 
