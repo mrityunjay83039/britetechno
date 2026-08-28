@@ -1,0 +1,3 @@
+Starting MongoDB Memory Server...
+MongoDB Memory Server started at: mongodb://127.0.0.1:27017/
+Updated .env.local with MONGODB_URI

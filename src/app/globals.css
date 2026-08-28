@@ -1,0 +1,29 @@
+@import "tailwindcss";
+
+:root {
+  --background: #FAFAFA;
+  --foreground: #222222;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background-color: #FAFAFA;
+  color: #222222;
+  font-family: var(--font-geist-sans), sans-serif;
+}
+
+/* Form input contrast rules */
+input, select, textarea {
+  color: #222222 !important;
+}
+
+input::placeholder, textarea::placeholder {
+  color: #8C857B !important;
+  opacity: 0.75;
+}

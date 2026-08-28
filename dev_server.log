@@ -1,0 +1,87 @@
+
+> bhavatsyam@0.1.0 dev
+> next dev
+
+▲ Next.js 16.3.0 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://192.168.0.2:3000
+- Environments: .env.local
+✓ Ready in 528ms
+✓ Running next.config.mjs took 27ms
+⚠ The Edge Runtime is deprecated. You can use the "nodejs" runtime instead. Learn more: https://nextjs.org/docs/messages/edge-runtime-deprecated
+
+○ Compiling /login ...
+ GET /login 200 in 9.7s (next.js: 8.6s, proxy.ts: 512ms, application-code: 643ms)
+[browser] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <InnerLayoutRouter url="/login" tree={[...]} params={{}} cacheNode={{rsc:{...}, ...}} segmentPath={[...]} ...>
+      <SegmentViewNode type="page" pagePath="src/login/...">
+        <SegmentTrieNode>
+        <ClientPageRoot Component={function LoginPage} serverProvidedParams={{...}}>
+          <LoginPage params={Promise} searchParams={Promise}>
+            <Suspense fallback={<div>}>
+              <LoginForm>
+                <div className="min-h-scre...">
+                  <div>
+                  <div className="mt-8 sm:mx...">
+                    <div className="bg-white p...">
+                      <form className="space-y-5" onSubmit={function handleSubmit}>
+                        <div className="space-y-1">
+                          <label>
+                          <div className="relative">
+                            <div>
+                            <input
+                              type="email"
+                              required={true}
+                              value=""
+                              onChange={function onChange}
+                              className="w-full pl-10 pr-3 py-2.5 bg-white border border-gray-200 focus:border-[#FF6F6..."
+                              placeholder="name@example.com"
+-                             style={{caret-color:"transparent"}}
+                            >
+                        <div className="space-y-1">
+                          <div>
+                          <div className="relative">
+                            <div>
+                            <input
+                              type="password"
+                              required={true}
+                              value=""
+                              onChange={function onChange}
+                              className="w-full pl-10 pr-3 py-2.5 bg-white border border-gray-200 focus:border-[#FF6F6..."
+                              placeholder="••••••••"
+-                             style={{caret-color:"transparent"}}
+                            >
+                        <div className="pt-2 borde...">
+                          <CaptchaChallenge ref={{current:null}}>
+                            <div className={"space-y-2 "}>
+                              <div>
+                              <div className="flex items...">
+                                <div>
+                                <div className="relative f...">
+                                  <input
+                                    type="number"
+                                    required={true}
+                                    value=""
+                                    onChange={function onChange}
+                                    placeholder="Answer"
+                                    className="w-full px-3 py-2 bg-white border text-sm font-sans font-bold text-[#0F0..."
+-                                   style={{caret-color:"transparent"}}
+                                  >
+                        ...
+                      ...
+      ...
+
+ GET /forgot-password 200 in 998ms (next.js: 772ms, proxy.ts: 84ms, application-code: 142ms)
+ GET /reset-password?token=sample_test_token 200 in 785ms (next.js: 613ms, proxy.ts: 6ms, application-code: 165ms)
