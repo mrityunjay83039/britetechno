@@ -26,6 +26,13 @@ export interface SerializedProduct {
   }>;
   averageRating: number;
   reviewCount: number;
+  specifications?: {
+    wattage?: string;
+    lumens?: string;
+    certifications?: string;
+    voltage?: string;
+    cct?: string;
+  };
 }
 
 export interface SerializedReview {
@@ -222,7 +229,7 @@ export default function ProductDetailClient({ product, reviews = [] }: ProductDe
               fill
               className="object-contain p-4 transition-transform duration-150 ease-out"
               style={zoomStyle}
-              sizes="(max-width: 1024px) 100vw, 55vw"
+              sizes="(max-width: 1024px) 100vw, 50vw"
               onError={() => handleImageError(activeImage)}
               priority
               unoptimized
@@ -253,6 +260,25 @@ export default function ProductDetailClient({ product, reviews = [] }: ProductDe
               ))}
             </div>
           )}
+
+          {/* Quick Technical Highlights Cards */}
+          <div className="grid grid-cols-3 gap-3 mt-2">
+            <div className="p-3 bg-slate-50 border border-slate-200 rounded flex flex-col items-center text-center">
+              <Zap className="h-5 w-5 text-[#1E3A8A] mb-1" />
+              <span className="text-[10px] font-bold text-slate-500 uppercase">Power Output</span>
+              <span className="text-sm font-bold text-slate-900">{wattage}</span>
+            </div>
+            <div className="p-3 bg-slate-50 border border-slate-200 rounded flex flex-col items-center text-center">
+              <Lightbulb className="h-5 w-5 text-[#1E3A8A] mb-1" />
+              <span className="text-[10px] font-bold text-slate-500 uppercase">Luminous Flux</span>
+              <span className="text-sm font-bold text-slate-900">{lumens}</span>
+            </div>
+            <div className="p-3 bg-slate-50 border border-slate-200 rounded flex flex-col items-center text-center">
+              <ShieldCheck className="h-5 w-5 text-[#1E3A8A] mb-1" />
+              <span className="text-[10px] font-bold text-slate-500 uppercase">Certification</span>
+              <span className="text-xs font-bold text-slate-900 line-clamp-1">{certifications}</span>
+            </div>
+          </div>
         </div>
 
         {/* Product Details Column */}
@@ -414,7 +440,7 @@ export default function ProductDetailClient({ product, reviews = [] }: ProductDe
               onClick={handleOpenReviewModal}
               className="mt-2 w-full max-w-xs h-12 border border-amber-400 text-amber-400 bg-transparent font-sans text-xs font-bold tracking-widest hover:bg-amber-400 hover:text-slate-950 transition-all duration-300 cursor-pointer rounded"
             >
-              WRITE A REVIEW
+              SUBMIT FIELD REVIEW
             </button>
           </div>
 
@@ -451,13 +477,28 @@ export default function ProductDetailClient({ product, reviews = [] }: ProductDe
                         <span className="font-sans text-[10px] text-slate-400 tracking-wider uppercase font-semibold">
                           {new Date(review.createdAt).toLocaleDateString()}
                         </span>
+                        <div className="flex items-center">
+                          {[1, 2, 3, 4, 5].map((star) => (
+                            <Star
+                              key={star}
+                              className={`h-3 w-3 ${
+                                star <= review.rating
+                                  ? 'text-[#1E3A8A] fill-[#1E3A8A]'
+                                  : 'text-slate-200'
+                              }`}
+                            />
+                          ))}
+                        </div>
                       </div>
                       <p className="font-sans text-xs text-slate-300 leading-relaxed">
                         {review.comment}
                       </p>
                     </div>
-                  );
-                })}
+                    <p className="text-xs text-slate-600 leading-relaxed">
+                      {review.comment}
+                    </p>
+                  </div>
+                ))}
               </div>
             )}
           </div>
@@ -505,7 +546,7 @@ export default function ProductDetailClient({ product, reviews = [] }: ProductDe
                   )}`}
                   className="inline-block w-full max-w-xs h-12 bg-amber-500 text-slate-950 font-sans text-xs font-bold tracking-widest hover:bg-amber-400 transition-all duration-300 flex items-center justify-center rounded"
                 >
-                  SIGN IN
+                  SIGN IN TO SUBMIT
                 </Link>
               </div>
             ) : (
@@ -542,7 +583,7 @@ export default function ProductDetailClient({ product, reviews = [] }: ProductDe
                   <label className="font-sans text-xs font-bold text-slate-400 uppercase tracking-wider block mb-2 text-center">
                     Rating
                   </label>
-                  <div className="flex items-center justify-center gap-1.5">
+                  <div className="flex items-center justify-center gap-1">
                     {[1, 2, 3, 4, 5].map((star) => {
                       const active = hoverRating !== null ? star <= hoverRating : star <= formRating;
                       return (
@@ -552,7 +593,7 @@ export default function ProductDetailClient({ product, reviews = [] }: ProductDe
                           onClick={() => setFormRating(star)}
                           onMouseEnter={() => setHoverRating(star)}
                           onMouseLeave={() => setHoverRating(null)}
-                          className="p-1 focus:outline-none transition-transform duration-100 hover:scale-110 cursor-pointer"
+                          className="p-1 focus:outline-none"
                           disabled={isSubmitting || !!submitSuccess}
                         >
                           <Star
@@ -595,7 +636,7 @@ export default function ProductDetailClient({ product, reviews = [] }: ProductDe
                     disabled={isSubmitting || !!submitSuccess}
                     className="flex-1 h-11 bg-amber-500 text-slate-950 font-sans text-xs font-bold tracking-widest hover:bg-amber-400 disabled:bg-slate-800 disabled:text-slate-500 disabled:cursor-not-allowed transition-all cursor-pointer rounded"
                   >
-                    {isSubmitting ? 'SUBMITTING...' : 'SUBMIT REVIEW'}
+                    {isSubmitting ? 'SUBMITTING...' : 'SUBMIT REPORT'}
                   </button>
                 </div>
               </form>

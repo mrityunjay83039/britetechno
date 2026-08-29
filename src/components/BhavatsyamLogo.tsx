@@ -17,18 +17,18 @@ export default function BhavatsyamLogo({
   variant = 'gold',
   showTagline = true,
 }: BhavatsyamLogoProps) {
-  let strokeColor = '#C5A880'; // Gold
-  let textColor = '#C5A880';
-  let taglineColor = '#8C857B';
+  let strokeColor = '#1E3A8A'; // Gold
+  let textColor = '#1E3A8A';
+  let taglineColor = '#64748B';
 
   if (variant === 'dark') {
-    strokeColor = '#0F0F11';
-    textColor = '#0F0F11';
+    strokeColor = '#1E3A8A';
+    textColor = '#1E3A8A';
     taglineColor = '#4A4640';
   } else if (variant === 'white') {
-    strokeColor = '#FAF8F5';
-    textColor = '#FAF8F5';
-    taglineColor = '#C5A880';
+    strokeColor = '#FFFFFF';
+    textColor = '#FFFFFF';
+    taglineColor = '#1E3A8A';
   }
 
   return (

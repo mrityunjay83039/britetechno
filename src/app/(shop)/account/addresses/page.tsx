@@ -36,15 +36,15 @@ export default async function AddressesPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="font-serif text-2xl font-semibold text-[#0F0F11] tracking-wide">
+        <h2 className="font-sans text-2xl font-semibold text-[#1E3A8A] tracking-wide">
           Manage Addresses
         </h2>
-        <p className="font-sans text-xs text-[#8C857B] mt-1">
+        <p className="font-sans text-xs text-[#64748B] mt-1">
           Add, edit, or remove delivery destinations for seamless hand-crafted commissions.
         </p>
       </div>
 
-      <div className="border-t border-[#C5A880]/15 pt-6">
+      <div className="border-t border-[#1E3A8A]/15 pt-6">
         <AddressesClient initialAddresses={serializedAddresses} />
       </div>
     </div>

@@ -30,36 +30,36 @@ export default function FAQPage() {
   ];
 
   return (
-    <div className="bg-[#FAF8F5] min-h-screen py-16 px-4 sm:px-6 lg:px-8">
+    <div className="bg-[#FFFFFF] min-h-screen py-16 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
         {/* Breadcrumbs */}
-        <nav className="mb-8 text-xs font-sans font-bold tracking-wider text-[#8C857B] uppercase">
-          <Link href="/" className="hover:text-[#C5A880] transition-colors">Home</Link>
+        <nav className="mb-8 text-xs font-sans font-bold tracking-wider text-[#64748B] uppercase">
+          <Link href="/" className="hover:text-[#1E3A8A] transition-colors">Home</Link>
           <span className="mx-2">/</span>
-          <span className="text-[#0F0F11]">FAQs</span>
+          <span className="text-[#1E3A8A]">FAQs</span>
         </nav>
 
         {/* Content Header */}
-        <header className="border-b border-[#C5A880]/15 pb-8 mb-10">
-          <span className="font-sans text-xs tracking-[0.3em] text-[#C5A880] uppercase font-bold block mb-3">
+        <header className="border-b border-[#1E3A8A]/15 pb-8 mb-10">
+          <span className="font-sans text-xs tracking-[0.3em] text-[#1E3A8A] uppercase font-bold block mb-3">
             Atelier Assistance
           </span>
-          <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl font-light tracking-wide text-[#0F0F11]">
+          <h1 className="font-sans text-3xl sm:text-4xl md:text-5xl font-light tracking-wide text-[#1E3A8A]">
             Frequently Asked Questions
           </h1>
-          <p className="font-serif italic text-[#8C857B] mt-3 text-lg">
+          <p className="font-sans italic text-[#64748B] mt-3 text-lg">
             Find swift solutions regarding styling assistance, sizing, orders, and delivery details.
           </p>
         </header>
 
         {/* FAQ Accordion List */}
-        <div className="space-y-8 divide-y divide-[#C5A880]/15">
+        <div className="space-y-8 divide-y divide-[#1E3A8A]/15">
           {faqs.map((faq, index) => (
             <div key={index} className={`pt-8 ${index === 0 ? 'pt-0 border-t-0' : ''}`}>
-              <h3 className="font-serif text-lg font-medium text-[#0F0F11] tracking-wide mb-3">
+              <h3 className="font-sans text-lg font-medium text-[#1E3A8A] tracking-wide mb-3">
                 {faq.q}
               </h3>
-              <p className="font-sans text-sm text-[#8C857B] leading-relaxed">
+              <p className="font-sans text-sm text-[#64748B] leading-relaxed">
                 {faq.a}
               </p>
             </div>
@@ -67,14 +67,14 @@ export default function FAQPage() {
         </div>
 
         {/* Footer help note */}
-        <div className="mt-16 pt-8 border-t border-[#C5A880]/15 text-center">
-          <h4 className="font-serif text-lg font-medium text-[#0F0F11] mb-2">Still Have Questions?</h4>
-          <p className="font-sans text-xs sm:text-sm text-[#8C857B] max-w-md mx-auto leading-relaxed mb-6">
+        <div className="mt-16 pt-8 border-t border-[#1E3A8A]/15 text-center">
+          <h4 className="font-sans text-lg font-medium text-[#1E3A8A] mb-2">Still Have Questions?</h4>
+          <p className="font-sans text-xs sm:text-sm text-[#64748B] max-w-md mx-auto leading-relaxed mb-6">
             Our customer care desk is always glad to assist you. Contact us directly at any time.
           </p>
           <Link
             href="/contact"
-            className="inline-block border border-[#C5A880] px-8 py-3.5 font-sans text-xs font-bold tracking-widest text-[#C5A880] hover:bg-[#C5A880] hover:text-[#0F0F11] transition-all duration-300"
+            className="inline-block border border-[#1E3A8A] px-8 py-3.5 font-sans text-xs font-bold tracking-widest text-[#1E3A8A] hover:bg-[#1E3A8A] hover:text-[#1E3A8A] transition-all duration-300"
           >
             CONTACT CONCIERGE
           </Link>

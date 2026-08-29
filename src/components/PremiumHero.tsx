@@ -99,7 +99,7 @@ export default function PremiumHero() {
                 setIsVideoPlaying(!isVideoPlaying);
               }
             }}
-            className="absolute bottom-6 right-6 z-20 w-10 h-10 rounded-full bg-white/80 border border-gray-200 flex items-center justify-center text-[#222222] hover:bg-[#FF6F61] hover:text-white transition-all cursor-pointer shadow-sm"
+            className="absolute bottom-6 right-6 z-20 w-10 h-10 rounded-full bg-white/80 border border-gray-200 flex items-center justify-center text-[#0F172A] hover:bg-[#1E3A8A] hover:text-white transition-all cursor-pointer shadow-sm"
             aria-label={isVideoPlaying ? 'Pause Video' : 'Play Video'}
           >
             {isVideoPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4 ml-0.5" />}
@@ -130,14 +130,14 @@ export default function PremiumHero() {
               <div className="absolute inset-0 flex items-center">
                 <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 text-left">
                   <div className="max-w-2xl space-y-4 md:space-y-6 animate-in fade-in slide-in-from-bottom-8 duration-700">
-                    <span className="font-sans text-[10px] sm:text-xs tracking-[0.35em] text-[#FF6F61] uppercase font-bold block">
+                    <span className="font-sans text-[10px] sm:text-xs tracking-[0.35em] text-[#1E3A8A] uppercase font-bold block">
                       {slide.title}
                     </span>
-                    <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light tracking-wide text-[#222222] leading-tight">
+                    <h1 className="font-sans text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light tracking-wide text-[#0F172A] leading-tight">
                       {slide.heading.split(' ').map((word, i) => (
                         <React.Fragment key={i}>
                           {i === 2 && slide.id === 1 ? (
-                            <span className="italic text-[#FF6F61] block sm:inline">{word} </span>
+                            <span className="italic text-[#1E3A8A] block sm:inline">{word} </span>
                           ) : (
                             word + ' '
                           )}
@@ -150,7 +150,7 @@ export default function PremiumHero() {
                     <div className="pt-2">
                       <Link
                         href="/search"
-                        className="inline-block bg-[#FF6F61] hover:bg-[#E05A47] text-white px-8 py-3.5 font-sans text-xs font-bold tracking-widest transition-all duration-300 rounded-sm shadow-md"
+                        className="inline-block bg-[#1E3A8A] hover:bg-[#1D4ED8] text-white px-8 py-3.5 font-sans text-xs font-bold tracking-widest transition-all duration-300 rounded-sm shadow-md"
                       >
                         {slide.cta.toUpperCase()}
                       </Link>
@@ -164,14 +164,14 @@ export default function PremiumHero() {
           {/* Carousel Manual Controls */}
           <button
             onClick={prevSlide}
-            className="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full border border-gray-200 bg-white/80 backdrop-blur-xs flex items-center justify-center text-zinc-700 hover:text-[#FF6F61] hover:border-[#FF6F61] hover:bg-white transition-all cursor-pointer shadow-sm"
+            className="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full border border-gray-200 bg-white/80 backdrop-blur-xs flex items-center justify-center text-zinc-700 hover:text-[#1E3A8A] hover:border-[#1E3A8A] hover:bg-white transition-all cursor-pointer shadow-sm"
             aria-label="Previous Slide"
           >
             <ChevronLeft className="w-5 h-5" />
           </button>
           <button
             onClick={nextSlide}
-            className="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full border border-gray-200 bg-white/80 backdrop-blur-xs flex items-center justify-center text-zinc-700 hover:text-[#FF6F61] hover:border-[#FF6F61] hover:bg-white transition-all cursor-pointer shadow-sm"
+            className="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full border border-gray-200 bg-white/80 backdrop-blur-xs flex items-center justify-center text-zinc-700 hover:text-[#1E3A8A] hover:border-[#1E3A8A] hover:bg-white transition-all cursor-pointer shadow-sm"
             aria-label="Next Slide"
           >
             <ChevronRight className="w-5 h-5" />
@@ -184,7 +184,7 @@ export default function PremiumHero() {
                 key={idx}
                 onClick={() => setCurrentSlide(idx)}
                 className={`h-1.5 transition-all duration-500 rounded-full cursor-pointer ${
-                  idx === currentSlide ? 'w-8 bg-[#FF6F61]' : 'w-1.5 bg-zinc-300 hover:bg-[#FF6F61]/50'
+                  idx === currentSlide ? 'w-8 bg-[#1E3A8A]' : 'w-1.5 bg-zinc-300 hover:bg-[#1E3A8A]/50'
                 }`}
                 aria-label={`Go to slide ${idx + 1}`}
               />
@@ -194,8 +194,8 @@ export default function PremiumHero() {
       )}
 
       {/* Decorative Warm Accent Ambient Gradients */}
-      <div className="absolute top-0 left-1/4 w-96 h-96 rounded-full bg-[#FF6F61]/3 blur-3xl pointer-events-none z-10" />
-      <div className="absolute bottom-0 right-1/4 w-96 h-96 rounded-full bg-[#FF6F61]/3 blur-3xl pointer-events-none z-10" />
+      <div className="absolute top-0 left-1/4 w-96 h-96 rounded-full bg-[#1E3A8A]/3 blur-3xl pointer-events-none z-10" />
+      <div className="absolute bottom-0 right-1/4 w-96 h-96 rounded-full bg-[#1E3A8A]/3 blur-3xl pointer-events-none z-10" />
     </section>
   );
 }

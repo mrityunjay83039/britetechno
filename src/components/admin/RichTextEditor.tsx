@@ -21,7 +21,7 @@ export default function RichTextEditor({ value, onChange }: RichTextEditorProps)
     editorProps: {
       attributes: {
         class:
-          'prose prose-sm max-w-none focus:outline-none min-h-[140px] px-3 py-2 bg-white text-[#0F0F11] font-sans text-xs sm:text-sm leading-relaxed',
+          'prose prose-sm max-w-none focus:outline-none min-h-[140px] px-3 py-2 bg-white text-[#1E3A8A] font-sans text-xs sm:text-sm leading-relaxed',
       },
     },
   });
@@ -38,14 +38,14 @@ export default function RichTextEditor({ value, onChange }: RichTextEditorProps)
   }
 
   return (
-    <div className="border border-[#C5A880]/30 rounded-sm overflow-hidden bg-white focus-within:border-[#C5A880] transition-colors">
+    <div className="border border-[#1E3A8A]/30 rounded-sm overflow-hidden bg-white focus-within:border-[#1E3A8A] transition-colors">
       {/* Toolbar */}
-      <div className="bg-[#FAF8F5] border-b border-[#C5A880]/20 p-1.5 flex flex-wrap items-center gap-1">
+      <div className="bg-[#FFFFFF] border-b border-[#1E3A8A]/20 p-1.5 flex flex-wrap items-center gap-1">
         <button
           type="button"
           onClick={() => editor.chain().focus().toggleBold().run()}
           className={`p-1.5 rounded-xs hover:bg-gray-200 text-xs font-bold transition-colors cursor-pointer ${
-            editor.isActive('bold') ? 'bg-[#0F0F11] text-white' : 'text-[#0F0F11]'
+            editor.isActive('bold') ? 'bg-[#1E3A8A] text-white' : 'text-[#1E3A8A]'
           }`}
           title="Bold"
         >
@@ -56,20 +56,20 @@ export default function RichTextEditor({ value, onChange }: RichTextEditorProps)
           type="button"
           onClick={() => editor.chain().focus().toggleItalic().run()}
           className={`p-1.5 rounded-xs hover:bg-gray-200 text-xs font-bold transition-colors cursor-pointer ${
-            editor.isActive('italic') ? 'bg-[#0F0F11] text-white' : 'text-[#0F0F11]'
+            editor.isActive('italic') ? 'bg-[#1E3A8A] text-white' : 'text-[#1E3A8A]'
           }`}
           title="Italic"
         >
           <Italic className="w-3.5 h-3.5" />
         </button>
 
-        <div className="w-[1px] h-4 bg-[#C5A880]/30 mx-1" />
+        <div className="w-[1px] h-4 bg-[#1E3A8A]/30 mx-1" />
 
         <button
           type="button"
           onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
           className={`p-1.5 rounded-xs hover:bg-gray-200 text-xs font-bold transition-colors cursor-pointer ${
-            editor.isActive('heading', { level: 1 }) ? 'bg-[#0F0F11] text-white' : 'text-[#0F0F11]'
+            editor.isActive('heading', { level: 1 }) ? 'bg-[#1E3A8A] text-white' : 'text-[#1E3A8A]'
           }`}
           title="Heading 1"
         >
@@ -80,20 +80,20 @@ export default function RichTextEditor({ value, onChange }: RichTextEditorProps)
           type="button"
           onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
           className={`p-1.5 rounded-xs hover:bg-gray-200 text-xs font-bold transition-colors cursor-pointer ${
-            editor.isActive('heading', { level: 2 }) ? 'bg-[#0F0F11] text-white' : 'text-[#0F0F11]'
+            editor.isActive('heading', { level: 2 }) ? 'bg-[#1E3A8A] text-white' : 'text-[#1E3A8A]'
           }`}
           title="Heading 2"
         >
           <Heading2 className="w-3.5 h-3.5" />
         </button>
 
-        <div className="w-[1px] h-4 bg-[#C5A880]/30 mx-1" />
+        <div className="w-[1px] h-4 bg-[#1E3A8A]/30 mx-1" />
 
         <button
           type="button"
           onClick={() => editor.chain().focus().toggleBulletList().run()}
           className={`p-1.5 rounded-xs hover:bg-gray-200 text-xs font-bold transition-colors cursor-pointer ${
-            editor.isActive('bulletList') ? 'bg-[#0F0F11] text-white' : 'text-[#0F0F11]'
+            editor.isActive('bulletList') ? 'bg-[#1E3A8A] text-white' : 'text-[#1E3A8A]'
           }`}
           title="Bullet List"
         >
@@ -104,14 +104,14 @@ export default function RichTextEditor({ value, onChange }: RichTextEditorProps)
           type="button"
           onClick={() => editor.chain().focus().toggleOrderedList().run()}
           className={`p-1.5 rounded-xs hover:bg-gray-200 text-xs font-bold transition-colors cursor-pointer ${
-            editor.isActive('orderedList') ? 'bg-[#0F0F11] text-white' : 'text-[#0F0F11]'
+            editor.isActive('orderedList') ? 'bg-[#1E3A8A] text-white' : 'text-[#1E3A8A]'
           }`}
           title="Ordered List"
         >
           <ListOrdered className="w-3.5 h-3.5" />
         </button>
 
-        <div className="w-[1px] h-4 bg-[#C5A880]/30 mx-1 ml-auto" />
+        <div className="w-[1px] h-4 bg-[#1E3A8A]/30 mx-1 ml-auto" />
 
         <button
           type="button"

@@ -131,8 +131,8 @@ export default function OrdersClient({ initialOrders }: OrdersClientProps) {
               onClick={() => setFilterStatus(status)}
               className={`px-4 py-2 border rounded-sm font-sans text-xs font-bold tracking-wider transition-all cursor-pointer uppercase ${
                 filterStatus === status
-                  ? 'bg-[#0F0F11] text-[#FAF8F5] border-[#0F0F11]'
-                  : 'bg-white text-[#8C857B] border-[#C5A880]/15 hover:border-[#C5A880]/35 hover:text-[#0F0F11]'
+                  ? 'bg-[#1E3A8A] text-[#FFFFFF] border-[#1E3A8A]'
+                  : 'bg-white text-[#64748B] border-[#1E3A8A]/15 hover:border-[#1E3A8A]/35 hover:text-[#1E3A8A]'
               }`}
             >
               {status}
@@ -160,8 +160,8 @@ export default function OrdersClient({ initialOrders }: OrdersClientProps) {
       {/* Orders List */}
       <div className="space-y-4">
         {filteredOrders.length === 0 ? (
-          <div className="bg-white border border-[#C5A880]/15 rounded-sm p-12 text-center text-[#8C857B] font-sans font-medium">
-            No orders found matching status: <strong className="text-[#0F0F11] uppercase">{filterStatus}</strong>
+          <div className="bg-white border border-[#1E3A8A]/15 rounded-sm p-12 text-center text-[#64748B] font-sans font-medium">
+            No orders found matching status: <strong className="text-[#1E3A8A] uppercase">{filterStatus}</strong>
           </div>
         ) : (
           filteredOrders.map((order) => {
@@ -179,37 +179,37 @@ export default function OrdersClient({ initialOrders }: OrdersClientProps) {
             return (
               <div
                 key={order._id}
-                className="bg-white border border-[#C5A880]/15 rounded-sm overflow-hidden shadow-xs hover:shadow-md transition-shadow duration-300"
+                className="bg-white border border-[#1E3A8A]/15 rounded-sm overflow-hidden shadow-xs hover:shadow-md transition-shadow duration-300"
               >
                 {/* Card Header (always visible) */}
-                <div className="p-6 flex flex-col lg:flex-row lg:items-center justify-between gap-6 bg-[#FAF8F5]/40 border-b border-[#C5A880]/10">
+                <div className="p-6 flex flex-col lg:flex-row lg:items-center justify-between gap-6 bg-[#FFFFFF]/40 border-b border-[#1E3A8A]/10">
                   {/* Order Meta */}
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 flex-1">
                     <div className="space-y-1">
-                      <span className="text-[10px] text-[#8C857B] font-bold uppercase tracking-wider block">Order ID</span>
-                      <span className="font-mono text-xs font-bold text-[#0F0F11]">{order._id}</span>
+                      <span className="text-[10px] text-[#64748B] font-bold uppercase tracking-wider block">Order ID</span>
+                      <span className="font-mono text-xs font-bold text-[#1E3A8A]">{order._id}</span>
                     </div>
 
                     <div className="space-y-1">
-                      <span className="text-[10px] text-[#8C857B] font-bold uppercase tracking-wider block">Customer</span>
-                      <div className="flex items-center gap-1.5 text-xs text-[#0F0F11] font-semibold">
-                        <UserIcon className="w-3.5 h-3.5 text-[#C5A880]" />
+                      <span className="text-[10px] text-[#64748B] font-bold uppercase tracking-wider block">Customer</span>
+                      <div className="flex items-center gap-1.5 text-xs text-[#1E3A8A] font-semibold">
+                        <UserIcon className="w-3.5 h-3.5 text-[#1E3A8A]" />
                         <span>{customerName}</span>
                       </div>
-                      <span className="text-[10px] text-[#8C857B] block">{customerEmail}</span>
+                      <span className="text-[10px] text-[#64748B] block">{customerEmail}</span>
                     </div>
 
                     <div className="space-y-1">
-                      <span className="text-[10px] text-[#8C857B] font-bold uppercase tracking-wider block">Date & Time</span>
-                      <div className="flex items-center gap-1.5 text-xs text-[#0F0F11]">
-                        <Calendar className="w-3.5 h-3.5 text-[#C5A880]" />
+                      <span className="text-[10px] text-[#64748B] font-bold uppercase tracking-wider block">Date & Time</span>
+                      <div className="flex items-center gap-1.5 text-xs text-[#1E3A8A]">
+                        <Calendar className="w-3.5 h-3.5 text-[#1E3A8A]" />
                         <span>{orderDate}</span>
                       </div>
                     </div>
 
                     <div className="space-y-1">
-                      <span className="text-[10px] text-[#8C857B] font-bold uppercase tracking-wider block">Total Amount</span>
-                      <div className="flex items-center gap-1 text-base font-bold text-[#0F0F11]">
+                      <span className="text-[10px] text-[#64748B] font-bold uppercase tracking-wider block">Total Amount</span>
+                      <div className="flex items-center gap-1 text-base font-bold text-[#1E3A8A]">
                         <span>{formatCurrency(order.totalAmount)}</span>
                         <span className={`inline-block px-1.5 py-0.5 rounded-sm border text-[9px] uppercase font-bold ml-1.5 ${getPaymentBadgeClass(order.paymentStatus)}`}>
                           {order.paymentStatus}
@@ -219,15 +219,15 @@ export default function OrdersClient({ initialOrders }: OrdersClientProps) {
                   </div>
 
                   {/* Actions / Status dropdown */}
-                  <div className="flex items-center gap-4 border-t lg:border-t-0 pt-4 lg:pt-0 border-[#C5A880]/10">
+                  <div className="flex items-center gap-4 border-t lg:border-t-0 pt-4 lg:pt-0 border-[#1E3A8A]/10">
                     <div className="space-y-1">
-                      <span className="text-[10px] text-[#8C857B] font-bold uppercase tracking-wider block">Fulfillment Status</span>
+                      <span className="text-[10px] text-[#64748B] font-bold uppercase tracking-wider block">Fulfillment Status</span>
                       <div className="flex items-center gap-2">
                         <select
                           disabled={updatingId === order._id}
                           value={order.orderStatus}
                           onChange={(e) => handleStatusChange(order._id, e.target.value as 'PROCESSING' | 'SHIPPED' | 'DELIVERED' | 'CANCELLED')}
-                          className={`px-3 py-1.5 border border-[#C5A880]/20 rounded-sm font-sans text-xs font-bold uppercase tracking-wider outline-none bg-white text-[#0F0F11] cursor-pointer focus:border-[#C5A880] focus:ring-1 focus:ring-[#C5A880] transition-all ${
+                          className={`px-3 py-1.5 border border-[#1E3A8A]/20 rounded-sm font-sans text-xs font-bold uppercase tracking-wider outline-none bg-white text-[#1E3A8A] cursor-pointer focus:border-[#1E3A8A] focus:ring-1 focus:ring-[#1E3A8A] transition-all ${
                             updatingId === order._id ? 'opacity-50' : ''
                           }`}
                         >
@@ -238,7 +238,7 @@ export default function OrdersClient({ initialOrders }: OrdersClientProps) {
                         </select>
 
                         {updatingId === order._id ? (
-                          <Loader2 className="w-4 h-4 text-[#C5A880] animate-spin" />
+                          <Loader2 className="w-4 h-4 text-[#1E3A8A] animate-spin" />
                         ) : (
                           <span className={`inline-block px-2 py-1 rounded-sm border text-[10px] font-bold tracking-wider ${getOrderStatusBadgeClass(order.orderStatus)}`}>
                             {order.orderStatus}
@@ -249,7 +249,7 @@ export default function OrdersClient({ initialOrders }: OrdersClientProps) {
 
                     <button
                       onClick={() => toggleExpand(order._id)}
-                      className="p-2 border border-[#C5A880]/20 rounded-sm hover:bg-[#FAF8F5] text-[#8C857B] hover:text-[#0F0F11] transition-all cursor-pointer mt-4 self-end"
+                      className="p-2 border border-[#1E3A8A]/20 rounded-sm hover:bg-blue-900 text-[#64748B] hover:text-[#1E3A8A] transition-all cursor-pointer mt-4 self-end"
                       title={isExpanded ? 'Collapse' : 'Expand Details'}
                     >
                       {isExpanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
@@ -259,18 +259,18 @@ export default function OrdersClient({ initialOrders }: OrdersClientProps) {
 
                 {/* Card Expandable Body (Items and Shipping address) */}
                 {isExpanded && (
-                  <div className="p-6 bg-[#FAF8F5]/10 border-t border-[#C5A880]/10 space-y-6 animate-fadeIn">
+                  <div className="p-6 bg-[#FFFFFF]/10 border-t border-[#1E3A8A]/10 space-y-6 animate-fadeIn">
                     <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
                       {/* Items Details */}
                       <div className="md:col-span-8 space-y-3">
-                        <h4 className="font-serif text-sm font-bold text-[#0F0F11] tracking-wide flex items-center gap-1.5">
-                          <Package className="w-4 h-4 text-[#C5A880]" /> Ordered Items ({order.items.length})
+                        <h4 className="font-sans text-sm font-bold text-[#1E3A8A] tracking-wide flex items-center gap-1.5">
+                          <Package className="w-4 h-4 text-[#1E3A8A]" /> Ordered Items ({order.items.length})
                         </h4>
 
-                        <div className="border border-[#C5A880]/15 rounded-sm overflow-hidden bg-white">
+                        <div className="border border-[#1E3A8A]/15 rounded-sm overflow-hidden bg-white">
                           <table className="w-full text-left text-xs">
                             <thead>
-                              <tr className="bg-[#FAF8F5] text-[#8C857B] font-bold uppercase tracking-wider border-b border-[#C5A880]/10">
+                              <tr className="bg-[#FFFFFF] text-[#64748B] font-bold uppercase tracking-wider border-b border-[#1E3A8A]/10">
                                 <th className="py-2 px-4">Item description</th>
                                 <th className="py-2 px-4">Size / Color</th>
                                 <th className="py-2 px-4 text-right">Price</th>
@@ -278,19 +278,19 @@ export default function OrdersClient({ initialOrders }: OrdersClientProps) {
                                 <th className="py-2 px-4 text-right">Subtotal</th>
                               </tr>
                             </thead>
-                            <tbody className="divide-y divide-[#C5A880]/10 font-sans">
+                            <tbody className="divide-y divide-[#1E3A8A]/10 font-sans">
                               {order.items.map((item, idx) => (
-                                <tr key={idx} className="text-[#0F0F11]">
+                                <tr key={idx} className="text-[#1E3A8A]">
                                   <td className="py-2.5 px-4 font-semibold">{item.title}</td>
                                   <td className="py-2.5 px-4">
-                                    <span className="bg-[#FAF8F5] px-1.5 py-0.5 rounded border border-[#C5A880]/15 text-[#8C857B] font-bold mr-1.5">
+                                    <span className="bg-[#FFFFFF] px-1.5 py-0.5 rounded border border-[#1E3A8A]/15 text-[#64748B] font-bold mr-1.5">
                                       {item.size}
                                     </span>
-                                    <span className="text-[#8C857B]">{item.color}</span>
+                                    <span className="text-[#64748B]">{item.color}</span>
                                   </td>
                                   <td className="py-2.5 px-4 text-right font-medium">{formatCurrency(item.priceAtPurchase)}</td>
-                                  <td className="py-2.5 px-4 text-center font-bold text-[#8C857B]">{item.quantity}</td>
-                                  <td className="py-2.5 px-4 text-right font-semibold text-[#0F0F11]">
+                                  <td className="py-2.5 px-4 text-center font-bold text-[#64748B]">{item.quantity}</td>
+                                  <td className="py-2.5 px-4 text-right font-semibold text-[#1E3A8A]">
                                     {formatCurrency(item.priceAtPurchase * item.quantity)}
                                   </td>
                                 </tr>
@@ -302,15 +302,15 @@ export default function OrdersClient({ initialOrders }: OrdersClientProps) {
 
                       {/* Shipping Address */}
                       <div className="md:col-span-4 space-y-3">
-                        <h4 className="font-serif text-sm font-bold text-[#0F0F11] tracking-wide flex items-center gap-1.5">
-                          <MapPin className="w-4 h-4 text-[#C5A880]" /> Shipping Destination
+                        <h4 className="font-sans text-sm font-bold text-[#1E3A8A] tracking-wide flex items-center gap-1.5">
+                          <MapPin className="w-4 h-4 text-[#1E3A8A]" /> Shipping Destination
                         </h4>
 
-                        <div className="bg-white p-4 border border-[#C5A880]/15 rounded-sm space-y-1 text-xs font-sans text-[#0F0F11]">
+                        <div className="bg-white p-4 border border-[#1E3A8A]/15 rounded-sm space-y-1 text-xs font-sans text-[#1E3A8A]">
                           <p className="font-semibold">{customerName}</p>
                           <p>{order.shippingAddress.street}</p>
                           <p>{order.shippingAddress.city}, {order.shippingAddress.state} {order.shippingAddress.postalCode}</p>
-                          <p className="font-bold text-[#C5A880] tracking-wider uppercase text-[10px] mt-1">
+                          <p className="font-bold text-[#1E3A8A] tracking-wider uppercase text-[10px] mt-1">
                             {order.shippingAddress.country}
                           </p>
                         </div>

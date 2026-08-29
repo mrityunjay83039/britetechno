@@ -57,8 +57,8 @@ export default async function SearchPage() {
   return (
     <Suspense
       fallback={
-        <div className="min-h-screen bg-[#FAF8F5] flex items-center justify-center p-4">
-          <p className="font-serif text-[#C5A880] text-lg font-bold animate-pulse">
+        <div className="min-h-screen bg-[#FFFFFF] flex items-center justify-center p-4">
+          <p className="font-sans text-[#1E3A8A] text-lg font-bold animate-pulse">
             Searching Collections...
           </p>
         </div>

@@ -24,10 +24,10 @@ export default async function ReviewsPage() {
   return (
     <div className="space-y-8">
       <div>
-        <h2 className="font-serif text-3xl font-bold text-[#0F0F11] tracking-wide">
+        <h2 className="font-sans text-3xl font-bold text-[#1E3A8A] tracking-wide">
           Customer Reviews
         </h2>
-        <p className="font-sans text-xs text-[#8C857B] mt-1 uppercase tracking-widest font-semibold">
+        <p className="font-sans text-xs text-[#64748B] mt-1 uppercase tracking-widest font-semibold">
           Moderate customer feedback, approve genuine opinions, and remove spam or inappropriate comments
         </p>
       </div>

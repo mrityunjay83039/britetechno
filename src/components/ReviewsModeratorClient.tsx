@@ -108,20 +108,20 @@ export default function ReviewsModeratorClient({ initialReviews }: ReviewsModera
       )}
 
       {reviews.length === 0 ? (
-        <div className="bg-white border border-[#C5A880]/15 p-16 text-center rounded flex flex-col items-center justify-center">
-          <MessageSquare className="h-10 w-10 text-[#C5A880]/60 mb-4" />
-          <p className="font-serif text-lg text-[#0F0F11]">No Reviews Found</p>
-          <p className="font-sans text-xs text-[#8C857B] mt-1 max-w-xs leading-relaxed">
+        <div className="bg-white border border-[#1E3A8A]/15 p-16 text-center rounded flex flex-col items-center justify-center">
+          <MessageSquare className="h-10 w-10 text-[#1E3A8A]/60 mb-4" />
+          <p className="font-sans text-lg text-[#1E3A8A]">No Reviews Found</p>
+          <p className="font-sans text-xs text-[#64748B] mt-1 max-w-xs leading-relaxed">
             There are currently no customer reviews submitted on the platform.
           </p>
         </div>
       ) : (
-        <div className="bg-white border border-[#C5A880]/15 rounded overflow-hidden">
+        <div className="bg-white border border-[#1E3A8A]/15 rounded overflow-hidden">
           {/* Table Header */}
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse font-sans text-xs">
               <thead>
-                <tr className="bg-[#0F0F11] text-[#FAF8F5] border-b border-[#C5A880]/15 uppercase tracking-wider text-[10px] font-bold">
+                <tr className="bg-[#1E3A8A] text-[#FFFFFF] border-b border-[#1E3A8A]/15 uppercase tracking-wider text-[10px] font-bold">
                   <th className="py-4 px-6">Product</th>
                   <th className="py-4 px-6">Reviewer</th>
                   <th className="py-4 px-6">Rating</th>
@@ -131,19 +131,19 @@ export default function ReviewsModeratorClient({ initialReviews }: ReviewsModera
                   <th className="py-4 px-6 text-right">Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-[#C5A880]/10">
+              <tbody className="divide-y divide-[#1E3A8A]/10">
                 {reviews.map((review) => {
                   const isActionLoading = loadingId === review._id;
 
                   return (
-                    <tr key={review._id} className="hover:bg-[#FAF8F5]/50 transition-colors">
+                    <tr key={review._id} className="hover:bg-blue-900/50 transition-colors">
                       {/* Product details */}
                       <td className="py-4 px-6 font-semibold">
                         {review.product ? (
                           <Link
                             href={`/products/${review.product.slug}`}
                             target="_blank"
-                            className="text-[#0F0F11] hover:text-[#C5A880] flex items-center gap-1.5 transition-colors"
+                            className="text-[#1E3A8A] hover:text-[#1E3A8A] flex items-center gap-1.5 transition-colors"
                           >
                             <span className="line-clamp-2 max-w-[150px]">{review.product.title}</span>
                             <ExternalLink className="h-3 w-3 shrink-0 opacity-60" />
@@ -156,10 +156,10 @@ export default function ReviewsModeratorClient({ initialReviews }: ReviewsModera
                       {/* Reviewer details */}
                       <td className="py-4 px-6">
                         <div className="flex flex-col gap-0.5">
-                          <span className="text-[#0F0F11] font-bold">
+                          <span className="text-[#1E3A8A] font-bold">
                             {review.user ? review.user.name : 'Unknown User'}
                           </span>
-                          <span className="text-[10px] text-[#8C857B]">
+                          <span className="text-[10px] text-[#64748B]">
                             {review.user ? review.user.email : 'Deleted Email'}
                           </span>
                         </div>
@@ -173,7 +173,7 @@ export default function ReviewsModeratorClient({ initialReviews }: ReviewsModera
                               key={star}
                               className={`h-3.5 w-3.5 ${
                                 star <= review.rating
-                                  ? 'text-[#C5A880] fill-[#C5A880]'
+                                  ? 'text-[#1E3A8A] fill-[#1E3A8A]'
                                   : 'text-zinc-200'
                               }`}
                             />
@@ -189,7 +189,7 @@ export default function ReviewsModeratorClient({ initialReviews }: ReviewsModera
                       </td>
 
                       {/* Created date */}
-                      <td className="py-4 px-6 text-[#8C857B] font-medium whitespace-nowrap">
+                      <td className="py-4 px-6 text-[#64748B] font-medium whitespace-nowrap">
                         {new Date(review.createdAt).toLocaleDateString('en-IN', {
                           year: 'numeric',
                           month: 'short',
@@ -219,8 +219,8 @@ export default function ReviewsModeratorClient({ initialReviews }: ReviewsModera
                             disabled={isActionLoading}
                             className={`p-1.5 rounded border transition-all duration-200 cursor-pointer ${
                               review.isApproved
-                                ? 'border-[#C5A880]/20 text-[#8C857B] hover:text-[#0F0F11] hover:border-[#0F0F11]'
-                                : 'border-[#C5A880]/35 bg-[#C5A880]/5 text-[#C5A880] hover:bg-[#C5A880] hover:text-[#0F0F11]'
+                                ? 'border-[#1E3A8A]/20 text-[#64748B] hover:text-[#1E3A8A] hover:border-[#1E3A8A]'
+                                : 'border-[#1E3A8A]/35 bg-[#1E3A8A]/5 text-[#1E3A8A] hover:bg-[#1E3A8A] hover:text-[#1E3A8A]'
                             }`}
                             title={review.isApproved ? 'Hide Review' : 'Approve Review'}
                           >

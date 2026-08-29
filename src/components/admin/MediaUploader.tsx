@@ -81,8 +81,8 @@ export default function MediaUploader({ images, onChange }: MediaUploaderProps) 
         onClick={() => fileInputRef.current?.click()}
         className={`border-2 border-dashed rounded-sm p-6 text-center cursor-pointer transition-all ${
           isDragging
-            ? 'border-[#FF6F61] bg-[#FF6F61]/5'
-            : 'border-[#C5A880]/30 hover:border-[#C5A880] bg-[#FAF8F5]/50'
+            ? 'border-[#1E3A8A] bg-[#1E3A8A]/5'
+            : 'border-[#1E3A8A]/30 hover:border-[#1E3A8A] bg-[#FFFFFF]/50'
         }`}
       >
         <input
@@ -94,14 +94,14 @@ export default function MediaUploader({ images, onChange }: MediaUploaderProps) 
           className="hidden"
         />
         <div className="flex flex-col items-center justify-center space-y-2">
-          <div className="p-3 bg-white border border-[#C5A880]/20 rounded-full text-[#C5A880]">
+          <div className="p-3 bg-white border border-[#1E3A8A]/20 rounded-full text-[#1E3A8A]">
             <Upload className="w-5 h-5" />
           </div>
           <div>
-            <p className="font-sans text-xs font-bold text-[#0F0F11] uppercase tracking-wider">
-              Drag & Drop product images here, or <span className="text-[#FF6F61]">Browse</span>
+            <p className="font-sans text-xs font-bold text-[#1E3A8A] uppercase tracking-wider">
+              Drag & Drop product images here, or <span className="text-[#1E3A8A]">Browse</span>
             </p>
-            <p className="font-sans text-[10px] text-[#8C857B] mt-0.5">
+            <p className="font-sans text-[10px] text-[#64748B] mt-0.5">
               Supports PNG, JPG, WEBP formats. High quality portrait (3:4) recommended.
             </p>
           </div>
@@ -111,7 +111,7 @@ export default function MediaUploader({ images, onChange }: MediaUploaderProps) 
       {/* URL Input */}
       <div className="flex gap-2">
         <div className="relative flex-1">
-          <LinkIcon className="w-3.5 h-3.5 text-[#8C857B] absolute left-3 top-1/2 -translate-y-1/2" />
+          <LinkIcon className="w-3.5 h-3.5 text-[#64748B] absolute left-3 top-1/2 -translate-y-1/2" />
           <input
             type="url"
             value={urlInput}
@@ -123,13 +123,13 @@ export default function MediaUploader({ images, onChange }: MediaUploaderProps) 
               }
             }}
             placeholder="Or enter image URL (e.g. https://images.unsplash.com/...)"
-            className="w-full pl-9 pr-3 py-2 bg-white border border-[#C5A880]/30 focus:border-[#C5A880] text-xs font-sans rounded-sm outline-none"
+            className="w-full pl-9 pr-3 py-2 bg-white border border-[#1E3A8A]/30 focus:border-[#1E3A8A] text-xs font-sans rounded-sm outline-none"
           />
         </div>
         <button
           type="button"
           onClick={handleAddUrl}
-          className="px-4 py-2 bg-[#0F0F11] text-white hover:bg-[#C5A880] hover:text-[#0F0F11] text-xs font-sans font-bold uppercase tracking-wider rounded-sm transition-colors cursor-pointer flex items-center gap-1 shrink-0"
+          className="px-4 py-2 bg-[#1E3A8A] text-white hover:bg-[#1E3A8A] hover:text-[#1E3A8A] text-xs font-sans font-bold uppercase tracking-wider rounded-sm transition-colors cursor-pointer flex items-center gap-1 shrink-0"
         >
           <Plus className="w-3.5 h-3.5" />
           Add URL
@@ -145,7 +145,7 @@ export default function MediaUploader({ images, onChange }: MediaUploaderProps) 
               <div
                 key={idx}
                 className={`relative aspect-[3/4] bg-white border rounded-sm overflow-hidden group shadow-xs ${
-                  isPrimary ? 'border-[#FF6F61] ring-1 ring-[#FF6F61]' : 'border-[#C5A880]/20'
+                  isPrimary ? 'border-[#1E3A8A] ring-1 ring-[#1E3A8A]' : 'border-[#1E3A8A]/20'
                 }`}
               >
                 <Image
@@ -159,14 +159,14 @@ export default function MediaUploader({ images, onChange }: MediaUploaderProps) 
 
                 {/* Primary Tag */}
                 {isPrimary ? (
-                  <span className="absolute top-1.5 left-1.5 bg-[#FF6F61] text-white text-[9px] font-sans font-bold px-1.5 py-0.5 rounded-xs uppercase tracking-wider shadow-xs flex items-center gap-0.5">
+                  <span className="absolute top-1.5 left-1.5 bg-[#1E3A8A] text-white text-[9px] font-sans font-bold px-1.5 py-0.5 rounded-xs uppercase tracking-wider shadow-xs flex items-center gap-0.5">
                     <Star className="w-2.5 h-2.5 fill-white" /> Primary
                   </span>
                 ) : (
                   <button
                     type="button"
                     onClick={() => handleSetPrimary(idx)}
-                    className="absolute top-1.5 left-1.5 bg-black/60 hover:bg-[#FF6F61] text-white p-1 rounded-xs opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer"
+                    className="absolute top-1.5 left-1.5 bg-black/60 hover:bg-[#1E3A8A] text-white p-1 rounded-xs opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer"
                     title="Set as Primary Featured Image"
                   >
                     <Star className="w-3 h-3" />
