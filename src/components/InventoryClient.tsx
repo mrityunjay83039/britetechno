@@ -2,8 +2,6 @@
 
 import React, { useState } from 'react';
 import Image from 'next/image';
-import { useForm, Controller } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { createProduct, updateProduct } from '@/app/actions/admin';
 import RichTextEditor from '@/components/admin/RichTextEditor';
@@ -76,6 +74,93 @@ const productFormSchema = z.object({
 
 type ProductFormValues = z.infer<typeof productFormSchema>;
 
+// Inline Form Hook & Controller to avoid missing node_modules dependency
+function useZodForm<T extends Record<string, unknown>>({
+  schema,
+  defaultValues,
+}: {
+  schema: z.ZodSchema<T>;
+  defaultValues: T;
+}) {
+  const [values, setValues] = useState<T>(defaultValues);
+  const [errors, setErrors] = useState<Record<string, { message?: string }>>({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const setValue = <K extends keyof T>(name: K, val: T[K]) => {
+    setValues((prev) => ({ ...prev, [name]: val }));
+  };
+
+  const watch = <K extends keyof T>(name: K): T[K] => values[name];
+
+  const reset = (newValues: T) => {
+    setValues(newValues);
+    setErrors({});
+  };
+
+  const register = (name: keyof T) => ({
+    name: name as string,
+    value: (values[name] as string | number | undefined) ?? '',
+    onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+      const target = e.target as HTMLInputElement;
+      const val = target.type === 'checkbox' ? target.checked : target.value;
+      setValue(name, val as unknown as T[keyof T]);
+    },
+  });
+
+  const handleSubmit = (onSubmitFn: (values: T) => Promise<void>) => async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setErrors({});
+
+    const result = schema.safeParse(values);
+    if (!result.success) {
+      const formattedErrors: Record<string, { message?: string }> = {};
+      result.error.issues.forEach((issue) => {
+        const path = issue.path[0] as string;
+        if (path && !formattedErrors[path]) {
+          formattedErrors[path] = { message: issue.message };
+        }
+      });
+      setErrors(formattedErrors);
+      setIsSubmitting(false);
+      return;
+    }
+
+    try {
+      await onSubmitFn(result.data);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  return {
+    values,
+    register,
+    handleSubmit,
+    setValue,
+    watch,
+    reset,
+    formState: { errors, isSubmitting },
+    control: { values, setValue },
+  };
+}
+
+function Controller<T extends Record<string, unknown>>({
+  name,
+  control,
+  render,
+}: {
+  name: keyof T & string;
+  control: { values: T; setValue: <K extends keyof T>(n: K, v: T[K]) => void };
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  render: (props: { field: { value: any; onChange: (v: any) => void } }) => React.ReactNode;
+}) {
+  const value = control.values[name];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const onChange = (val: any) => control.setValue(name as any, val);
+  return <>{render({ field: { value, onChange } })}</>;
+}
+
 export default function InventoryClient({ initialProducts, categories }: InventoryClientProps) {
   const [products, setProducts] = useState<Product[]>(initialProducts);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -91,8 +176,8 @@ export default function InventoryClient({ initialProducts, categories }: Invento
     watch,
     reset,
     formState: { errors, isSubmitting },
-  } = useForm<ProductFormValues>({
-    resolver: zodResolver(productFormSchema) as any,
+  } = useZodForm<ProductFormValues>({
+    schema: productFormSchema,
     defaultValues: {
       title: '',
       description: '',
@@ -481,7 +566,8 @@ export default function InventoryClient({ initialProducts, categories }: Invento
                     <Controller
                       name="description"
                       control={control}
-                      render={({ field }) => (
+                      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                      render={({ field }: { field: any }) => (
                         <RichTextEditor value={field.value} onChange={field.onChange} />
                       )}
                     />

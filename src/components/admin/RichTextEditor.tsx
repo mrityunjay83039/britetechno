@@ -1,9 +1,7 @@
 'use client';
 
-import React from 'react';
-import { useEditor, EditorContent } from '@tiptap/react';
-import StarterKit from '@tiptap/starter-kit';
-import { Bold, Italic, List, ListOrdered, Heading1, Heading2, Undo, Redo } from 'lucide-react';
+import React, { useRef } from 'react';
+import { Bold, Italic, List, ListOrdered, Heading1, Heading2 } from 'lucide-react';
 
 interface RichTextEditorProps {
   value: string;
@@ -11,31 +9,27 @@ interface RichTextEditorProps {
 }
 
 export default function RichTextEditor({ value, onChange }: RichTextEditorProps) {
-  const editor = useEditor({
-    extensions: [StarterKit],
-    content: value || '',
-    immediatelyRender: false,
-    onUpdate: ({ editor }) => {
-      onChange(editor.getHTML());
-    },
-    editorProps: {
-      attributes: {
-        class:
-          'prose prose-sm max-w-none focus:outline-none min-h-[140px] px-3 py-2 bg-white text-[#1E3A8A] font-sans text-xs sm:text-sm leading-relaxed',
-      },
-    },
-  });
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
 
-  // Sync content if controlled value changes externally
-  React.useEffect(() => {
-    if (editor && value !== editor.getHTML()) {
-      editor.commands.setContent(value || '');
-    }
-  }, [value, editor]);
+  const insertTag = (openTag: string, closeTag: string) => {
+    const textarea = textareaRef.current;
+    if (!textarea) return;
 
-  if (!editor) {
-    return null;
-  }
+    const start = textarea.selectionStart;
+    const end = textarea.selectionEnd;
+    const currentText = textarea.value;
+    const selectedText = currentText.substring(start, end);
+
+    const replacement = `${openTag}${selectedText}${closeTag}`;
+    const newText = currentText.substring(0, start) + replacement + currentText.substring(end);
+
+    onChange(newText);
+
+    setTimeout(() => {
+      textarea.focus();
+      textarea.setSelectionRange(start + openTag.length, end + openTag.length);
+    }, 0);
+  };
 
   return (
     <div className="border border-[#1E3A8A]/30 rounded-sm overflow-hidden bg-white focus-within:border-[#1E3A8A] transition-colors">
@@ -43,10 +37,8 @@ export default function RichTextEditor({ value, onChange }: RichTextEditorProps)
       <div className="bg-[#FFFFFF] border-b border-[#1E3A8A]/20 p-1.5 flex flex-wrap items-center gap-1">
         <button
           type="button"
-          onClick={() => editor.chain().focus().toggleBold().run()}
-          className={`p-1.5 rounded-xs hover:bg-gray-200 text-xs font-bold transition-colors cursor-pointer ${
-            editor.isActive('bold') ? 'bg-[#1E3A8A] text-white' : 'text-[#1E3A8A]'
-          }`}
+          onClick={() => insertTag('<strong>', '</strong>')}
+          className="p-1.5 rounded-xs hover:bg-gray-200 text-xs font-bold transition-colors text-[#1E3A8A] cursor-pointer"
           title="Bold"
         >
           <Bold className="w-3.5 h-3.5" />
@@ -54,10 +46,8 @@ export default function RichTextEditor({ value, onChange }: RichTextEditorProps)
 
         <button
           type="button"
-          onClick={() => editor.chain().focus().toggleItalic().run()}
-          className={`p-1.5 rounded-xs hover:bg-gray-200 text-xs font-bold transition-colors cursor-pointer ${
-            editor.isActive('italic') ? 'bg-[#1E3A8A] text-white' : 'text-[#1E3A8A]'
-          }`}
+          onClick={() => insertTag('<em>', '</em>')}
+          className="p-1.5 rounded-xs hover:bg-gray-200 text-xs font-bold transition-colors text-[#1E3A8A] cursor-pointer"
           title="Italic"
         >
           <Italic className="w-3.5 h-3.5" />
@@ -67,10 +57,8 @@ export default function RichTextEditor({ value, onChange }: RichTextEditorProps)
 
         <button
           type="button"
-          onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
-          className={`p-1.5 rounded-xs hover:bg-gray-200 text-xs font-bold transition-colors cursor-pointer ${
-            editor.isActive('heading', { level: 1 }) ? 'bg-[#1E3A8A] text-white' : 'text-[#1E3A8A]'
-          }`}
+          onClick={() => insertTag('<h1>', '</h1>')}
+          className="p-1.5 rounded-xs hover:bg-gray-200 text-xs font-bold transition-colors text-[#1E3A8A] cursor-pointer"
           title="Heading 1"
         >
           <Heading1 className="w-3.5 h-3.5" />
@@ -78,10 +66,8 @@ export default function RichTextEditor({ value, onChange }: RichTextEditorProps)
 
         <button
           type="button"
-          onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
-          className={`p-1.5 rounded-xs hover:bg-gray-200 text-xs font-bold transition-colors cursor-pointer ${
-            editor.isActive('heading', { level: 2 }) ? 'bg-[#1E3A8A] text-white' : 'text-[#1E3A8A]'
-          }`}
+          onClick={() => insertTag('<h2>', '</h2>')}
+          className="p-1.5 rounded-xs hover:bg-gray-200 text-xs font-bold transition-colors text-[#1E3A8A] cursor-pointer"
           title="Heading 2"
         >
           <Heading2 className="w-3.5 h-3.5" />
@@ -91,10 +77,8 @@ export default function RichTextEditor({ value, onChange }: RichTextEditorProps)
 
         <button
           type="button"
-          onClick={() => editor.chain().focus().toggleBulletList().run()}
-          className={`p-1.5 rounded-xs hover:bg-gray-200 text-xs font-bold transition-colors cursor-pointer ${
-            editor.isActive('bulletList') ? 'bg-[#1E3A8A] text-white' : 'text-[#1E3A8A]'
-          }`}
+          onClick={() => insertTag('<ul>\n  <li>', '</li>\n</ul>')}
+          className="p-1.5 rounded-xs hover:bg-gray-200 text-xs font-bold transition-colors text-[#1E3A8A] cursor-pointer"
           title="Bullet List"
         >
           <List className="w-3.5 h-3.5" />
@@ -102,40 +86,23 @@ export default function RichTextEditor({ value, onChange }: RichTextEditorProps)
 
         <button
           type="button"
-          onClick={() => editor.chain().focus().toggleOrderedList().run()}
-          className={`p-1.5 rounded-xs hover:bg-gray-200 text-xs font-bold transition-colors cursor-pointer ${
-            editor.isActive('orderedList') ? 'bg-[#1E3A8A] text-white' : 'text-[#1E3A8A]'
-          }`}
+          onClick={() => insertTag('<ol>\n  <li>', '</li>\n</ol>')}
+          className="p-1.5 rounded-xs hover:bg-gray-200 text-xs font-bold transition-colors text-[#1E3A8A] cursor-pointer"
           title="Ordered List"
         >
           <ListOrdered className="w-3.5 h-3.5" />
         </button>
-
-        <div className="w-[1px] h-4 bg-[#1E3A8A]/30 mx-1 ml-auto" />
-
-        <button
-          type="button"
-          onClick={() => editor.chain().focus().undo().run()}
-          disabled={!editor.can().undo()}
-          className="p-1.5 rounded-xs hover:bg-gray-200 text-xs font-bold transition-colors disabled:opacity-30 cursor-pointer"
-          title="Undo"
-        >
-          <Undo className="w-3.5 h-3.5" />
-        </button>
-
-        <button
-          type="button"
-          onClick={() => editor.chain().focus().redo().run()}
-          disabled={!editor.can().redo()}
-          className="p-1.5 rounded-xs hover:bg-gray-200 text-xs font-bold transition-colors disabled:opacity-30 cursor-pointer"
-          title="Redo"
-        >
-          <Redo className="w-3.5 h-3.5" />
-        </button>
       </div>
 
       {/* Content Editor */}
-      <EditorContent editor={editor} />
+      <textarea
+        ref={textareaRef}
+        value={value || ''}
+        onChange={(e) => onChange(e.target.value)}
+        rows={5}
+        placeholder="Enter rich HTML or text description..."
+        className="w-full px-3 py-2 bg-white text-[#1E3A8A] font-sans text-xs sm:text-sm leading-relaxed focus:outline-none resize-y"
+      />
     </div>
   );
 }

@@ -78,14 +78,14 @@ const CaptchaChallenge = forwardRef<CaptchaHandle, CaptchaChallengeProps>(
     return (
       <div className={`space-y-2 ${className}`}>
         <div className="flex items-center justify-between">
-          <label className="font-sans text-xs font-bold text-[#1E3A8A] uppercase tracking-wider flex items-center gap-1.5">
-            <ShieldCheck className="w-3.5 h-3.5 text-[#1E3A8A]" />
+          <label className="font-sans text-xs font-bold text-[#0066B4] uppercase tracking-wider flex items-center gap-1.5">
+            <ShieldCheck className="w-3.5 h-3.5 text-[#0066B4]" />
             Security Captcha <span className="text-red-500">*</span>
           </label>
           <button
             type="button"
             onClick={generateChallenge}
-            className="inline-flex items-center gap-1 text-[11px] font-sans text-[#64748B] hover:text-[#1E3A8A] transition-colors cursor-pointer font-medium"
+            className="inline-flex items-center gap-1 text-[11px] font-sans text-slate-500 hover:text-[#0066B4] transition-colors cursor-pointer font-medium"
             title="Refresh CAPTCHA"
           >
             <RefreshCw className="w-3 h-3" />
@@ -95,10 +95,10 @@ const CaptchaChallenge = forwardRef<CaptchaHandle, CaptchaChallengeProps>(
 
         <div className="flex items-center gap-3">
           {/* Captcha Visual Challenge Display */}
-          <div className="relative flex items-center justify-center bg-[#1E3A8A] text-white font-sans text-lg font-bold tracking-widest px-4 py-2 rounded-sm border border-[#1E3A8A]/40 select-none shadow-inner min-w-[130px] h-10 overflow-hidden">
+          <div className="relative flex items-center justify-center bg-slate-900 text-[#0066B4] font-sans text-lg font-bold tracking-widest px-4 py-2 rounded-lg border border-[#0066B4]/40 select-none shadow-inner min-w-[130px] h-10 overflow-hidden">
             {/* Visual background noise lines */}
-            <div className="absolute inset-0 opacity-20 pointer-events-none bg-[radial-gradient(#1E3A8A_1px,transparent_1px)] [background-size:8px_8px]" />
-            <span className="relative z-10 font-mono tracking-wider text-base text-[#1E3A8A]">
+            <div className="absolute inset-0 opacity-20 pointer-events-none bg-[radial-gradient(#0066B4_1px,transparent_1px)] [background-size:8px_8px]" />
+            <span className="relative z-10 font-mono tracking-wider text-base text-[#0066B4]">
               {num1} {operator} {num2} = ?
             </span>
           </div>
@@ -111,12 +111,12 @@ const CaptchaChallenge = forwardRef<CaptchaHandle, CaptchaChallengeProps>(
               value={userInput}
               onChange={(e) => handleInputChange(e.target.value)}
               placeholder="Answer"
-              className={`w-full px-3 py-2 bg-white border text-sm font-sans font-bold text-[#1E3A8A] outline-none rounded-sm transition-all placeholder-[#64748B] ${
+              className={`w-full px-3 py-2 bg-white border text-sm font-sans font-bold text-[#0F172A] outline-none rounded-lg transition-all placeholder-slate-400 ${
                 status === 'success'
                   ? 'border-emerald-500 ring-1 ring-emerald-500 text-emerald-950 bg-emerald-50/50'
                   : status === 'error'
                   ? 'border-red-400 ring-1 ring-red-400 text-red-950 bg-red-50/50'
-                  : 'border-[#1E3A8A]/30 focus:border-[#1E3A8A] focus:ring-1 focus:ring-[#1E3A8A]'
+                  : 'border-slate-300 focus:border-[#0066B4] focus:ring-1 focus:ring-[#0066B4]'
               }`}
             />
           </div>

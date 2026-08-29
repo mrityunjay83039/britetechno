@@ -9,9 +9,11 @@ export async function POST(req: Request) {
     await connectToDatabase();
 
     const body = await req.json();
-    const { companyName, contactPerson, email, phone, projectDetails, items } = body;
+    const { companyName, contactPerson, contactName, email, phone, phoneNumber, projectDetails, items } = body;
+    const contactNameInput = contactPerson || contactName;
+    const phoneInput = phone || phoneNumber;
 
-    if (!companyName || !contactPerson || !email || !phone) {
+    if (!companyName || !contactNameInput || !email || !phoneInput) {
       return NextResponse.json(
         { success: false, error: 'Company Name, Contact Person, Email, and Phone are required.' },
         { status: 400 }
@@ -37,20 +39,20 @@ export async function POST(req: Request) {
 
     const quoteRequest = await QuoteRequest.create({
       companyName: companyName.trim(),
-      contactPerson: contactPerson.trim(),
+      contactName: contactNameInput.trim(),
       email: email.trim(),
-      phone: phone.trim(),
+      phoneNumber: phoneInput.trim(),
       projectDetails: projectDetails ? projectDetails.trim() : '',
       items: formattedItems,
       userId: session?.user?.id || undefined,
-      status: 'PENDING',
+      status: 'Pending Review',
     });
 
     return NextResponse.json(
       {
         success: true,
         data: quoteRequest,
-        quoteId: quoteRequest._id.toString(),
+        quoteId: String(quoteRequest._id),
         message: 'Quote request submitted successfully.',
       },
       { status: 201 }

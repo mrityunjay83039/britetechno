@@ -40,7 +40,7 @@ export default function QuoteDrawer() {
         {/* Header */}
         <div className="flex items-center justify-between border-b border-slate-800 px-6 py-5">
           <div className="flex items-center gap-2.5">
-            <FileText className="h-5 w-5 text-amber-400" />
+            <FileText className="h-5 w-5 text-[#0066B4]" />
             <h2 className="font-sans text-lg font-bold tracking-wide text-white">
               Quote List ({totalItemCount})
             </h2>
@@ -58,7 +58,7 @@ export default function QuoteDrawer() {
         <div className="flex-1 overflow-y-auto px-6 py-4">
           {!isHydrated ? (
             <div className="flex h-full flex-col items-center justify-center text-slate-400">
-              <div className="h-8 w-8 animate-spin rounded-full border-2 border-amber-400 border-t-transparent" />
+              <div className="h-8 w-8 animate-spin rounded-full border-2 border-[#0066B4] border-t-transparent" />
               <p className="mt-4 font-sans text-sm">Loading Quote List...</p>
             </div>
           ) : items.length === 0 ? (
@@ -70,7 +70,7 @@ export default function QuoteDrawer() {
               </p>
               <button
                 onClick={() => setIsOpen(false)}
-                className="mt-6 border border-amber-400 px-6 py-2.5 font-sans text-xs font-bold tracking-wider text-amber-400 hover:bg-amber-400 hover:text-slate-950 transition-all duration-300 rounded cursor-pointer uppercase"
+                className="mt-6 border border-[#0066B4] px-6 py-2.5 font-sans text-xs font-bold tracking-wider text-[#0066B4] hover:bg-[#0066B4] hover:text-white transition-all duration-300 rounded cursor-pointer uppercase"
               >
                 EXPLORE CATALOG
               </button>
@@ -99,7 +99,7 @@ export default function QuoteDrawer() {
                       />
                     </div>
 
-                    {/* Product Details - Display strictly Product Name, selected specs (Wattage/CCT), and Quantity */}
+                    {/* Product Details */}
                     <div className="flex flex-1 flex-col">
                       <div className="flex justify-between gap-2">
                         <h3 className="font-sans text-sm font-semibold text-white leading-tight">
@@ -114,13 +114,13 @@ export default function QuoteDrawer() {
                         </button>
                       </div>
 
-                      {/* Selected Specs (Wattage / CCT) */}
+                      {/* Selected Specs */}
                       <div className="mt-2 flex flex-wrap items-center gap-2 text-xs font-sans">
                         <span className="bg-slate-800 text-slate-300 px-2 py-0.5 rounded border border-slate-700 font-medium">
-                          Wattage: <strong className="text-amber-400">{specWattage}</strong>
+                          Wattage: <strong className="text-[#0066B4]">{specWattage}</strong>
                         </span>
                         <span className="bg-slate-800 text-slate-300 px-2 py-0.5 rounded border border-slate-700 font-medium">
-                          CCT: <strong className="text-amber-400">{specCCT}</strong>
+                          CCT: <strong className="text-[#0066B4]">{specCCT}</strong>
                         </span>
                       </div>
 
@@ -184,7 +184,7 @@ export default function QuoteDrawer() {
             </p>
             <button
               onClick={handleProceedToQuote}
-              className="w-full bg-amber-500 text-slate-950 font-sans font-bold py-3.5 text-xs tracking-widest hover:bg-amber-400 transition-all duration-300 shadow-lg flex items-center justify-center gap-2 cursor-pointer uppercase rounded"
+              className="w-full bg-[#0066B4] text-white font-sans font-bold py-3.5 text-xs tracking-widest hover:bg-[#005293] transition-all duration-300 shadow-lg flex items-center justify-center gap-2 cursor-pointer uppercase rounded-lg"
             >
               PROCEED TO QUOTE REQUEST
               <ArrowRight className="h-4 w-4" />

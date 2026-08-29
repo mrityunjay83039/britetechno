@@ -47,13 +47,14 @@ Always use B2B terminology in variables, UI, and database schemas. If you see ol
 - **Double Authorization:** Every API Route or Server Action that performs an admin mutation MUST independently verify that the user session exists and `role === 'ADMIN'`.
 
 ## 8. UI, Styling & B2B Design System (BRITE TECHNO Rules)
-- **Aesthetic:** Professional, Trustworthy, Industrial, Clean. Remove all "airy/editorial" fashion styling.
-- **Color Palette Swap:** 
-  - **Primary:** Deep Corporate Navy/Blue (e.g., `#0F172A` or `#1E3A8A`) for trust and authority.
-  - **Secondary:** Clean White (`#FFFFFF`) and Light Gray (`#F3F4F6`) for high-contrast, readable technical tables.
-  - **Accent:** Amber/Gold or vibrant Orange (representing lighting) for "Add to Quote" buttons and CTA elements.
-- **Typography:** Replace Serif fonts with modern, highly legible Sans-Serif fonts (e.g., Inter, Roboto, or Plus Jakarta Sans). Data density and readability for technical specs are the priority.
-- **UI Structure:** Product Detail pages must shift focus from lifestyle imagery to technical data grids. Implement specification tables and downloadable spec sheets (PDFs).
+- **Aesthetic:** Professional, Trustworthy, Industrial, Clean. 
+- **Official Brand Color Palette (BRITE Techno Inc.):** 
+  - **Primary Brand Blue:** `#0066B4` (Official Brite Techno Blue) for primary buttons, category icons, and brand accents.
+  - **Deep Brand Navy:** `#044A80` / `#0F172A` for authoritative headers and dark contrast sections.
+  - **Accent Highlight:** Electric Blue (`#0088FF`) or Amber Gold (`#F59E0B`) for interactive quote badges and call-to-actions.
+  - **Surfaces & Cards:** Clean White (`#FFFFFF`) and Soft Slate (`#F8FAFC` / `#F1F5F9`) for high-contrast technical specification tables.
+- **Typography:** Modern, highly legible Sans-Serif typography (Inter, Roboto, system-ui). Technical data density and readability for specs are top priorities.
+- **UI Structure:** Product Detail pages focus on technical data grids, voltage/wattage selectors, and downloadable PDF specification sheets.
 
 ## 9. Error Handling & API Responses
 - **Backend API Responses:** All API routes must return standard JSON formats: `{ success: boolean, data?: any, error?: string }`.

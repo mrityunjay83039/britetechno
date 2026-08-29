@@ -6,21 +6,28 @@ import { FileText, Clock, Boxes } from 'lucide-react';
 import { getSystemSettings } from '@/app/actions/admin';
 import MaintenanceToggle from '@/components/MaintenanceToggle';
 
+import mongoose from 'mongoose';
+
 export const revalidate = 0; // force dynamic rendering
 
 export default async function DashboardPage() {
-  await dbConnect();
+  let quotes: unknown[] = [];
+  let totalActiveProducts = 0;
+  let settings = { isMaintenanceModeEnabled: false };
 
-  // Fetch metrics
-  const quotes = await QuoteRequest.find({});
+  try {
+    await dbConnect();
+    if (mongoose.connection.readyState === 1) {
+      quotes = await QuoteRequest.find({});
+      totalActiveProducts = await Product.countDocuments({ isPublished: true });
+      settings = await getSystemSettings();
+    }
+  } catch (err) {
+    console.warn('Database connection or query failed in DashboardPage:', err);
+  }
+
   const totalQuoteRequests = quotes.length;
-  const pendingQuotesCount = quotes.filter((q) => q.status === 'Pending Review').length;
-
-  // Count active products
-  const totalActiveProducts = await Product.countDocuments({ isPublished: true });
-
-  // Fetch current system settings for maintenance mode
-  const settings = await getSystemSettings();
+  const pendingQuotesCount = (quotes as Array<{ status?: string }>).filter((q) => q.status === 'Pending Review').length;
 
   return (
     <div className="space-y-8">

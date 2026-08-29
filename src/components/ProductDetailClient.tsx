@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { Plus, Minus, FileText, ChevronRight, Star, X, AlertCircle } from 'lucide-react';
+import { Plus, Minus, FileText, ChevronRight, Star, X, AlertCircle, Zap, Lightbulb, ShieldCheck } from 'lucide-react';
 import { useQuoteListStore } from '@/store/useQuoteListStore';
 
 export interface SerializedProduct {
@@ -52,13 +52,13 @@ export default function ProductDetailClient({ product, reviews = [] }: ProductDe
   const addToQuoteList = useQuoteListStore((state) => state.addToQuoteList);
   const router = useRouter();
 
-  const { title, images, category, variants, description } = product;
+  const { title, images, category, variants, description, specifications } = product;
 
   // Fallback image
   const fallbackSvg = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="600" height="800" viewBox="0 0 600 800">
     <rect width="100%" height="100%" fill="%230F172A"/>
-    <rect x="20" y="20" width="560" height="760" fill="none" stroke="%23F59E0B" stroke-width="1" stroke-opacity="0.3"/>
-    <text x="50%" y="45%" dominant-baseline="middle" text-anchor="middle" font-family="sans-serif" font-size="28" fill="%23F59E0B" letter-spacing="6">BRITE TECHNO</text>
+    <rect x="20" y="20" width="560" height="760" fill="none" stroke="%230066B4" stroke-width="2" stroke-opacity="0.4"/>
+    <text x="50%" y="45%" dominant-baseline="middle" text-anchor="middle" font-family="sans-serif" font-size="28" fill="%230066B4" letter-spacing="6">BRITE TECHNO</text>
     <text x="50%" y="52%" dominant-baseline="middle" text-anchor="middle" font-family="sans-serif" font-size="12" fill="%2394A3B8" letter-spacing="3" font-weight="bold">${encodeURIComponent(category.toUpperCase())}</text>
     <text x="50%" y="60%" dominant-baseline="middle" text-anchor="middle" font-family="sans-serif" font-size="16" fill="%23F8FAFC" font-weight="300">${encodeURIComponent(title)}</text>
   </svg>`;
@@ -88,7 +88,7 @@ export default function ProductDetailClient({ product, reviews = [] }: ProductDe
     });
   };
 
-  // Specs extraction: Wattage & CCT (using size/color or wattage/cct fallback)
+  // Specs extraction: Wattage & CCT
   const wattages = Array.from(new Set(variants.map((v) => v.wattage || v.size || '30W'))).filter(Boolean);
   const ccts = Array.from(new Set(variants.map((v) => v.cct || v.color || '4000K'))).filter(Boolean);
 
@@ -205,7 +205,7 @@ export default function ProductDetailClient({ product, reviews = [] }: ProductDe
     <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 bg-slate-900 text-slate-100">
       {/* Breadcrumbs */}
       <nav className="flex items-center space-x-2 font-sans text-xs tracking-wider text-slate-400 mb-8 uppercase">
-        <Link href="/" className="hover:text-amber-400 transition-colors">
+        <Link href="/" className="hover:text-[#0066B4] transition-colors">
           HOME
         </Link>
         <ChevronRight className="h-3.5 w-3.5 opacity-50" />
@@ -244,7 +244,7 @@ export default function ProductDetailClient({ product, reviews = [] }: ProductDe
                   key={index}
                   onClick={() => setActiveImage(img)}
                   className={`relative h-20 w-20 flex-shrink-0 bg-slate-800 border overflow-hidden rounded transition-all duration-300 ${
-                    activeImage === img ? 'border-amber-400 ring-1 ring-amber-400' : 'border-slate-700 hover:border-slate-500'
+                    activeImage === img ? 'border-[#0066B4] ring-1 ring-[#0066B4]' : 'border-slate-700 hover:border-slate-500'
                   }`}
                 >
                   <Image
@@ -263,27 +263,27 @@ export default function ProductDetailClient({ product, reviews = [] }: ProductDe
 
           {/* Quick Technical Highlights Cards */}
           <div className="grid grid-cols-3 gap-3 mt-2">
-            <div className="p-3 bg-slate-50 border border-slate-200 rounded flex flex-col items-center text-center">
-              <Zap className="h-5 w-5 text-[#1E3A8A] mb-1" />
-              <span className="text-[10px] font-bold text-slate-500 uppercase">Power Output</span>
-              <span className="text-sm font-bold text-slate-900">{wattage}</span>
+            <div className="p-3 bg-slate-800/80 border border-slate-700/80 rounded flex flex-col items-center text-center">
+              <Zap className="h-5 w-5 text-[#0066B4] mb-1" />
+              <span className="text-[10px] font-bold text-slate-400 uppercase">Power Output</span>
+              <span className="text-xs font-bold text-slate-100">{specifications?.wattage || '150W'}</span>
             </div>
-            <div className="p-3 bg-slate-50 border border-slate-200 rounded flex flex-col items-center text-center">
-              <Lightbulb className="h-5 w-5 text-[#1E3A8A] mb-1" />
-              <span className="text-[10px] font-bold text-slate-500 uppercase">Luminous Flux</span>
-              <span className="text-sm font-bold text-slate-900">{lumens}</span>
+            <div className="p-3 bg-slate-800/80 border border-slate-700/80 rounded flex flex-col items-center text-center">
+              <Lightbulb className="h-5 w-5 text-[#0066B4] mb-1" />
+              <span className="text-[10px] font-bold text-slate-400 uppercase">Luminous Flux</span>
+              <span className="text-xs font-bold text-slate-100">{specifications?.lumens || '21,000 LM'}</span>
             </div>
-            <div className="p-3 bg-slate-50 border border-slate-200 rounded flex flex-col items-center text-center">
-              <ShieldCheck className="h-5 w-5 text-[#1E3A8A] mb-1" />
-              <span className="text-[10px] font-bold text-slate-500 uppercase">Certification</span>
-              <span className="text-xs font-bold text-slate-900 line-clamp-1">{certifications}</span>
+            <div className="p-3 bg-slate-800/80 border border-slate-700/80 rounded flex flex-col items-center text-center">
+              <ShieldCheck className="h-5 w-5 text-[#0066B4] mb-1" />
+              <span className="text-[10px] font-bold text-slate-400 uppercase">Certification</span>
+              <span className="text-xs font-bold text-slate-100 line-clamp-1">{specifications?.certifications || 'Commercial Grade'}</span>
             </div>
           </div>
         </div>
 
         {/* Product Details Column */}
         <div className="lg:col-span-5 flex flex-col text-slate-100">
-          <span className="font-sans text-xs tracking-[0.25em] text-amber-400 uppercase font-bold mb-2">
+          <span className="font-sans text-xs tracking-[0.25em] text-[#0066B4] uppercase font-bold mb-2">
             {category}
           </span>
 
@@ -292,7 +292,7 @@ export default function ProductDetailClient({ product, reviews = [] }: ProductDe
           </h1>
 
           <div className="bg-slate-800/80 border border-slate-700/80 rounded-md p-4 mb-6">
-            <span className="font-sans text-xs font-semibold text-amber-400 uppercase tracking-wider block">
+            <span className="font-sans text-xs font-semibold text-[#0066B4] uppercase tracking-wider block">
               B2B Pricing Notice
             </span>
             <p className="font-sans text-sm text-slate-300 mt-1">
@@ -322,10 +322,10 @@ export default function ProductDetailClient({ product, reviews = [] }: ProductDe
                         setSelectedWattage(wattage);
                         setQuantity(1);
                       }}
-                      className={`font-sans text-xs px-4 py-2 border tracking-wider rounded transition-all duration-300 ${
+                      className={`font-sans text-xs px-4 py-2 border tracking-wider rounded transition-all duration-300 cursor-pointer ${
                         selectedWattage === wattage
-                          ? 'border-amber-500 bg-amber-500 text-slate-950 font-bold shadow-sm'
-                          : 'border-slate-700 bg-slate-800 text-slate-200 hover:border-amber-400/60'
+                          ? 'border-[#0066B4] bg-[#0066B4] text-white font-bold shadow-sm'
+                          : 'border-slate-700 bg-slate-800 text-slate-200 hover:border-[#0066B4]/60'
                       }`}
                     >
                       {wattage}
@@ -349,10 +349,10 @@ export default function ProductDetailClient({ product, reviews = [] }: ProductDe
                         setSelectedCCT(cct);
                         setQuantity(1);
                       }}
-                      className={`font-sans text-xs px-4 py-2 border tracking-wider rounded transition-all duration-300 ${
+                      className={`font-sans text-xs px-4 py-2 border tracking-wider rounded transition-all duration-300 cursor-pointer ${
                         selectedCCT === cct
-                          ? 'border-amber-500 bg-amber-500 text-slate-950 font-bold shadow-sm'
-                          : 'border-slate-700 bg-slate-800 text-slate-200 hover:border-amber-400/60'
+                          ? 'border-[#0066B4] bg-[#0066B4] text-white font-bold shadow-sm'
+                          : 'border-slate-700 bg-slate-800 text-slate-200 hover:border-[#0066B4]/60'
                       }`}
                     >
                       {cct}
@@ -369,7 +369,7 @@ export default function ProductDetailClient({ product, reviews = [] }: ProductDe
             <div className="flex items-center border border-slate-700 rounded h-12 bg-slate-800">
               <button
                 onClick={() => setQuantity((q) => Math.max(1, q - 1))}
-                className="px-3.5 text-slate-400 hover:text-white transition-colors"
+                className="px-3.5 text-slate-400 hover:text-white transition-colors cursor-pointer"
                 disabled={quantity <= 1}
                 aria-label="Decrease quantity"
               >
@@ -380,7 +380,7 @@ export default function ProductDetailClient({ product, reviews = [] }: ProductDe
               </span>
               <button
                 onClick={() => setQuantity((q) => q + 1)}
-                className="px-3.5 text-slate-400 hover:text-white transition-colors"
+                className="px-3.5 text-slate-400 hover:text-white transition-colors cursor-pointer"
                 aria-label="Increase quantity"
               >
                 <Plus className="h-4 w-4" />
@@ -390,7 +390,7 @@ export default function ProductDetailClient({ product, reviews = [] }: ProductDe
             {/* Add to Quote Button */}
             <button
               onClick={handleAddToQuote}
-              className="flex-1 flex items-center justify-center gap-3 h-12 text-xs font-sans font-bold tracking-widest uppercase transition-all duration-300 bg-amber-500 text-slate-950 hover:bg-amber-400 shadow-md rounded-md cursor-pointer"
+              className="flex-1 flex items-center justify-center gap-3 h-12 text-xs font-sans font-bold tracking-widest uppercase transition-all duration-300 bg-[#0066B4] hover:bg-[#005293] text-white shadow-md rounded-md cursor-pointer"
             >
               <FileText className="h-4 w-4" />
               ADD TO QUOTE
@@ -400,7 +400,7 @@ export default function ProductDetailClient({ product, reviews = [] }: ProductDe
           <div className="mt-8">
             <Link
               href="/products"
-              className="font-sans text-xs tracking-wider text-slate-400 hover:text-amber-400 uppercase flex items-center gap-1.5 transition-colors font-semibold"
+              className="font-sans text-xs tracking-wider text-slate-400 hover:text-[#0066B4] uppercase flex items-center gap-1.5 transition-colors font-semibold"
             >
               ← BACK TO CATALOG
             </Link>
@@ -422,7 +422,7 @@ export default function ProductDetailClient({ product, reviews = [] }: ProductDe
                     key={star}
                     className={`h-5 w-5 ${
                       star <= Math.round(product.averageRating || 0)
-                        ? 'text-amber-400 fill-amber-400'
+                        ? 'text-[#0066B4] fill-[#0066B4]'
                         : 'text-slate-700'
                     }`}
                   />
@@ -438,7 +438,7 @@ export default function ProductDetailClient({ product, reviews = [] }: ProductDe
 
             <button
               onClick={handleOpenReviewModal}
-              className="mt-2 w-full max-w-xs h-12 border border-amber-400 text-amber-400 bg-transparent font-sans text-xs font-bold tracking-widest hover:bg-amber-400 hover:text-slate-950 transition-all duration-300 cursor-pointer rounded"
+              className="mt-2 w-full max-w-xs h-12 border border-[#0066B4] text-[#0066B4] bg-transparent font-sans text-xs font-bold tracking-widest hover:bg-[#0066B4] hover:text-white transition-all duration-300 cursor-pointer rounded"
             >
               SUBMIT FIELD REVIEW
             </button>
@@ -467,7 +467,7 @@ export default function ProductDetailClient({ product, reviews = [] }: ProductDe
                                 key={star}
                                 className={`h-3.5 w-3.5 ${
                                   star <= review.rating
-                                    ? 'text-amber-400 fill-amber-400'
+                                    ? 'text-[#0066B4] fill-[#0066B4]'
                                     : 'text-slate-700'
                                 }`}
                               />
@@ -477,28 +477,13 @@ export default function ProductDetailClient({ product, reviews = [] }: ProductDe
                         <span className="font-sans text-[10px] text-slate-400 tracking-wider uppercase font-semibold">
                           {new Date(review.createdAt).toLocaleDateString()}
                         </span>
-                        <div className="flex items-center">
-                          {[1, 2, 3, 4, 5].map((star) => (
-                            <Star
-                              key={star}
-                              className={`h-3 w-3 ${
-                                star <= review.rating
-                                  ? 'text-[#1E3A8A] fill-[#1E3A8A]'
-                                  : 'text-slate-200'
-                              }`}
-                            />
-                          ))}
-                        </div>
                       </div>
                       <p className="font-sans text-xs text-slate-300 leading-relaxed">
                         {review.comment}
                       </p>
                     </div>
-                    <p className="text-xs text-slate-600 leading-relaxed">
-                      {review.comment}
-                    </p>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             )}
           </div>
@@ -527,7 +512,7 @@ export default function ProductDetailClient({ product, reviews = [] }: ProductDe
 
             {isCheckingSession ? (
               <div className="flex flex-col items-center justify-center py-12">
-                <div className="h-8 w-8 animate-spin rounded-full border-2 border-amber-400 border-t-transparent" />
+                <div className="h-8 w-8 animate-spin rounded-full border-2 border-[#0066B4] border-t-transparent" />
                 <span className="font-sans text-xs text-slate-400 mt-4 tracking-widest uppercase">
                   Verifying session...
                 </span>
@@ -544,7 +529,7 @@ export default function ProductDetailClient({ product, reviews = [] }: ProductDe
                   href={`/login?callbackUrl=${encodeURIComponent(
                     typeof window !== 'undefined' ? window.location.pathname : ''
                   )}`}
-                  className="inline-block w-full max-w-xs h-12 bg-amber-500 text-slate-950 font-sans text-xs font-bold tracking-widest hover:bg-amber-400 transition-all duration-300 flex items-center justify-center rounded"
+                  className="inline-block w-full max-w-xs h-12 bg-[#0066B4] hover:bg-[#005293] text-white font-sans text-xs font-bold tracking-widest transition-all duration-300 flex items-center justify-center rounded"
                 >
                   SIGN IN TO SUBMIT
                 </Link>
@@ -552,7 +537,7 @@ export default function ProductDetailClient({ product, reviews = [] }: ProductDe
             ) : (
               <form onSubmit={handleReviewSubmit} className="flex flex-col gap-5">
                 <div className="text-center">
-                  <span className="font-sans text-[10px] tracking-[0.3em] text-amber-400 uppercase font-bold block mb-1">
+                  <span className="font-sans text-[10px] tracking-[0.3em] text-[#0066B4] uppercase font-bold block mb-1">
                     CLIENT FEEDBACK
                   </span>
                   <h3 className="font-sans text-lg tracking-wide text-white uppercase font-bold">
@@ -593,12 +578,12 @@ export default function ProductDetailClient({ product, reviews = [] }: ProductDe
                           onClick={() => setFormRating(star)}
                           onMouseEnter={() => setHoverRating(star)}
                           onMouseLeave={() => setHoverRating(null)}
-                          className="p-1 focus:outline-none"
+                          className="p-1 focus:outline-none cursor-pointer"
                           disabled={isSubmitting || !!submitSuccess}
                         >
                           <Star
                             className={`h-7 w-7 ${
-                              active ? 'text-amber-400 fill-amber-400' : 'text-slate-700'
+                              active ? 'text-[#0066B4] fill-[#0066B4]' : 'text-slate-700'
                             }`}
                           />
                         </button>
@@ -617,7 +602,7 @@ export default function ProductDetailClient({ product, reviews = [] }: ProductDe
                     onChange={(e) => setFormComment(e.target.value)}
                     required
                     placeholder="Share performance, build quality, or installation details..."
-                    className="font-sans text-xs p-3 border border-slate-700 rounded focus:border-amber-400 focus:outline-none bg-slate-800 text-slate-100 leading-relaxed transition-all"
+                    className="font-sans text-xs p-3 border border-slate-700 rounded focus:border-[#0066B4] focus:outline-none bg-slate-800 text-slate-100 leading-relaxed transition-all"
                     disabled={isSubmitting || !!submitSuccess}
                   />
                 </div>
@@ -634,7 +619,7 @@ export default function ProductDetailClient({ product, reviews = [] }: ProductDe
                   <button
                     type="submit"
                     disabled={isSubmitting || !!submitSuccess}
-                    className="flex-1 h-11 bg-amber-500 text-slate-950 font-sans text-xs font-bold tracking-widest hover:bg-amber-400 disabled:bg-slate-800 disabled:text-slate-500 disabled:cursor-not-allowed transition-all cursor-pointer rounded"
+                    className="flex-1 h-11 bg-[#0066B4] text-white font-sans text-xs font-bold tracking-widest hover:bg-[#005293] disabled:bg-slate-800 disabled:text-slate-500 disabled:cursor-not-allowed transition-all cursor-pointer rounded"
                   >
                     {isSubmitting ? 'SUBMITTING...' : 'SUBMIT REPORT'}
                   </button>

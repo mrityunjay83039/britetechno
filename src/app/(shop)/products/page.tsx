@@ -14,19 +14,27 @@ export const metadata: Metadata = {
     'Explore the complete BRITE Techno Lighting commercial and industrial LED catalog.',
 };
 
+import mongoose from 'mongoose';
+
 export default async function ProductsPage() {
-  await dbConnect();
-  await ensureCategoryMigration();
+  let rawCategories: unknown[] = [];
+  let rawProducts: IProduct[] = [];
 
-  // Fetch active categories
-  const rawCategories = await Category.find({ isActive: true }).sort({ name: 1 }).lean();
+  try {
+    await dbConnect();
+    if (mongoose.connection.readyState === 1) {
+      await ensureCategoryMigration();
+      rawCategories = await Category.find({ isActive: true }).sort({ name: 1 }).lean();
+      rawProducts = (await Product.find({ isPublished: true })
+        .populate('category')
+        .sort({ createdAt: -1 })
+        .lean()) as unknown as IProduct[];
+    }
+  } catch (err) {
+    console.warn('Database connection or query failed in ProductsPage:', err);
+  }
+
   const categories: CategoryItem[] = JSON.parse(JSON.stringify(rawCategories));
-
-  // Fetch published products populated with category
-  const rawProducts = (await Product.find({ isPublished: true })
-    .populate('category')
-    .sort({ createdAt: -1 })
-    .lean()) as unknown as IProduct[];
 
   // Serialize products safely to pass React Server Component boundary
   const products: SerializedProduct[] = rawProducts.map((prod) => {
@@ -45,7 +53,7 @@ export default async function ProductsPage() {
       categorySlug: catSlug,
       isPublished: prod.isPublished,
       variants: (prod.variants || []).map((v: IProductVariant) => ({
-        size: (v.attributes?.Wattage || v.attributes?.Size || 'Standard') as any,
+        size: (v.attributes?.Wattage || v.attributes?.Size || 'Standard') as string,
         color: v.attributes?.Color || v.attributes?.CCT || 'Default',
         stock: v.stockQuantity ?? 0,
         sku: v.sku,

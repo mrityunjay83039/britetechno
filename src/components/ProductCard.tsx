@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { ArrowRight } from 'lucide-react';
 
 export interface ProductCardProps {
   product: {
@@ -24,78 +25,69 @@ export interface ProductCardProps {
 }
 
 export default function ProductCard({ product }: ProductCardProps) {
-  const { title, slug, price, images, category, variants } = product;
+  const { title, slug, images, category, variants } = product;
 
-  // Custom premium fallback image if actual file is missing or errors
-  const fallbackSvg = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="400" height="500" viewBox="0 0 400 500">
-    <rect width="100%" height="100%" fill="%23141416"/>
-    <rect x="15" y="15" width="370" height="470" fill="none" stroke="%23C5A880" stroke-width="1" stroke-opacity="0.3"/>
-    <text x="50%" y="45%" dominant-baseline="middle" text-anchor="middle" font-family="serif" font-size="20" fill="%23C5A880" letter-spacing="4">BHAVATSYAM</text>
-    <text x="50%" y="52%" dominant-baseline="middle" text-anchor="middle" font-family="sans-serif" font-size="11" fill="%238C857B" letter-spacing="2" font-weight="bold">${encodeURIComponent(category.toUpperCase())}</text>
-    <text x="50%" y="60%" dominant-baseline="middle" text-anchor="middle" font-family="sans-serif" font-size="14" fill="%23FAF8F5" font-weight="300">${encodeURIComponent(title)}</text>
+  // Custom fallback SVG if image fails to load
+  const fallbackSvg = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 400 400">
+    <rect width="100%" height="100%" fill="%230F172A"/>
+    <rect x="20" y="20" width="360" height="360" fill="none" stroke="%230066B4" stroke-width="2" stroke-opacity="0.4"/>
+    <text x="50%" y="42%" dominant-baseline="middle" text-anchor="middle" font-family="sans-serif" font-size="16" fill="%230066B4" letter-spacing="3" font-weight="bold">BRITE TECHNO</text>
+    <text x="50%" y="54%" dominant-baseline="middle" text-anchor="middle" font-family="sans-serif" font-size="12" fill="%2394A3B8" letter-spacing="1" font-weight="600">${encodeURIComponent(category.toUpperCase())}</text>
   </svg>`;
 
   const [imgSrc, setImgSrc] = useState(images[0] || fallbackSvg);
 
-  const formatPrice = (price: number) => {
-    return new Intl.NumberFormat('en-IN', {
-      style: 'currency',
-      currency: 'INR',
-      maximumFractionDigits: 0,
-    }).format(price);
-  };
-
-  const totalStock = variants.reduce((sum, v) => sum + v.stock, 0);
+  const wattages = variants.map((v) => v.size).filter((s) => s && s !== 'Standard');
+  const primarySpec = wattages.length > 0 ? wattages.join(' / ') : 'Commercial Spec';
 
   return (
     <Link
       href={`/products/${slug}`}
-      className="group relative flex flex-col bg-white border border-gray-100 overflow-hidden hover:border-[#1E3A8A]/35 transition-all duration-500 hover:shadow-[0_8px_30px_rgba(255,111,97,0.06)]"
+      className="group relative flex flex-col bg-white border border-slate-200 rounded-xl overflow-hidden hover:border-[#0066B4]/60 transition-all duration-300 hover:shadow-xl flex-1 justify-between"
     >
-      {/* Image container */}
-      <div className="relative aspect-[3/4] w-full bg-zinc-50 overflow-hidden">
-        <Image
-          src={imgSrc}
-          alt={title}
-          fill
-          className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
-          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-          onError={() => setImgSrc(fallbackSvg)}
-          priority={false}
-          unoptimized // Prevents next/image optimization errors during testing on missing filesystem assets
-        />
+      <div>
+        {/* Image Container */}
+        <div className="relative aspect-[4/3] w-full bg-slate-900 overflow-hidden border-b border-slate-100">
+          <Image
+            src={imgSrc}
+            alt={title}
+            fill
+            className="object-cover object-center transition-transform duration-500 ease-out group-hover:scale-105"
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+            onError={() => setImgSrc(fallbackSvg)}
+            priority={false}
+            unoptimized
+          />
+        </div>
 
-        {/* Stock Badge (Vibrant joy and clear readability) */}
-        {totalStock === 0 && (
-          <div className="absolute inset-0 flex items-center justify-center bg-white/70 backdrop-blur-[1px]">
-            <span className="font-sans text-xs font-bold tracking-widest text-[#1E3A8A] border border-[#1E3A8A] px-4 py-1.5 bg-white">
-              OUT OF STOCK
-            </span>
-          </div>
-        )}
+        {/* Info Container */}
+        <div className="p-5 space-y-2">
+          {/* Category */}
+          <span className="font-sans text-[10px] tracking-widest text-[#0066B4] uppercase font-extrabold block">
+            {category}
+          </span>
+
+          {/* Title */}
+          <h3 className="font-sans text-sm font-bold tracking-tight text-slate-900 line-clamp-2 group-hover:text-[#0066B4] transition-colors duration-200 leading-snug">
+            {title}
+          </h3>
+
+          {/* Spec Line */}
+          <p className="font-sans text-[11px] text-slate-500 line-clamp-1">
+            Available Specs: <span className="font-semibold text-slate-700">{primarySpec}</span>
+          </p>
+        </div>
       </div>
 
-      {/* Info Container */}
-      <div className="flex flex-col flex-1 p-4 bg-white text-[#0F172A]">
-        {/* Category */}
-        <span className="font-sans text-[10px] tracking-widest text-zinc-400 uppercase font-bold mb-1">
-          {category}
+      {/* Action Footer */}
+      <div className="px-5 pb-5 pt-2 flex items-center justify-between border-t border-slate-100 mt-2">
+        <span className="font-sans text-[11px] font-bold text-slate-400 uppercase tracking-wider">
+          Pricing on Request
         </span>
-
-        {/* Title */}
-        <h3 className="font-sans text-base font-medium tracking-wide text-[#0F172A] line-clamp-1 group-hover:text-[#1E3A8A] transition-colors duration-300">
-          {title}
-        </h3>
-
-        {/* Price & Actions Row */}
-        <div className="mt-3 flex items-center justify-between">
-          <span className="font-sans text-sm font-semibold text-[#1E3A8A]">
-            {formatPrice(price)}
-          </span>
-          <span className="font-sans text-[11px] text-zinc-400 group-hover:text-[#1E3A8A] transition-colors duration-300 tracking-wider">
-            VIEW DETAILS →
-          </span>
-        </div>
+        <span className="font-sans text-xs font-bold text-[#0066B4] group-hover:text-[#005293] transition-colors flex items-center gap-1">
+          <span>REQUEST QUOTE</span>
+          <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+        </span>
       </div>
     </Link>
   );

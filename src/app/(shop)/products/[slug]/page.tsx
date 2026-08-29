@@ -97,7 +97,7 @@ export default async function ProductPage({ params }: PageProps) {
     category: productDoc.category && typeof productDoc.category === 'object' ? (productDoc.category as unknown as { name: string }).name : String(productDoc.category || 'Uncategorized'),
     isPublished: productDoc.isPublished,
     variants: (productDoc.variants || []).map((v: IProductVariant) => ({
-      size: (v.attributes?.Wattage || v.attributes?.Size || 'Standard') as any,
+      size: (v.attributes?.Wattage || v.attributes?.Size || 'Standard') as string,
       color: v.attributes?.Color || v.attributes?.CCT || 'Default',
       stock: v.stockQuantity ?? 0,
       sku: v.sku,

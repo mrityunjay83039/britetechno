@@ -1,9 +1,9 @@
 import React from 'react';
+import mongoose from 'mongoose';
 import dbConnect from '@/lib/db';
 import { ensureCategoryMigration } from '@/lib/migrateCategories';
 import { Product, IProduct, IProductVariant } from '@/models/Product';
-import ProductCard from '@/components/ProductCard';
-import PremiumHero from '@/components/PremiumHero';
+import IndustrialB2BHomepage from '@/components/home/IndustrialB2BHomepage';
 
 export const dynamic = 'force-dynamic';
 
@@ -26,24 +26,20 @@ interface SerializedProduct {
   variants: SerializedVariant[];
 }
 
-const INSTAGRAM_PLACEHOLDERS = [
-  {
-    id: 1,
-    url: 'https://images.unsplash.com/photo-1565814636199-ae8133055c1c?auto=format&fit=crop&q=80&w=600&h=600',
-    alt: 'Industrial lighting fixture in commercial facility',
-  },
-  {
-    id: 2,
-    url: 'https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?auto=format&fit=crop&q=80&w=600&h=600',
-    alt: 'High bay LED lighting installation',
-  },
-];
-
 export default async function HomePage() {
-  await dbConnect();
-  await ensureCategoryMigration();
+  let products: IProduct[] = [];
 
-  const products = await Product.find({ isPublished: true }).populate('category').lean() as unknown as IProduct[];
+  try {
+    await dbConnect();
+    if (mongoose.connection.readyState === 1) {
+      await ensureCategoryMigration();
+      products = (await Product.find({ isPublished: true })
+        .populate('category')
+        .lean()) as unknown as IProduct[];
+    }
+  } catch (err) {
+    console.warn('Database connection or query failed in HomePage:', err);
+  }
 
   const serializedProducts: SerializedProduct[] = products.map((prod) => ({
     _id: String(prod._id),
@@ -62,42 +58,5 @@ export default async function HomePage() {
     })),
   }));
 
-  return (
-    <div className="flex flex-col bg-[#FFFFFF]">
-      {/* High-Conversion Premium Hero Carousel / Background video */}
-      <PremiumHero />
-
-      {/* Product Catalog Grid */}
-      <section id="collection" className="mx-auto w-full max-w-7xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
-        <div className="border-b border-gray-100 pb-6 mb-12 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
-          <div>
-            <h2 className="font-serif text-2xl sm:text-3xl font-medium tracking-wide text-[#222222]">
-              Industrial & Commercial Catalog
-            </h2>
-            <p className="font-sans text-xs text-zinc-500 mt-1.5 uppercase tracking-wider">
-              High-efficiency LED fixtures for enterprise and industrial infrastructure
-            </p>
-          </div>
-          <span className="font-sans text-xs text-zinc-500 font-semibold tracking-wider">
-            SHOWING {serializedProducts.length} PRODUCTS
-          </span>
-        </div>
-
-        {serializedProducts.length === 0 ? (
-          <div className="flex flex-col items-center justify-center py-24 text-center">
-            <p className="font-sans text-lg font-medium text-[#0F172A]">No products available</p>
-            <p className="font-sans text-sm text-zinc-500 mt-2">
-              Our catalog is currently being updated. Please check back soon.
-            </p>
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
-            {serializedProducts.map((product) => (
-              <ProductCard key={product._id} product={product} />
-            ))}
-          </div>
-        )}
-      </section>
-    </div>
-  );
+  return <IndustrialB2BHomepage products={serializedProducts} />;
 }

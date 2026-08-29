@@ -63,25 +63,25 @@ function LoginForm() {
   };
 
   return (
-    <div className="min-h-screen bg-[#FFFFFF] flex flex-col justify-center py-12 sm:px-6 lg:px-8 text-[#0F172A]">
+    <div className="min-h-screen bg-slate-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8 text-[#0F172A]">
       {/* Brand Header */}
       <div className="sm:mx-auto w-full max-w-md text-center">
         <Link href="/" className="inline-block transition-transform hover:scale-105">
-          <LogoImage width={200} height={50} />
+          <LogoImage width={220} height={55} />
         </Link>
         <h2 className="mt-4 font-sans text-2xl font-bold text-[#0F172A] tracking-wide">
-          Account Sign In
+          B2B Account Sign In
         </h2>
-        <p className="font-sans text-xs text-zinc-500 mt-1 tracking-wider uppercase">
-          Welcome back to BHAVATSYAM
+        <p className="font-sans text-xs text-slate-500 mt-1 tracking-wider uppercase">
+          Welcome to BRITE Techno Lighting Inc.
         </p>
       </div>
 
       {/* Main Login Card */}
       <div className="mt-8 sm:mx-auto w-full max-w-md">
-        <div className="bg-white py-8 px-6 shadow-xl border border-gray-150 rounded-sm sm:px-10">
+        <div className="bg-white py-8 px-6 shadow-xl border border-slate-200 rounded-xl sm:px-10">
           {resetSuccess && (
-            <div className="mb-5 bg-emerald-50 border border-emerald-200 rounded-sm p-3.5 flex items-start gap-2.5 animate-in fade-in duration-200">
+            <div className="mb-5 bg-emerald-50 border border-emerald-200 rounded-lg p-3.5 flex items-start gap-2.5 animate-in fade-in duration-200">
               <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
               <p className="font-sans text-xs text-emerald-800 font-medium leading-relaxed">
                 Your password has been reset successfully. Please sign in with your new password.
@@ -91,7 +91,7 @@ function LoginForm() {
 
           <form className="space-y-5" onSubmit={handleSubmit}>
             {error && (
-              <div className="bg-red-50 border border-red-200 rounded-sm p-3.5 space-y-2 animate-in fade-in duration-200">
+              <div className="bg-red-50 border border-red-200 rounded-lg p-3.5 space-y-2 animate-in fade-in duration-200">
                 <div className="flex items-start gap-2.5">
                   <AlertCircle className="w-4 h-4 text-red-600 shrink-0 mt-0.5" />
                   <p className="font-sans text-xs text-red-800 font-medium leading-relaxed">{error}</p>
@@ -119,15 +119,15 @@ function LoginForm() {
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <Mail className="h-4 w-4 text-[#1E3A8A]" />
+                  <Mail className="h-4 w-4 text-[#0066B4]" />
                 </div>
                 <input
                   type="email"
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full pl-10 pr-3 py-2.5 bg-white border border-gray-200 focus:border-[#1E3A8A] focus:ring-1 focus:ring-[#1E3A8A] text-[#0F172A] font-semibold text-sm font-sans outline-none rounded-sm placeholder-zinc-400"
-                  placeholder="name@example.com"
+                  className="w-full pl-10 pr-3 py-2.5 bg-white border border-slate-300 focus:border-[#0066B4] focus:ring-1 focus:ring-[#0066B4] text-[#0F172A] font-semibold text-sm font-sans outline-none rounded-lg placeholder-slate-400"
+                  placeholder="name@company.com"
                 />
               </div>
             </div>
@@ -140,37 +140,37 @@ function LoginForm() {
                 </label>
                 <Link
                   href="/forgot-password"
-                  className="font-sans text-xs text-[#1E3A8A] hover:text-[#1D4ED8] font-semibold transition-colors"
+                  className="font-sans text-xs text-[#0066B4] hover:text-[#005293] font-semibold transition-colors"
                 >
                   Forgot Password?
                 </Link>
               </div>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <Lock className="h-4 w-4 text-[#1E3A8A]" />
+                  <Lock className="h-4 w-4 text-[#0066B4]" />
                 </div>
                 <input
                   type="password"
                   required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full pl-10 pr-3 py-2.5 bg-white border border-gray-200 focus:border-[#1E3A8A] focus:ring-1 focus:ring-[#1E3A8A] text-[#0F172A] font-semibold text-sm font-sans outline-none rounded-sm placeholder-zinc-400"
+                  className="w-full pl-10 pr-3 py-2.5 bg-white border border-slate-300 focus:border-[#0066B4] focus:ring-1 focus:ring-[#0066B4] text-[#0F172A] font-semibold text-sm font-sans outline-none rounded-lg placeholder-slate-400"
                   placeholder="••••••••"
                 />
               </div>
             </div>
 
             {/* Bot Protection CAPTCHA Challenge */}
-            <div className="pt-2 border-t border-gray-100">
+            <div className="pt-2 border-t border-slate-100">
               <CaptchaChallenge ref={captchaRef} />
             </div>
 
-            {/* Submit Button (Vibrant Coral accent) */}
+            {/* Submit Button */}
             <div className="pt-2">
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-3.5 bg-[#1E3A8A] text-white border border-[#1E3A8A] hover:bg-[#1D4ED8] hover:border-[#1D4ED8] disabled:opacity-50 font-sans text-xs font-bold tracking-widest transition-all duration-300 cursor-pointer uppercase rounded-sm flex items-center justify-center gap-2 group shadow-md"
+                className="w-full py-3.5 bg-[#0066B4] text-white border border-[#0066B4] hover:bg-[#005293] disabled:opacity-50 font-sans text-xs font-bold tracking-widest transition-all duration-300 cursor-pointer uppercase rounded-lg flex items-center justify-center gap-2 group shadow-md"
               >
                 {loading ? (
                   <span>Signing In...</span>
@@ -185,12 +185,12 @@ function LoginForm() {
           </form>
 
           {/* Footer Link to Register */}
-          <div className="mt-6 pt-6 border-t border-gray-100 text-center space-y-2">
-            <p className="font-sans text-xs text-zinc-500">
-              Don&apos;t have an account?{' '}
+          <div className="mt-6 pt-6 border-t border-slate-100 text-center space-y-2">
+            <p className="font-sans text-xs text-slate-500">
+              Don&apos;t have a business account?{' '}
               <Link
                 href="/register"
-                className="font-bold text-[#1E3A8A] hover:text-[#1D4ED8] transition-colors underline underline-offset-4"
+                className="font-bold text-[#0066B4] hover:text-[#005293] transition-colors underline underline-offset-4"
               >
                 Register here
               </Link>
@@ -206,7 +206,7 @@ export default function LoginPage() {
   return (
     <Suspense
       fallback={
-        <div className="min-h-screen bg-[#FFFFFF] flex items-center justify-center font-sans text-xs text-zinc-500">
+        <div className="min-h-screen bg-slate-50 flex items-center justify-center font-sans text-xs text-slate-500">
           Loading login page...
         </div>
       }

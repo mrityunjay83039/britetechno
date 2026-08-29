@@ -14,7 +14,7 @@ export interface CategoryItem {
 }
 
 export interface SerializedVariant {
-  size: 'XS' | 'S' | 'M' | 'L' | 'XL' | 'XXL' | 'ONE_SIZE';
+  size: string;
   color: string;
   stock: number;
   sku: string;

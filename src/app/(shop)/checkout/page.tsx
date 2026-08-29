@@ -3,13 +3,11 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
 import { FileText, Building2, User, Mail, Phone, MessageSquare, CheckCircle, AlertCircle, ArrowLeft } from 'lucide-react';
 import { useQuoteListStore, QuoteListState, QuoteListItem } from '@/store/useQuoteListStore';
 import { useHydratedStore } from '@/hooks/useHydratedStore';
 
 export default function CheckoutQuotePage() {
-  const router = useRouter();
   const clearQuoteList = useQuoteListStore((state) => state.clearQuoteList);
   const items = useHydratedStore<QuoteListState, QuoteListItem[]>(useQuoteListStore, (state) => state.items) || [];
   const isHydrated = useHydratedStore<QuoteListState, boolean>(useQuoteListStore, () => true) || false;
@@ -80,7 +78,7 @@ export default function CheckoutQuotePage() {
     return (
       <div className="min-h-[70vh] bg-slate-900 text-slate-100 flex items-center justify-center">
         <div className="flex flex-col items-center">
-          <div className="h-8 w-8 animate-spin rounded-full border-2 border-amber-400 border-t-transparent" />
+          <div className="h-8 w-8 animate-spin rounded-full border-2 border-[#0066B4] border-t-transparent" />
           <p className="mt-4 font-sans text-sm text-slate-400">Loading Quote Builder...</p>
         </div>
       </div>
@@ -90,15 +88,15 @@ export default function CheckoutQuotePage() {
   if (submittedQuoteId) {
     return (
       <div className="min-h-[75vh] bg-slate-900 text-slate-100 flex items-center justify-center px-4 py-16">
-        <div className="max-w-xl w-full text-center space-y-6 border border-slate-800 bg-slate-850 p-8 sm:p-12 rounded-lg shadow-2xl backdrop-blur-md">
+        <div className="max-w-xl w-full text-center space-y-6 border border-slate-800 bg-slate-850 p-8 sm:p-12 rounded-2xl shadow-2xl backdrop-blur-md">
           <div className="flex justify-center">
-            <div className="rounded-full bg-amber-400/10 p-4 border border-amber-400/30">
-              <CheckCircle className="h-14 w-14 text-amber-400" />
+            <div className="rounded-full bg-[#0066B4]/20 p-4 border border-[#0066B4]/40">
+              <CheckCircle className="h-14 w-14 text-[#0066B4]" />
             </div>
           </div>
 
           <div className="space-y-2">
-            <span className="font-sans text-xs tracking-[0.3em] text-amber-400 uppercase font-bold block">
+            <span className="font-sans text-xs tracking-[0.3em] text-[#0066B4] uppercase font-bold block">
               BRITE TECHNO LIGHTING
             </span>
             <h1 className="font-sans text-3xl font-bold text-white tracking-wide">
@@ -109,11 +107,11 @@ export default function CheckoutQuotePage() {
             </p>
           </div>
 
-          <div className="bg-slate-800 border border-slate-700 rounded p-4 text-center">
+          <div className="bg-slate-800 border border-slate-700 rounded-lg p-4 text-center">
             <span className="font-sans text-xs text-slate-400 tracking-wider uppercase block">
               Quote Request ID
             </span>
-            <span className="font-mono text-sm text-amber-400 select-all font-bold mt-1 block">
+            <span className="font-mono text-sm text-[#0066B4] select-all font-bold mt-1 block">
               {submittedQuoteId}
             </span>
           </div>
@@ -121,7 +119,7 @@ export default function CheckoutQuotePage() {
           <div className="pt-4 flex flex-col sm:flex-row gap-3">
             <Link
               href="/products"
-              className="flex-1 bg-amber-500 text-slate-950 font-sans font-bold py-3 px-6 text-xs tracking-widest hover:bg-amber-400 transition-all shadow-lg flex items-center justify-center rounded uppercase"
+              className="flex-1 bg-[#0066B4] text-white font-sans font-bold py-3 px-6 text-xs tracking-widest hover:bg-[#005293] transition-all shadow-lg flex items-center justify-center rounded-lg uppercase"
             >
               BROWSE MORE PRODUCTS
             </Link>
@@ -139,7 +137,7 @@ export default function CheckoutQuotePage() {
           <div>
             <Link
               href="/products"
-              className="inline-flex items-center gap-2 text-xs font-sans text-slate-400 hover:text-amber-400 transition-colors uppercase font-semibold mb-2"
+              className="inline-flex items-center gap-2 text-xs font-sans text-slate-400 hover:text-[#0066B4] transition-colors uppercase font-semibold mb-2"
             >
               <ArrowLeft className="h-3.5 w-3.5" /> Back to Catalog
             </Link>
@@ -150,7 +148,7 @@ export default function CheckoutQuotePage() {
         </div>
 
         {items.length === 0 ? (
-          <div className="bg-slate-850 border border-slate-800 p-12 text-center rounded-lg max-w-lg mx-auto">
+          <div className="bg-slate-850 border border-slate-800 p-12 text-center rounded-2xl max-w-lg mx-auto">
             <FileText className="h-12 w-12 text-slate-600 mx-auto mb-4" />
             <h2 className="font-sans text-xl font-bold text-white mb-2">Your Quote List is Empty</h2>
             <p className="font-sans text-sm text-slate-400 mb-6">
@@ -158,7 +156,7 @@ export default function CheckoutQuotePage() {
             </p>
             <Link
               href="/products"
-              className="inline-block bg-amber-500 text-slate-950 font-sans font-bold px-6 py-3 text-xs tracking-widest rounded uppercase hover:bg-amber-400 transition-all"
+              className="inline-block bg-[#0066B4] text-white font-sans font-bold px-6 py-3 text-xs tracking-widest rounded-lg uppercase hover:bg-[#005293] transition-all"
             >
               EXPLORE LIGHTING CATALOG
             </Link>
@@ -166,13 +164,13 @@ export default function CheckoutQuotePage() {
         ) : (
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
             {/* Lead Capture Form */}
-            <div className="lg:col-span-7 bg-slate-850 border border-slate-800 rounded-lg p-6 sm:p-8">
+            <div className="lg:col-span-7 bg-slate-850 border border-slate-800 rounded-xl p-6 sm:p-8">
               <h2 className="font-sans text-lg font-bold text-white uppercase tracking-wider mb-6 flex items-center gap-2">
-                <Building2 className="h-5 w-5 text-amber-400" /> Company & Contact Information
+                <Building2 className="h-5 w-5 text-[#0066B4]" /> Company & Contact Information
               </h2>
 
               {errorMsg && (
-                <div className="mb-6 p-4 bg-rose-950/60 border border-rose-800 rounded text-rose-300 text-xs font-sans flex items-center gap-2.5">
+                <div className="mb-6 p-4 bg-rose-950/60 border border-rose-800 rounded-lg text-rose-300 text-xs font-sans flex items-center gap-2.5">
                   <AlertCircle className="h-4 w-4 shrink-0 text-rose-400" />
                   <span>{errorMsg}</span>
                 </div>
@@ -181,7 +179,7 @@ export default function CheckoutQuotePage() {
               <form onSubmit={handleSubmit} className="space-y-5">
                 <div>
                   <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2">
-                    Company Name <span className="text-amber-400">*</span>
+                    Company Name <span className="text-[#0066B4]">*</span>
                   </label>
                   <div className="relative">
                     <Building2 className="h-4 w-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
@@ -191,14 +189,14 @@ export default function CheckoutQuotePage() {
                       value={companyName}
                       onChange={(e) => setCompanyName(e.target.value)}
                       placeholder="e.g. Acme Industrial Lighting Corp"
-                      className="w-full bg-slate-900 border border-slate-700 rounded pl-10 pr-4 py-2.5 text-xs text-white placeholder-slate-500 focus:border-amber-400 focus:outline-none"
+                      className="w-full bg-slate-900 border border-slate-700 rounded-lg pl-10 pr-4 py-2.5 text-xs text-white placeholder-slate-500 focus:border-[#0066B4] focus:outline-none"
                     />
                   </div>
                 </div>
 
                 <div>
                   <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2">
-                    Contact Person <span className="text-amber-400">*</span>
+                    Contact Person <span className="text-[#0066B4]">*</span>
                   </label>
                   <div className="relative">
                     <User className="h-4 w-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
@@ -208,7 +206,7 @@ export default function CheckoutQuotePage() {
                       value={contactPerson}
                       onChange={(e) => setContactPerson(e.target.value)}
                       placeholder="e.g. John Doe (Procurement Manager)"
-                      className="w-full bg-slate-900 border border-slate-700 rounded pl-10 pr-4 py-2.5 text-xs text-white placeholder-slate-500 focus:border-amber-400 focus:outline-none"
+                      className="w-full bg-slate-900 border border-slate-700 rounded-lg pl-10 pr-4 py-2.5 text-xs text-white placeholder-slate-500 focus:border-[#0066B4] focus:outline-none"
                     />
                   </div>
                 </div>
@@ -216,7 +214,7 @@ export default function CheckoutQuotePage() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2">
-                      Email Address <span className="text-amber-400">*</span>
+                      Email Address <span className="text-[#0066B4]">*</span>
                     </label>
                     <div className="relative">
                       <Mail className="h-4 w-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
@@ -226,14 +224,14 @@ export default function CheckoutQuotePage() {
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         placeholder="john.doe@company.com"
-                        className="w-full bg-slate-900 border border-slate-700 rounded pl-10 pr-4 py-2.5 text-xs text-white placeholder-slate-500 focus:border-amber-400 focus:outline-none"
+                        className="w-full bg-slate-900 border border-slate-700 rounded-lg pl-10 pr-4 py-2.5 text-xs text-white placeholder-slate-500 focus:border-[#0066B4] focus:outline-none"
                       />
                     </div>
                   </div>
 
                   <div>
                     <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2">
-                      Phone Number <span className="text-amber-400">*</span>
+                      Phone Number <span className="text-[#0066B4]">*</span>
                     </label>
                     <div className="relative">
                       <Phone className="h-4 w-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
@@ -243,7 +241,7 @@ export default function CheckoutQuotePage() {
                         value={phone}
                         onChange={(e) => setPhone(e.target.value)}
                         placeholder="+1 (555) 000-0000"
-                        className="w-full bg-slate-900 border border-slate-700 rounded pl-10 pr-4 py-2.5 text-xs text-white placeholder-slate-500 focus:border-amber-400 focus:outline-none"
+                        className="w-full bg-slate-900 border border-slate-700 rounded-lg pl-10 pr-4 py-2.5 text-xs text-white placeholder-slate-500 focus:border-[#0066B4] focus:outline-none"
                       />
                     </div>
                   </div>
@@ -260,7 +258,7 @@ export default function CheckoutQuotePage() {
                       value={projectDetails}
                       onChange={(e) => setProjectDetails(e.target.value)}
                       placeholder="Specify installation timeline, delivery address, or technical requirements..."
-                      className="w-full bg-slate-900 border border-slate-700 rounded pl-10 pr-4 py-2.5 text-xs text-white placeholder-slate-500 focus:border-amber-400 focus:outline-none resize-none"
+                      className="w-full bg-slate-900 border border-slate-700 rounded-lg pl-10 pr-4 py-2.5 text-xs text-white placeholder-slate-500 focus:border-[#0066B4] focus:outline-none resize-none"
                     />
                   </div>
                 </div>
@@ -268,11 +266,11 @@ export default function CheckoutQuotePage() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full bg-amber-500 text-slate-950 font-sans font-bold py-3.5 text-xs tracking-widest hover:bg-amber-400 transition-all duration-300 shadow-lg flex items-center justify-center gap-2 rounded uppercase cursor-pointer disabled:opacity-50"
+                  className="w-full bg-[#0066B4] text-white font-sans font-bold py-3.5 text-xs tracking-widest hover:bg-[#005293] transition-all duration-300 shadow-lg flex items-center justify-center gap-2 rounded-lg uppercase cursor-pointer disabled:opacity-50"
                 >
                   {isSubmitting ? (
                     <>
-                      <div className="h-4 w-4 animate-spin rounded-full border-2 border-slate-950 border-t-transparent" />
+                      <div className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
                       SUBMITTING QUOTE REQUEST...
                     </>
                   ) : (
@@ -283,10 +281,10 @@ export default function CheckoutQuotePage() {
             </div>
 
             {/* Selected Quote Items Summary */}
-            <div className="lg:col-span-5 bg-slate-850 border border-slate-800 rounded-lg p-6 sm:p-8 flex flex-col">
+            <div className="lg:col-span-5 bg-slate-850 border border-slate-800 rounded-xl p-6 sm:p-8 flex flex-col">
               <h2 className="font-sans text-lg font-bold text-white uppercase tracking-wider mb-6 flex items-center justify-between">
                 <span>Quote List Items</span>
-                <span className="text-amber-400 text-sm font-semibold">
+                <span className="text-[#0066B4] text-sm font-semibold">
                   ({items.reduce((acc, i) => acc + i.quantity, 0)} items)
                 </span>
               </h2>
@@ -301,7 +299,7 @@ export default function CheckoutQuotePage() {
                       key={`${item.productId}-${specWattage}-${specCCT}`}
                       className="flex items-center gap-4 border-b border-slate-800 pb-4"
                     >
-                      <div className="relative h-16 w-16 bg-slate-800 border border-slate-700 rounded overflow-hidden shrink-0">
+                      <div className="relative h-16 w-16 bg-slate-800 border border-slate-700 rounded-lg overflow-hidden shrink-0">
                         <Image
                           src={item.image}
                           alt={item.title}
@@ -315,9 +313,9 @@ export default function CheckoutQuotePage() {
                           {item.title}
                         </h4>
                         <div className="flex items-center gap-2 mt-1 text-[11px] text-slate-400">
-                          <span>Wattage: <strong className="text-amber-400">{specWattage}</strong></span>
+                          <span>Wattage: <strong className="text-[#0066B4]">{specWattage}</strong></span>
                           <span>•</span>
-                          <span>CCT: <strong className="text-amber-400">{specCCT}</strong></span>
+                          <span>CCT: <strong className="text-[#0066B4]">{specCCT}</strong></span>
                         </div>
                         <p className="text-xs text-slate-400 mt-1 font-medium">
                           Qty: <span className="text-white font-bold">{item.quantity}</span>
@@ -328,7 +326,7 @@ export default function CheckoutQuotePage() {
                 })}
               </div>
 
-              <div className="mt-6 pt-4 border-t border-slate-800 bg-slate-900/60 rounded p-4">
+              <div className="mt-6 pt-4 border-t border-slate-800 bg-slate-900/60 rounded-lg p-4">
                 <p className="font-sans text-xs text-slate-400 leading-relaxed">
                   Notice: Standard prices are withheld for B2B requests. Direct volume discounts and shipping logistics will be calculated in your custom proposal.
                 </p>
