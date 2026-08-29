@@ -4,14 +4,14 @@ import dbConnect from '@/lib/db';
 import { ensureCategoryMigration } from '@/lib/migrateCategories';
 import { Product, IProduct, IProductVariant } from '@/models/Product';
 import { Category } from '@/models/Category';
-import ProductsFilterClient, { SerializedProduct, SerializedVariant, CategoryItem } from '@/components/ProductsFilterClient';
+import ProductsFilterClient, { SerializedProduct, CategoryItem } from '@/components/ProductsFilterClient';
 
 export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
-  title: 'All Collections | BHAVATSYAM Luxury Apparel',
+  title: 'All Lighting Solutions | BRITE Techno Lighting',
   description:
-    'Explore the complete BHAVATSYAM atelier collection. Luxury ethnic co-ord sets, silk ensembles, and minimalist heritage garments.',
+    'Explore the complete BRITE Techno Lighting commercial and industrial LED catalog.',
 };
 
 export default async function ProductsPage() {
@@ -45,9 +45,9 @@ export default async function ProductsPage() {
       categorySlug: catSlug,
       isPublished: prod.isPublished,
       variants: (prod.variants || []).map((v: IProductVariant) => ({
-        size: (v.size || v.attributes?.Size || 'ONE_SIZE') as SerializedVariant['size'],
-        color: v.color || v.attributes?.Color || 'Default',
-        stock: typeof v.stock === 'number' ? v.stock : (v.stockQuantity ?? 0),
+        size: (v.attributes?.Wattage || v.attributes?.Size || 'Standard') as any,
+        color: v.attributes?.Color || v.attributes?.CCT || 'Default',
+        stock: v.stockQuantity ?? 0,
         sku: v.sku,
       })),
       averageRating: prod.averageRating || 0,
@@ -58,9 +58,9 @@ export default async function ProductsPage() {
   return (
     <Suspense
       fallback={
-        <div className="min-h-screen bg-[#FFFFFF] flex items-center justify-center p-4">
-          <p className="font-sans text-[#1E3A8A] text-lg font-bold animate-pulse">
-            Loading Atelier Collections...
+        <div className="min-h-screen bg-[#FAF8F5] flex items-center justify-center p-4">
+          <p className="font-serif text-[#C5A880] text-lg font-bold animate-pulse">
+            Loading Catalog...
           </p>
         </div>
       }

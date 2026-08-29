@@ -1,22 +1,22 @@
 import mongoose, { Document, Model, Schema } from 'mongoose';
+import { IUser } from './User';
+import { IProduct } from './Product';
 
 export interface IQuoteItem {
-  productId: mongoose.Types.ObjectId;
+  productId: mongoose.Types.ObjectId | IProduct | string;
   title: string;
-  wattage?: string;
-  cct?: string;
   quantity: number;
 }
 
 export interface IQuoteRequest extends Document {
+  userId?: mongoose.Types.ObjectId | IUser | string;
   companyName: string;
-  contactPerson: string;
+  contactName: string;
+  phoneNumber: string;
   email: string;
-  phone: string;
   projectDetails?: string;
   items: IQuoteItem[];
-  status: 'PENDING' | 'REVIEWED' | 'CONTACTED' | 'COMPLETED';
-  userId?: mongoose.Types.ObjectId;
+  status: 'Pending Review' | 'Quoted' | 'Closed';
   createdAt: Date;
   updatedAt: Date;
 }
@@ -32,14 +32,6 @@ const quoteItemSchema = new Schema<IQuoteItem>(
       type: String,
       required: true,
     },
-    wattage: {
-      type: String,
-      default: '',
-    },
-    cct: {
-      type: String,
-      default: '',
-    },
     quantity: {
       type: Number,
       required: true,
@@ -51,12 +43,22 @@ const quoteItemSchema = new Schema<IQuoteItem>(
 
 const quoteRequestSchema = new Schema<IQuoteRequest>(
   {
+    userId: {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
+      required: false,
+    },
     companyName: {
       type: String,
       required: true,
       trim: true,
     },
-    contactPerson: {
+    contactName: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    phoneNumber: {
       type: String,
       required: true,
       trim: true,
@@ -64,12 +66,7 @@ const quoteRequestSchema = new Schema<IQuoteRequest>(
     email: {
       type: String,
       required: true,
-      trim: true,
       lowercase: true,
-    },
-    phone: {
-      type: String,
-      required: true,
       trim: true,
     },
     projectDetails: {
@@ -81,18 +78,14 @@ const quoteRequestSchema = new Schema<IQuoteRequest>(
       required: true,
       validate: [
         (val: IQuoteItem[]) => val.length > 0,
-        'A quote request must contain at least one item.',
+        'A quote request must have at least one item.',
       ],
     },
     status: {
       type: String,
-      enum: ['PENDING', 'REVIEWED', 'CONTACTED', 'COMPLETED'],
-      default: 'PENDING',
-    },
-    userId: {
-      type: Schema.Types.ObjectId,
-      ref: 'User',
-      required: false,
+      enum: ['Pending Review', 'Quoted', 'Closed'],
+      default: 'Pending Review',
+      required: true,
     },
   },
   {

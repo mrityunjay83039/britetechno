@@ -1,8 +1,8 @@
 'use server';
 
 import dbConnect from '@/lib/db';
-import { Product } from '@/models/Product';
-import { Order } from '@/models/Order';
+import { Product, ISpecifications } from '@/models/Product';
+import { QuoteRequest } from '@/models/QuoteRequest';
 import { Category } from '@/models/Category';
 import { SystemSettings } from '@/models/SystemSettings';
 import { PromoCode } from '@/models/PromoCode';
@@ -48,6 +48,8 @@ export interface CreateProductInput {
   category: string;
   images: string[];
   isPublished?: boolean;
+  specifications?: ISpecifications;
+  specSheetUrl?: string;
   options?: ProductOptionInput[];
   variants: ProductVariantInput[];
 }
@@ -89,6 +91,8 @@ export async function createProduct(input: CreateProductInput) {
       images: input.images && input.images.length > 0 ? input.images : ['/images/placeholder.jpg'],
       category: input.category,
       isPublished: input.isPublished ?? true,
+      specifications: input.specifications || {},
+      specSheetUrl: input.specSheetUrl,
       options: input.options || [],
       variants: input.variants,
     });
@@ -298,6 +302,8 @@ export async function updateProduct(input: UpdateProductInput) {
         images: input.images && input.images.length > 0 ? input.images : ['/images/placeholder.jpg'],
         category: input.category,
         isPublished: input.isPublished ?? true,
+        specifications: input.specifications || {},
+        specSheetUrl: input.specSheetUrl,
         options: input.options || [],
         variants: input.variants,
       },
@@ -522,39 +528,41 @@ export async function updateMaintenanceMode(enabled: boolean) {
   }
 }
 
-export async function updateOrderStatus(orderId: string, status: 'PROCESSING' | 'SHIPPED' | 'DELIVERED' | 'CANCELLED') {
+export async function updateQuoteStatus(quoteId: string, status: 'Pending Review' | 'Quoted' | 'Closed') {
   try {
     // 1. Verify authorization (Double Authorization)
     await checkAdminAuth();
 
     // 2. Validate input
-    const allowedStatuses = ['PROCESSING', 'SHIPPED', 'DELIVERED', 'CANCELLED'];
+    const allowedStatuses = ['Pending Review', 'Quoted', 'Closed'];
     if (!allowedStatuses.includes(status)) {
-      return { success: false, error: 'Invalid order status.' };
+      return { success: false, error: 'Invalid quote status.' };
     }
 
     await dbConnect();
 
-    // 3. Find and update order
-    const updatedOrder = await Order.findByIdAndUpdate(
-      orderId,
-      { orderStatus: status },
+    // 3. Find and update quote
+    const updatedQuote = await QuoteRequest.findByIdAndUpdate(
+      quoteId,
+      { status },
       { new: true }
     );
 
-    if (!updatedOrder) {
-      return { success: false, error: 'Order not found.' };
+    if (!updatedQuote) {
+      return { success: false, error: 'Quote request not found.' };
     }
 
     revalidatePath('/admin/orders');
 
     return {
       success: true,
-      data: JSON.parse(JSON.stringify(updatedOrder)),
+      data: JSON.parse(JSON.stringify(updatedQuote)),
     };
   } catch (error: unknown) {
-    console.error('Error updating order status:', error);
-    const errorMessage = error instanceof Error ? error.message : 'Failed to update order status.';
+    console.error('Error updating quote status:', error);
+    const errorMessage = error instanceof Error ? error.message : 'Failed to update quote status.';
     return { success: false, error: errorMessage };
   }
 }
+
+export const updateOrderStatus = updateQuoteStatus;

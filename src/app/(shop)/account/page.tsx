@@ -3,9 +3,9 @@ import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/lib/auth';
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
-import { ShoppingBag, User as UserIcon, Calendar, IndianRupee, ArrowRight } from 'lucide-react';
+import { FileText, User as UserIcon, Calendar, ArrowRight } from 'lucide-react';
 import dbConnect from '@/lib/db';
-import { Order } from '@/models/Order';
+import { QuoteRequest } from '@/models/QuoteRequest';
 import { User as UserModel } from '@/models/User';
 
 export default async function AccountPage() {
@@ -30,10 +30,8 @@ export default async function AccountPage() {
   const mobile = user.mobile || '';
 
   // Fetch metrics using .lean()
-  const orders = await Order.find({ userId }).sort({ createdAt: -1 }).limit(3).lean();
-  const totalOrdersCount = await Order.countDocuments({ userId });
-  const paidOrders = await Order.find({ userId, paymentStatus: 'PAID' }).lean();
-  const totalSpent = paidOrders.reduce((sum, order) => sum + order.totalAmount, 0);
+  const quotes = await QuoteRequest.find({ userId }).sort({ createdAt: -1 }).limit(3).lean();
+  const totalQuotesCount = await QuoteRequest.countDocuments({ userId });
 
   return (
     <div className="space-y-8">
@@ -42,47 +40,32 @@ export default async function AccountPage() {
         <h2 className="font-sans text-2xl font-semibold text-[#1E3A8A] tracking-wide">
           Dashboard Overview
         </h2>
-        <p className="font-sans text-xs text-[#64748B] mt-1">
-          Monitor your orders, account status, and recently commissioned items.
+        <p className="font-sans text-xs text-[#8C857B] mt-1">
+          Monitor your quote requests, account status, and submitted lighting inquiries.
         </p>
       </div>
 
       {/* Dashboard Stats Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {/* Stats 1: Total Orders */}
-        <div className="bg-[#FFFFFF] border border-[#1E3A8A]/15 p-6 rounded-sm shadow-sm flex items-center gap-5">
-          <div className="bg-[#1E3A8A]/10 p-3 border border-[#1E3A8A]/30 rounded-sm">
-            <ShoppingBag className="h-6 w-6 text-[#1E3A8A]" />
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {/* Stats 1: Total Quote Requests */}
+        <div className="bg-[#FAF8F5] border border-[#C5A880]/15 p-6 rounded-sm shadow-sm flex items-center gap-5">
+          <div className="bg-[#C5A880]/10 p-3 border border-[#C5A880]/30 rounded-sm">
+            <FileText className="h-6 w-6 text-[#C5A880]" />
           </div>
           <div>
-            <span className="font-sans text-[10px] text-[#64748B] uppercase tracking-wider block font-bold">
-              Total Orders
+            <span className="font-sans text-[10px] text-[#8C857B] uppercase tracking-wider block font-bold">
+              Total Quote Requests
             </span>
-            <span className="font-sans text-2xl font-bold text-[#1E3A8A] mt-0.5 block">
-              {totalOrdersCount}
+            <span className="font-serif text-2xl font-bold text-[#0F0F11] mt-0.5 block">
+              {totalQuotesCount}
             </span>
           </div>
         </div>
 
-        {/* Stats 2: Total Spent */}
-        <div className="bg-[#FFFFFF] border border-[#1E3A8A]/15 p-6 rounded-sm shadow-sm flex items-center gap-5">
-          <div className="bg-[#1E3A8A]/10 p-3 border border-[#1E3A8A]/30 rounded-sm">
-            <IndianRupee className="h-6 w-6 text-[#1E3A8A]" />
-          </div>
-          <div>
-            <span className="font-sans text-[10px] text-[#64748B] uppercase tracking-wider block font-bold">
-              Total Spent (PAID)
-            </span>
-            <span className="font-sans text-2xl font-bold text-[#1E3A8A] mt-0.5 block">
-              ₹{totalSpent.toLocaleString('en-IN')}
-            </span>
-          </div>
-        </div>
-
-        {/* Stats 3: Account Status */}
-        <div className="bg-[#FFFFFF] border border-[#1E3A8A]/15 p-6 rounded-sm shadow-sm flex items-center gap-5">
-          <div className="bg-[#1E3A8A]/10 p-3 border border-[#1E3A8A]/30 rounded-sm">
-            <UserIcon className="h-6 w-6 text-[#1E3A8A]" />
+        {/* Stats 2: Account Status */}
+        <div className="bg-[#FAF8F5] border border-[#C5A880]/15 p-6 rounded-sm shadow-sm flex items-center gap-5">
+          <div className="bg-[#C5A880]/10 p-3 border border-[#C5A880]/30 rounded-sm">
+            <UserIcon className="h-6 w-6 text-[#C5A880]" />
           </div>
           <div>
             <span className="font-sans text-[10px] text-[#64748B] uppercase tracking-wider block font-bold">
@@ -137,13 +120,13 @@ export default async function AccountPage() {
           </div>
         </div>
 
-        {/* Recent Orders Column */}
-        <div className="bg-[#FFFFFF] border border-[#1E3A8A]/15 p-6 rounded-sm shadow-sm md:col-span-2 space-y-4">
-          <div className="flex justify-between items-center border-b border-[#1E3A8A]/15 pb-3">
-            <h3 className="font-sans text-lg font-semibold text-[#1E3A8A] tracking-wide">
-              Recent Orders
+        {/* Recent Quotes Column */}
+        <div className="bg-[#FAF8F5] border border-[#C5A880]/15 p-6 rounded-sm shadow-sm md:col-span-2 space-y-4">
+          <div className="flex justify-between items-center border-b border-[#C5A880]/15 pb-3">
+            <h3 className="font-serif text-lg font-semibold text-[#0F0F11] tracking-wide">
+              Recent Quote Requests
             </h3>
-            {totalOrdersCount > 0 && (
+            {totalQuotesCount > 0 && (
               <Link
                 href="/account/orders"
                 className="font-sans text-[10px] font-bold text-[#1E3A8A] hover:text-[#1E3A8A] tracking-widest uppercase transition-colors flex items-center gap-1"
@@ -154,57 +137,54 @@ export default async function AccountPage() {
             )}
           </div>
 
-          {orders.length === 0 ? (
+          {quotes.length === 0 ? (
             <div className="py-8 text-center">
-              <p className="font-sans text-xs text-[#64748B]">
-                You haven&apos;t placed any orders yet.
+              <p className="font-sans text-xs text-[#8C857B]">
+                You haven&apos;t submitted any quote requests yet.
               </p>
               <Link
                 href="/products"
                 className="inline-block mt-4 bg-[#1E3A8A] text-[#FFFFFF] font-sans text-[10px] font-bold tracking-widest uppercase border border-[#1E3A8A]/30 hover:bg-[#1E3A8A] hover:text-[#1E3A8A] px-5 py-2.5 transition-all duration-300 rounded-sm"
               >
-                Start Shopping
+                Explore Catalog
               </Link>
             </div>
           ) : (
             <div className="space-y-4">
-              {orders.map((order) => (
+              {quotes.map((quote) => (
                 <div
-                  key={order._id.toString()}
-                  className="border border-[#1E3A8A]/10 bg-white p-4 rounded-sm flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 transition-all duration-300 hover:border-[#1E3A8A]/30"
+                  key={quote._id.toString()}
+                  className="border border-[#C5A880]/10 bg-white p-4 rounded-sm flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 transition-all duration-300 hover:border-[#C5A880]/30"
                 >
                   <div className="space-y-1">
                     <div className="flex items-center gap-2">
-                      <span className="font-mono text-xs font-bold text-[#1E3A8A]">
-                        #{order._id.toString().slice(-6).toUpperCase()}
+                      <span className="font-mono text-xs font-bold text-[#0F0F11]">
+                        #{quote._id.toString().slice(-6).toUpperCase()}
                       </span>
                       <span className="font-sans text-[10px] text-[#64748B] flex items-center gap-1">
                         <Calendar className="h-3 w-3" />
-                        {new Date(order.createdAt).toLocaleDateString('en-US', {
+                        {new Date(quote.createdAt).toLocaleDateString('en-US', {
                           month: 'short',
                           day: 'numeric',
                           year: 'numeric',
                         })}
                       </span>
                     </div>
-                    <p className="font-sans text-xs text-[#64748B] line-clamp-1">
-                      {order.items.map((item) => `${item.title} (${item.quantity})`).join(', ')}
+                    <p className="font-sans text-xs text-[#8C857B] line-clamp-1">
+                      {quote.items.map((item) => `${item.title} (${item.quantity})`).join(', ')}
                     </p>
                   </div>
 
                   <div className="flex sm:flex-col items-end justify-between w-full sm:w-auto gap-2">
-                    <span className="font-sans text-sm font-semibold text-[#1E3A8A]">
-                      ₹{order.totalAmount.toLocaleString('en-IN')}
+                    <span className={`font-sans text-[9px] font-bold tracking-wider uppercase px-2 py-0.5 rounded-sm border ${
+                      quote.status === 'Quoted'
+                        ? 'bg-blue-50 text-blue-700 border-blue-200'
+                        : quote.status === 'Closed'
+                        ? 'bg-zinc-100 text-zinc-700 border-zinc-200'
+                        : 'bg-amber-50 text-amber-700 border-amber-200'
+                    }`}>
+                      {quote.status}
                     </span>
-                    <div className="flex gap-2">
-                      <span className={`font-sans text-[9px] font-bold tracking-wider uppercase px-2 py-0.5 rounded-sm border ${
-                        order.paymentStatus === 'PAID'
-                          ? 'bg-emerald-50 text-emerald-700 border-emerald-200'
-                          : 'bg-amber-50 text-amber-700 border-amber-200'
-                      }`}>
-                        {order.paymentStatus}
-                      </span>
-                    </div>
                   </div>
                 </div>
               ))}

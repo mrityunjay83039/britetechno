@@ -97,9 +97,9 @@ export default async function ProductPage({ params }: PageProps) {
     category: productDoc.category && typeof productDoc.category === 'object' ? (productDoc.category as unknown as { name: string }).name : String(productDoc.category || 'Uncategorized'),
     isPublished: productDoc.isPublished,
     variants: (productDoc.variants || []).map((v: IProductVariant) => ({
-      size: (v.size || v.attributes?.Size || 'ONE_SIZE') as any,
-      color: v.color || v.attributes?.Color || 'Default',
-      stock: typeof v.stock === 'number' ? v.stock : (v.stockQuantity ?? 0),
+      size: (v.attributes?.Wattage || v.attributes?.Size || 'Standard') as any,
+      color: v.attributes?.Color || v.attributes?.CCT || 'Default',
+      stock: v.stockQuantity ?? 0,
       sku: v.sku,
     })),
     averageRating: productDoc.averageRating || 0,
