@@ -1,11 +1,10 @@
 import React from 'react';
 import mongoose from 'mongoose';
 import dbConnect from '@/lib/db';
-import { ensureCategoryMigration } from '@/lib/migrateCategories';
 import { Product, IProduct, IProductVariant } from '@/models/Product';
 import IndustrialB2BHomepage from '@/components/home/IndustrialB2BHomepage';
 
-export const dynamic = 'force-dynamic';
+export const revalidate = 60;
 
 interface SerializedVariant {
   size: string;
@@ -32,9 +31,9 @@ export default async function HomePage() {
   try {
     await dbConnect();
     if (mongoose.connection.readyState === 1) {
-      await ensureCategoryMigration();
       products = (await Product.find({ isPublished: true })
-        .populate('category')
+        .select('title slug description price images category isPublished variants')
+        .populate('category', 'name slug')
         .lean()) as unknown as IProduct[];
     }
   } catch (err) {

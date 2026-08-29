@@ -1,34 +1,35 @@
 import React, { Suspense } from 'react';
 import type { Metadata } from 'next';
 import dbConnect from '@/lib/db';
-import { ensureCategoryMigration } from '@/lib/migrateCategories';
 import { Product, IProduct, IProductVariant } from '@/models/Product';
 import { Category } from '@/models/Category';
 import ProductsFilterClient, { SerializedProduct, CategoryItem } from '@/components/ProductsFilterClient';
+import mongoose from 'mongoose';
 
-export const dynamic = 'force-dynamic';
+export const revalidate = 60;
 
 export const metadata: Metadata = {
   title: 'Search Catalog | BRITE Techno Lighting',
   description: 'Search BRITE Techno Lighting industrial products.',
 };
 
-import mongoose from 'mongoose';
-
 export default async function SearchPage() {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  let rawCategories: any[] = [];
+  let rawCategories: unknown[] = [];
   let rawProducts: IProduct[] = [];
 
   try {
     await dbConnect();
     if (mongoose.connection.readyState === 1) {
-      await ensureCategoryMigration();
-      rawCategories = await Category.find({ isActive: true }).sort({ name: 1 }).lean();
-      rawProducts = (await Product.find({ isPublished: true })
-        .populate('category')
-        .sort({ createdAt: -1 })
-        .lean()) as unknown as IProduct[];
+      const [catResults, prodResults] = await Promise.all([
+        Category.find({ isActive: true }).select('name slug isActive').sort({ name: 1 }).lean(),
+        Product.find({ isPublished: true })
+          .select('title slug description price images category isPublished variants averageRating reviewCount')
+          .populate('category', 'name slug')
+          .sort({ createdAt: -1 })
+          .lean(),
+      ]);
+      rawCategories = catResults;
+      rawProducts = prodResults as unknown as IProduct[];
     }
   } catch (err) {
     console.warn('Database connection or query failed in SearchPage:', err);

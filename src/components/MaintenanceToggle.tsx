@@ -49,18 +49,18 @@ export default function MaintenanceToggle({ initialEnabled }: MaintenanceToggleP
   };
 
   return (
-    <div className="bg-white p-6 rounded-sm border border-[#1E3A8A]/15 shadow-xs max-w-xl">
+    <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-xs max-w-xl">
       <div className="flex items-start justify-between gap-4">
         <div className="space-y-1.5 flex-1">
           <div className="flex items-center gap-2">
-            <h3 className="font-sans text-lg font-bold text-[#1E3A8A]">
+            <h3 className="font-sans text-base font-bold text-slate-900">
               Global Maintenance Mode
             </h3>
             {isPending && (
-              <RefreshCw className="w-4 h-4 text-[#1E3A8A] animate-spin" />
+              <RefreshCw className="w-4 h-4 text-[#0066B4] animate-spin" />
             )}
           </div>
-          <p className="font-sans text-xs text-[#64748B] leading-relaxed">
+          <p className="font-sans text-xs text-slate-600 leading-relaxed font-medium">
             Activating maintenance mode will immediately block access to the public storefront, displaying a branded landing page to visitors. Logged-in administrators will bypass this restriction to continue browsing and testing.
           </p>
         </div>
@@ -75,7 +75,7 @@ export default function MaintenanceToggle({ initialEnabled }: MaintenanceToggleP
               disabled={isPending}
               onChange={(e) => handleToggle(e.target.checked)}
             />
-            <div className="w-12 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#1E3A8A] disabled:opacity-50"></div>
+            <div className="w-12 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#0066B4] disabled:opacity-50"></div>
           </label>
         </div>
       </div>
@@ -84,10 +84,10 @@ export default function MaintenanceToggle({ initialEnabled }: MaintenanceToggleP
       <div className="mt-5 space-y-3">
         {/* Current status indicator banner */}
         <div
-          className={`flex items-center gap-3 px-4 py-3 rounded-sm border text-xs font-sans font-medium transition-colors duration-300 ${
+          className={`flex items-center gap-3 px-4 py-3 rounded-lg border text-xs font-sans font-medium transition-colors duration-300 ${
             isEnabled
-              ? 'bg-amber-50 border-amber-200 text-amber-800'
-              : 'bg-green-50 border-green-200 text-green-800'
+              ? 'bg-amber-50 border-amber-200 text-amber-900'
+              : 'bg-emerald-50 border-emerald-200 text-emerald-900'
           }`}
         >
           {isEnabled ? (

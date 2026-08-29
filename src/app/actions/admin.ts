@@ -99,6 +99,8 @@ export async function createProduct(input: CreateProductInput) {
 
     revalidatePath('/admin/inventory');
     revalidatePath('/');
+    revalidatePath('/products');
+    revalidatePath('/search');
 
     return {
       success: true,
@@ -316,6 +318,8 @@ export async function updateProduct(input: UpdateProductInput) {
 
     revalidatePath('/admin/inventory');
     revalidatePath('/');
+    revalidatePath('/products');
+    revalidatePath('/search');
 
     return {
       success: true,
@@ -371,6 +375,8 @@ export async function createCategory(input: CreateCategoryInput) {
     revalidatePath('/admin/categories');
     revalidatePath('/admin/inventory');
     revalidatePath('/');
+    revalidatePath('/products');
+    revalidatePath('/search');
 
     return {
       success: true,
@@ -432,6 +438,8 @@ export async function updateCategory(id: string, input: UpdateCategoryInput) {
     revalidatePath('/admin/categories');
     revalidatePath('/admin/inventory');
     revalidatePath('/');
+    revalidatePath('/products');
+    revalidatePath('/search');
 
     return {
       success: true,
@@ -470,6 +478,8 @@ export async function deleteCategory(id: string) {
     revalidatePath('/admin/categories');
     revalidatePath('/admin/inventory');
     revalidatePath('/');
+    revalidatePath('/products');
+    revalidatePath('/search');
 
     return {
       success: true,

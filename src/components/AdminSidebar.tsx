@@ -42,21 +42,21 @@ export default function AdminSidebar() {
   ];
 
   return (
-    <aside className="w-64 bg-[#1E3A8A] text-[#FFFFFF] flex flex-col border-r border-[#1E3A8A]/15 min-h-screen shrink-0">
+    <aside className="w-64 bg-slate-900 text-white flex flex-col border-r border-slate-800 min-h-screen shrink-0 shadow-lg">
       {/* Brand logo */}
-      <div className="h-20 border-b border-[#1E3A8A]/15 flex flex-col justify-center px-6">
-        <Link href="/" className="flex flex-col">
-          <span className="font-sans text-xl font-bold tracking-[0.2em] text-[#1E3A8A]">
-            BHAVATSYAM
+      <div className="h-20 border-b border-slate-800 flex flex-col justify-center px-6">
+        <Link href="/" className="flex flex-col group">
+          <span className="font-sans text-lg font-extrabold tracking-[0.2em] text-white group-hover:text-[#0066B4] transition-colors">
+            BRITE TECHNO
           </span>
-          <span className="font-sans text-[7px] tracking-[0.4em] text-[#64748B] uppercase -mt-0.5 font-bold">
-            Heritage & Modernity
+          <span className="font-sans text-[8px] tracking-[0.3em] text-[#0066B4] uppercase font-bold mt-0.5">
+            Lighting Equipment Inc.
           </span>
         </Link>
       </div>
 
       {/* Navigation */}
-      <nav className="flex-1 py-6 px-4 space-y-1.5">
+      <nav className="flex-1 py-6 px-3 space-y-1.5">
         {navItems.map((item) => {
           const Icon = item.icon;
           const isActive = pathname === item.href;
@@ -65,13 +65,13 @@ export default function AdminSidebar() {
             <Link
               key={item.name}
               href={item.href}
-              className={`flex items-center gap-3 px-4 py-3 rounded-sm font-sans text-xs font-bold tracking-wider transition-all duration-200 ${
+              className={`flex items-center gap-3 px-4 py-3 rounded-lg font-sans text-xs font-bold tracking-wider transition-all duration-200 ${
                 isActive
-                  ? 'bg-[#1E3A8A] text-white'
-                  : 'text-[#64748B] hover:bg-white/5 hover:text-[#FFFFFF]'
+                  ? 'bg-[#0066B4] text-white shadow-md'
+                  : 'text-slate-300 hover:bg-slate-800 hover:text-white'
               }`}
             >
-              <Icon className={`w-4 h-4 ${isActive ? 'text-[#1E3A8A]' : 'text-[#1E3A8A]'}`} />
+              <Icon className={`w-4 h-4 shrink-0 ${isActive ? 'text-white' : 'text-slate-400 group-hover:text-white'}`} />
               <span className="uppercase">{item.name}</span>
             </Link>
           );
@@ -79,8 +79,8 @@ export default function AdminSidebar() {
       </nav>
 
       {/* Bottom info */}
-      <div className="p-6 border-t border-[#1E3A8A]/10 text-center">
-        <p className="font-sans text-[10px] text-[#64748B]">BHAVATSYAM Admin v1.0</p>
+      <div className="p-6 border-t border-slate-800 text-center">
+        <p className="font-sans text-[11px] font-semibold text-slate-400">BRITE TECHNO B2B Admin</p>
       </div>
     </aside>
   );

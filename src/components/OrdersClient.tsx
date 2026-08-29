@@ -93,15 +93,15 @@ export default function OrdersClient({ initialOrders }: OrdersClientProps) {
       {/* Filters and Feedbacks */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         {/* Status Filter Tab-style */}
-        <div className="flex flex-wrap gap-1.5">
+        <div className="flex flex-wrap gap-2">
           {['ALL', 'Pending Review', 'Quoted', 'Closed'].map((status) => (
             <button
               key={status}
               onClick={() => setFilterStatus(status)}
-              className={`px-4 py-2 border rounded-sm font-sans text-xs font-bold tracking-wider transition-all cursor-pointer uppercase ${
+              className={`px-4 py-2 rounded-lg font-sans text-xs font-bold tracking-wider transition-all cursor-pointer uppercase shadow-xs ${
                 filterStatus === status
-                  ? 'bg-[#1E3A8A] text-[#FFFFFF] border-[#1E3A8A]'
-                  : 'bg-white text-[#64748B] border-[#1E3A8A]/15 hover:border-[#1E3A8A]/35 hover:text-[#1E3A8A]'
+                  ? 'bg-[#0066B4] text-white shadow-sm'
+                  : 'bg-white text-slate-700 border border-slate-200 hover:border-slate-300 hover:text-slate-900 hover:bg-slate-50'
               }`}
             >
               {status}
@@ -111,7 +111,7 @@ export default function OrdersClient({ initialOrders }: OrdersClientProps) {
 
         {/* Global Floating-style feedback */}
         {feedback && (
-          <div className={`p-3 border rounded-sm flex items-center gap-2 max-w-md ${
+          <div className={`p-3 border rounded-lg flex items-center gap-2 max-w-md ${
             feedback.type === 'success'
               ? 'bg-green-50 border-green-200 text-green-800'
               : 'bg-red-50 border-red-200 text-red-800'
@@ -129,15 +129,15 @@ export default function OrdersClient({ initialOrders }: OrdersClientProps) {
       {/* Quote Requests List */}
       <div className="space-y-4">
         {filteredQuotes.length === 0 ? (
-          <div className="bg-white border border-[#C5A880]/15 rounded-sm p-12 text-center text-[#8C857B] font-sans font-medium">
-            No quote requests found matching status: <strong className="text-[#0F0F11] uppercase">{filterStatus}</strong>
+          <div className="bg-white border border-slate-200 rounded-xl p-12 text-center text-slate-500 font-sans font-medium shadow-xs">
+            No quote requests found matching status: <strong className="text-slate-900 uppercase">{filterStatus}</strong>
           </div>
         ) : (
           filteredQuotes.map((quote) => {
             const isExpanded = !!expandedQuotes[quote._id];
-            const quoteDate = new Date(quote.createdAt).toLocaleDateString('en-IN', {
+            const quoteDate = new Date(quote.createdAt).toLocaleDateString('en-CA', {
               year: 'numeric',
-              month: 'long',
+              month: 'short',
               day: 'numeric',
               hour: '2-digit',
               minute: '2-digit',
@@ -146,57 +146,57 @@ export default function OrdersClient({ initialOrders }: OrdersClientProps) {
             return (
               <div
                 key={quote._id}
-                className="bg-white border border-[#C5A880]/15 rounded-sm overflow-hidden shadow-xs hover:shadow-md transition-shadow duration-300"
+                className="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-xs hover:shadow-md transition-shadow duration-200"
               >
                 {/* Card Header (always visible) */}
-                <div className="p-6 flex flex-col lg:flex-row lg:items-center justify-between gap-6 bg-[#FAF8F5]/40 border-b border-[#C5A880]/10">
+                <div className="p-6 flex flex-col lg:flex-row lg:items-center justify-between gap-6 bg-slate-50/50 border-b border-slate-100">
                   {/* Quote Meta */}
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 flex-1">
                     <div className="space-y-1">
-                      <span className="text-[10px] text-[#8C857B] font-bold uppercase tracking-wider block">Quote Ref</span>
-                      <span className="font-mono text-xs font-bold text-[#0F0F11]">{quote._id}</span>
+                      <span className="text-[10px] text-slate-500 font-bold uppercase tracking-wider block">Quote Ref</span>
+                      <span className="font-mono text-xs font-bold text-slate-900">{quote._id}</span>
                     </div>
 
                     <div className="space-y-1">
-                      <span className="text-[10px] text-[#8C857B] font-bold uppercase tracking-wider block">Company / Contact</span>
-                      <div className="flex items-center gap-1.5 text-xs text-[#0F0F11] font-semibold">
-                        <Building className="w-3.5 h-3.5 text-[#C5A880]" />
+                      <span className="text-[10px] text-slate-500 font-bold uppercase tracking-wider block">Company / Contact</span>
+                      <div className="flex items-center gap-1.5 text-xs text-slate-900 font-bold">
+                        <Building className="w-3.5 h-3.5 text-[#0066B4]" />
                         <span>{quote.companyName}</span>
                       </div>
-                      <span className="text-[10px] text-[#8C857B] block">{quote.contactName}</span>
+                      <span className="text-xs text-slate-600 font-medium block">{quote.contactName}</span>
                     </div>
 
                     <div className="space-y-1">
-                      <span className="text-[10px] text-[#8C857B] font-bold uppercase tracking-wider block">Contact Details</span>
-                      <div className="flex items-center gap-1 text-xs text-[#0F0F11]">
-                        <Mail className="w-3.5 h-3.5 text-[#C5A880]" />
+                      <span className="text-[10px] text-slate-500 font-bold uppercase tracking-wider block">Contact Details</span>
+                      <div className="flex items-center gap-1 text-xs text-slate-800 font-medium">
+                        <Mail className="w-3.5 h-3.5 text-[#0066B4]" />
                         <span>{quote.email}</span>
                       </div>
-                      <div className="flex items-center gap-1 text-xs text-[#8C857B]">
-                        <Phone className="w-3 h-3 text-[#C5A880]" />
+                      <div className="flex items-center gap-1 text-xs text-slate-600 font-medium">
+                        <Phone className="w-3 h-3 text-[#0066B4]" />
                         <span>{quote.phoneNumber}</span>
                       </div>
                     </div>
 
                     <div className="space-y-1">
-                      <span className="text-[10px] text-[#8C857B] font-bold uppercase tracking-wider block">Date & Time</span>
-                      <div className="flex items-center gap-1.5 text-xs text-[#0F0F11]">
-                        <Calendar className="w-3.5 h-3.5 text-[#C5A880]" />
+                      <span className="text-[10px] text-slate-500 font-bold uppercase tracking-wider block">Date & Time</span>
+                      <div className="flex items-center gap-1.5 text-xs text-slate-700 font-medium">
+                        <Calendar className="w-3.5 h-3.5 text-[#0066B4]" />
                         <span>{quoteDate}</span>
                       </div>
                     </div>
                   </div>
 
                   {/* Actions / Status dropdown */}
-                  <div className="flex items-center gap-4 border-t lg:border-t-0 pt-4 lg:pt-0 border-[#1E3A8A]/10">
+                  <div className="flex items-center gap-4 border-t lg:border-t-0 pt-4 lg:pt-0 border-slate-200">
                     <div className="space-y-1">
-                      <span className="text-[10px] text-[#8C857B] font-bold uppercase tracking-wider block">Quote Status</span>
+                      <span className="text-[10px] text-slate-500 font-bold uppercase tracking-wider block">Quote Status</span>
                       <div className="flex items-center gap-2">
                         <select
                           disabled={updatingId === quote._id}
                           value={quote.status}
                           onChange={(e) => handleStatusChange(quote._id, e.target.value as 'Pending Review' | 'Quoted' | 'Closed')}
-                          className={`px-3 py-1.5 border border-[#C5A880]/20 rounded-sm font-sans text-xs font-bold uppercase tracking-wider outline-none bg-white text-[#0F0F11] cursor-pointer focus:border-[#C5A880] focus:ring-1 focus:ring-[#C5A880] transition-all ${
+                          className={`px-3 py-1.5 border border-slate-300 rounded-lg font-sans text-xs font-bold uppercase tracking-wider outline-none bg-white text-slate-900 cursor-pointer focus:border-[#0066B4] focus:ring-1 focus:ring-[#0066B4] transition-all shadow-xs ${
                             updatingId === quote._id ? 'opacity-50' : ''
                           }`}
                         >
@@ -206,9 +206,9 @@ export default function OrdersClient({ initialOrders }: OrdersClientProps) {
                         </select>
 
                         {updatingId === quote._id ? (
-                          <Loader2 className="w-4 h-4 text-[#C5A880] animate-spin" />
+                          <Loader2 className="w-4 h-4 text-[#0066B4] animate-spin" />
                         ) : (
-                          <span className={`inline-block px-2 py-1 rounded-sm border text-[10px] font-bold tracking-wider ${getStatusBadgeClass(quote.status)}`}>
+                          <span className={`inline-block px-2.5 py-1 rounded-full border text-[10px] font-bold tracking-wider uppercase ${getStatusBadgeClass(quote.status)}`}>
                             {quote.status}
                           </span>
                         )}
@@ -217,7 +217,7 @@ export default function OrdersClient({ initialOrders }: OrdersClientProps) {
 
                     <button
                       onClick={() => toggleExpand(quote._id)}
-                      className="p-2 border border-[#C5A880]/20 rounded-sm hover:bg-[#FAF8F5] text-[#8C857B] hover:text-[#0F0F11] transition-all cursor-pointer mt-4 self-end"
+                      className="p-2 border border-slate-200 rounded-lg hover:bg-slate-100 text-slate-600 hover:text-slate-900 transition-all cursor-pointer mt-4 self-end shadow-xs"
                       title={isExpanded ? 'Collapse' : 'Expand Details'}
                     >
                       {isExpanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
@@ -227,27 +227,27 @@ export default function OrdersClient({ initialOrders }: OrdersClientProps) {
 
                 {/* Card Expandable Body */}
                 {isExpanded && (
-                  <div className="p-6 bg-[#FFFFFF]/10 border-t border-[#1E3A8A]/10 space-y-6 animate-fadeIn">
+                  <div className="p-6 bg-slate-50 border-t border-slate-100 space-y-6">
                     <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
                       {/* Requested Products */}
                       <div className="md:col-span-7 space-y-3">
-                        <h4 className="font-serif text-sm font-bold text-[#0F0F11] tracking-wide flex items-center gap-1.5">
-                          <Package className="w-4 h-4 text-[#C5A880]" /> Requested Line Items ({quote.items.length})
+                        <h4 className="font-sans text-xs font-bold text-slate-900 uppercase tracking-wider flex items-center gap-1.5">
+                          <Package className="w-4 h-4 text-[#0066B4]" /> Requested Line Items ({quote.items.length})
                         </h4>
 
-                        <div className="border border-[#1E3A8A]/15 rounded-sm overflow-hidden bg-white">
+                        <div className="border border-slate-200 rounded-lg overflow-hidden bg-white shadow-xs">
                           <table className="w-full text-left text-xs">
                             <thead>
-                              <tr className="bg-[#FAF8F5] text-[#8C857B] font-bold uppercase tracking-wider border-b border-[#C5A880]/10">
-                                <th className="py-2 px-4">Product Title</th>
-                                <th className="py-2 px-4 text-center">Quantity</th>
+                              <tr className="bg-slate-50 text-slate-600 font-bold uppercase tracking-wider border-b border-slate-200 text-[10px]">
+                                <th className="py-2.5 px-4">Fixture / Product Title</th>
+                                <th className="py-2.5 px-4 text-center">Requested Qty</th>
                               </tr>
                             </thead>
-                            <tbody className="divide-y divide-[#C5A880]/10 font-sans">
+                            <tbody className="divide-y divide-slate-100 font-sans">
                               {quote.items.map((item, idx) => (
-                                <tr key={idx} className="text-[#0F0F11]">
-                                  <td className="py-2.5 px-4 font-semibold">{item.title}</td>
-                                  <td className="py-2.5 px-4 text-center font-bold text-[#0F0F11]">{item.quantity}</td>
+                                <tr key={idx} className="text-slate-900 hover:bg-slate-50/60 transition-colors">
+                                  <td className="py-3 px-4 font-semibold text-slate-800">{item.title}</td>
+                                  <td className="py-3 px-4 text-center font-bold text-[#0066B4]">{item.quantity} units</td>
                                 </tr>
                               ))}
                             </tbody>
@@ -257,15 +257,15 @@ export default function OrdersClient({ initialOrders }: OrdersClientProps) {
 
                       {/* Project Details */}
                       <div className="md:col-span-5 space-y-3">
-                        <h4 className="font-serif text-sm font-bold text-[#0F0F11] tracking-wide">
+                        <h4 className="font-sans text-xs font-bold text-slate-900 uppercase tracking-wider">
                           Project Details & Notes
                         </h4>
 
-                        <div className="bg-white p-4 border border-[#C5A880]/15 rounded-sm text-xs font-sans text-[#0F0F11] leading-relaxed">
+                        <div className="bg-white p-4 border border-slate-200 rounded-lg text-xs font-sans text-slate-700 leading-relaxed shadow-xs">
                           {quote.projectDetails ? (
-                            <p>{quote.projectDetails}</p>
+                            <p className="whitespace-pre-wrap">{quote.projectDetails}</p>
                           ) : (
-                            <p className="italic text-[#8C857B]">No additional project notes supplied.</p>
+                            <p className="italic text-slate-400">No additional project notes supplied by contractor.</p>
                           )}
                         </div>
                       </div>

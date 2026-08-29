@@ -163,5 +163,9 @@ const productSchema = new Schema<IProduct>(
   }
 );
 
+// Performance compound indexes for catalog browsing & category filtering
+productSchema.index({ isPublished: 1, createdAt: -1 });
+productSchema.index({ isPublished: 1, category: 1 });
+
 export const Product: Model<IProduct> =
   mongoose.models.Product || mongoose.model<IProduct>('Product', productSchema);

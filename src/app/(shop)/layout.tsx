@@ -25,33 +25,36 @@ export default async function ShopLayout({ children }: { children: React.ReactNo
     console.warn('Database connection unavailable in ShopLayout:', dbErr);
   }
 
-  const settings = isConnected ? await getSystemSettings() : { isMaintenanceModeEnabled: false };
-
-  // Fetch active categories for dynamic storefront menu
-  let categories = [];
-  if (isConnected) {
-    try {
-      const rawCategories = await Category.find({ isActive: true }).sort({ name: 1 }).lean();
-      categories = JSON.parse(JSON.stringify(rawCategories));
-    } catch (err) {
-      console.error('Failed to fetch active categories for storefront layout:', err);
-    }
-  }
-
+  let settings = { isMaintenanceModeEnabled: false };
+  let categories: Array<{ _id: string; name: string; slug: string; isActive: boolean }> = [];
   let session = null;
   let userName = '';
-  try {
-    session = await getServerSession(authOptions);
-    if (session?.user?.id && isConnected) {
-      const dbUser = await User.findById(session.user.id).select('name').lean();
-      if (dbUser) {
-        userName = dbUser.name;
-      } else {
-        userName = session.user.name || '';
+
+  if (isConnected) {
+    try {
+      const [settingsRes, rawCategoriesRes, sessionRes] = await Promise.all([
+        getSystemSettings().catch(() => ({ isMaintenanceModeEnabled: false })),
+        Category.find({ isActive: true }).select('name slug isActive').sort({ name: 1 }).lean().catch(() => []),
+        getServerSession(authOptions).catch(() => null),
+      ]);
+
+      settings = settingsRes;
+      categories = JSON.parse(JSON.stringify(rawCategoriesRes));
+      session = sessionRes;
+
+      if (session?.user?.id) {
+        const dbUser = await User.findById(session.user.id).select('name').lean();
+        userName = dbUser ? dbUser.name : (session.user.name || '');
       }
+    } catch (err) {
+      console.warn('Error fetching layout data:', err);
     }
-  } catch (error) {
-    console.warn('NextAuth session decryption bypassed due to stale browser cookie:', error);
+  } else {
+    try {
+      session = await getServerSession(authOptions);
+    } catch {
+      // ignore
+    }
   }
 
   const isAdmin = session?.user?.role === 'ADMIN';

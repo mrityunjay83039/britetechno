@@ -69,5 +69,17 @@ export const authOptions: NextAuthOptions = {
   session: {
     strategy: 'jwt',
   },
+  jwt: {
+    secret: process.env.NEXTAUTH_SECRET || 'bhavatsyam-luxury-secret-key-32-chars-long-secure-token',
+  },
   secret: process.env.NEXTAUTH_SECRET || 'bhavatsyam-luxury-secret-key-32-chars-long-secure-token',
+  logger: {
+    error(code, metadata) {
+      if (code === 'JWT_SESSION_ERROR') {
+        // Stale browser session cookie from previous secret/session; safe to ignore
+        return;
+      }
+      console.error(`[next-auth][error][${code}]`, metadata);
+    },
+  },
 };

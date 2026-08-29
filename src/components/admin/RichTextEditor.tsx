@@ -32,13 +32,13 @@ export default function RichTextEditor({ value, onChange }: RichTextEditorProps)
   };
 
   return (
-    <div className="border border-[#1E3A8A]/30 rounded-sm overflow-hidden bg-white focus-within:border-[#1E3A8A] transition-colors">
+    <div className="border border-slate-300 rounded-lg overflow-hidden bg-white focus-within:border-[#0066B4] focus-within:ring-1 focus-within:ring-[#0066B4] transition-all shadow-xs">
       {/* Toolbar */}
-      <div className="bg-[#FFFFFF] border-b border-[#1E3A8A]/20 p-1.5 flex flex-wrap items-center gap-1">
+      <div className="bg-slate-50 border-b border-slate-200 p-1.5 flex flex-wrap items-center gap-1">
         <button
           type="button"
           onClick={() => insertTag('<strong>', '</strong>')}
-          className="p-1.5 rounded-xs hover:bg-gray-200 text-xs font-bold transition-colors text-[#1E3A8A] cursor-pointer"
+          className="p-1.5 rounded-md hover:bg-slate-200 text-xs font-bold transition-colors text-slate-700 hover:text-slate-900 cursor-pointer"
           title="Bold"
         >
           <Bold className="w-3.5 h-3.5" />
@@ -47,18 +47,18 @@ export default function RichTextEditor({ value, onChange }: RichTextEditorProps)
         <button
           type="button"
           onClick={() => insertTag('<em>', '</em>')}
-          className="p-1.5 rounded-xs hover:bg-gray-200 text-xs font-bold transition-colors text-[#1E3A8A] cursor-pointer"
+          className="p-1.5 rounded-md hover:bg-slate-200 text-xs font-bold transition-colors text-slate-700 hover:text-slate-900 cursor-pointer"
           title="Italic"
         >
           <Italic className="w-3.5 h-3.5" />
         </button>
 
-        <div className="w-[1px] h-4 bg-[#1E3A8A]/30 mx-1" />
+        <div className="w-[1px] h-4 bg-slate-300 mx-1" />
 
         <button
           type="button"
           onClick={() => insertTag('<h1>', '</h1>')}
-          className="p-1.5 rounded-xs hover:bg-gray-200 text-xs font-bold transition-colors text-[#1E3A8A] cursor-pointer"
+          className="p-1.5 rounded-md hover:bg-slate-200 text-xs font-bold transition-colors text-slate-700 hover:text-slate-900 cursor-pointer"
           title="Heading 1"
         >
           <Heading1 className="w-3.5 h-3.5" />
@@ -67,18 +67,18 @@ export default function RichTextEditor({ value, onChange }: RichTextEditorProps)
         <button
           type="button"
           onClick={() => insertTag('<h2>', '</h2>')}
-          className="p-1.5 rounded-xs hover:bg-gray-200 text-xs font-bold transition-colors text-[#1E3A8A] cursor-pointer"
+          className="p-1.5 rounded-md hover:bg-slate-200 text-xs font-bold transition-colors text-slate-700 hover:text-slate-900 cursor-pointer"
           title="Heading 2"
         >
           <Heading2 className="w-3.5 h-3.5" />
         </button>
 
-        <div className="w-[1px] h-4 bg-[#1E3A8A]/30 mx-1" />
+        <div className="w-[1px] h-4 bg-slate-300 mx-1" />
 
         <button
           type="button"
           onClick={() => insertTag('<ul>\n  <li>', '</li>\n</ul>')}
-          className="p-1.5 rounded-xs hover:bg-gray-200 text-xs font-bold transition-colors text-[#1E3A8A] cursor-pointer"
+          className="p-1.5 rounded-md hover:bg-slate-200 text-xs font-bold transition-colors text-slate-700 hover:text-slate-900 cursor-pointer"
           title="Bullet List"
         >
           <List className="w-3.5 h-3.5" />
@@ -87,7 +87,7 @@ export default function RichTextEditor({ value, onChange }: RichTextEditorProps)
         <button
           type="button"
           onClick={() => insertTag('<ol>\n  <li>', '</li>\n</ol>')}
-          className="p-1.5 rounded-xs hover:bg-gray-200 text-xs font-bold transition-colors text-[#1E3A8A] cursor-pointer"
+          className="p-1.5 rounded-md hover:bg-slate-200 text-xs font-bold transition-colors text-slate-700 hover:text-slate-900 cursor-pointer"
           title="Ordered List"
         >
           <ListOrdered className="w-3.5 h-3.5" />
@@ -101,7 +101,7 @@ export default function RichTextEditor({ value, onChange }: RichTextEditorProps)
         onChange={(e) => onChange(e.target.value)}
         rows={5}
         placeholder="Enter rich HTML or text description..."
-        className="w-full px-3 py-2 bg-white text-[#1E3A8A] font-sans text-xs sm:text-sm leading-relaxed focus:outline-none resize-y"
+        className="w-full px-3.5 py-2.5 bg-white text-slate-900 font-sans text-xs sm:text-sm leading-relaxed focus:outline-none resize-y placeholder-slate-400"
       />
     </div>
   );

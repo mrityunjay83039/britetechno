@@ -108,20 +108,20 @@ export default function ReviewsModeratorClient({ initialReviews }: ReviewsModera
       )}
 
       {reviews.length === 0 ? (
-        <div className="bg-white border border-[#1E3A8A]/15 p-16 text-center rounded flex flex-col items-center justify-center">
-          <MessageSquare className="h-10 w-10 text-[#1E3A8A]/60 mb-4" />
-          <p className="font-sans text-lg text-[#1E3A8A]">No Reviews Found</p>
-          <p className="font-sans text-xs text-[#64748B] mt-1 max-w-xs leading-relaxed">
+        <div className="bg-white border border-slate-200 p-16 text-center rounded-xl flex flex-col items-center justify-center shadow-xs">
+          <MessageSquare className="h-10 w-10 text-slate-300 mb-4" />
+          <p className="font-sans text-base font-bold text-slate-900">No Reviews Found</p>
+          <p className="font-sans text-xs text-slate-500 mt-1 max-w-xs leading-relaxed font-medium">
             There are currently no customer reviews submitted on the platform.
           </p>
         </div>
       ) : (
-        <div className="bg-white border border-[#1E3A8A]/15 rounded overflow-hidden">
+        <div className="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-xs">
           {/* Table Header */}
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse font-sans text-xs">
               <thead>
-                <tr className="bg-[#1E3A8A] text-[#FFFFFF] border-b border-[#1E3A8A]/15 uppercase tracking-wider text-[10px] font-bold">
+                <tr className="bg-slate-50 text-slate-600 border-b border-slate-200 uppercase tracking-wider text-[10px] font-bold">
                   <th className="py-4 px-6">Product</th>
                   <th className="py-4 px-6">Reviewer</th>
                   <th className="py-4 px-6">Rating</th>
@@ -131,35 +131,35 @@ export default function ReviewsModeratorClient({ initialReviews }: ReviewsModera
                   <th className="py-4 px-6 text-right">Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-[#1E3A8A]/10">
+              <tbody className="divide-y divide-slate-100">
                 {reviews.map((review) => {
                   const isActionLoading = loadingId === review._id;
 
                   return (
-                    <tr key={review._id} className="hover:bg-blue-900/50 transition-colors">
+                    <tr key={review._id} className="hover:bg-slate-50/80 transition-colors">
                       {/* Product details */}
                       <td className="py-4 px-6 font-semibold">
                         {review.product ? (
                           <Link
                             href={`/products/${review.product.slug}`}
                             target="_blank"
-                            className="text-[#1E3A8A] hover:text-[#1E3A8A] flex items-center gap-1.5 transition-colors"
+                            className="text-[#0066B4] hover:text-[#005293] font-bold flex items-center gap-1.5 transition-colors"
                           >
                             <span className="line-clamp-2 max-w-[150px]">{review.product.title}</span>
                             <ExternalLink className="h-3 w-3 shrink-0 opacity-60" />
                           </Link>
                         ) : (
-                          <span className="text-red-500 italic">Deleted Product</span>
+                          <span className="text-rose-500 italic">Deleted Product</span>
                         )}
                       </td>
 
                       {/* Reviewer details */}
                       <td className="py-4 px-6">
                         <div className="flex flex-col gap-0.5">
-                          <span className="text-[#1E3A8A] font-bold">
+                          <span className="text-slate-900 font-bold">
                             {review.user ? review.user.name : 'Unknown User'}
                           </span>
-                          <span className="text-[10px] text-[#64748B]">
+                          <span className="text-[10px] text-slate-500 font-medium">
                             {review.user ? review.user.email : 'Deleted Email'}
                           </span>
                         </div>
@@ -173,8 +173,8 @@ export default function ReviewsModeratorClient({ initialReviews }: ReviewsModera
                               key={star}
                               className={`h-3.5 w-3.5 ${
                                 star <= review.rating
-                                  ? 'text-[#1E3A8A] fill-[#1E3A8A]'
-                                  : 'text-zinc-200'
+                                  ? 'text-amber-400 fill-amber-400'
+                                  : 'text-slate-200'
                               }`}
                             />
                           ))}
@@ -183,14 +183,14 @@ export default function ReviewsModeratorClient({ initialReviews }: ReviewsModera
 
                       {/* Comment text */}
                       <td className="py-4 px-6 max-w-[250px]">
-                        <p className="line-clamp-3 text-zinc-600 leading-relaxed">
+                        <p className="line-clamp-3 text-slate-700 leading-relaxed font-medium">
                           {review.comment}
                         </p>
                       </td>
 
                       {/* Created date */}
-                      <td className="py-4 px-6 text-[#64748B] font-medium whitespace-nowrap">
-                        {new Date(review.createdAt).toLocaleDateString('en-IN', {
+                      <td className="py-4 px-6 text-slate-600 font-medium whitespace-nowrap">
+                        {new Date(review.createdAt).toLocaleDateString('en-CA', {
                           year: 'numeric',
                           month: 'short',
                           day: 'numeric',
@@ -200,10 +200,10 @@ export default function ReviewsModeratorClient({ initialReviews }: ReviewsModera
                       {/* Status */}
                       <td className="py-4 px-6">
                         <span
-                          className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded text-[10px] font-bold tracking-wider uppercase ${
+                          className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold tracking-wider uppercase ${
                             review.isApproved
-                              ? 'bg-green-50 text-green-700 border border-green-100'
-                              : 'bg-zinc-50 text-zinc-400 border border-zinc-200/60 line-through'
+                              ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
+                              : 'bg-slate-100 text-slate-500 border border-slate-200 line-through'
                           }`}
                         >
                           {review.isApproved ? 'Approved' : 'Hidden'}
@@ -217,10 +217,10 @@ export default function ReviewsModeratorClient({ initialReviews }: ReviewsModera
                           <button
                             onClick={() => handleToggleApproval(review._id, review.isApproved)}
                             disabled={isActionLoading}
-                            className={`p-1.5 rounded border transition-all duration-200 cursor-pointer ${
+                            className={`p-2 rounded-lg border transition-all duration-200 cursor-pointer shadow-xs ${
                               review.isApproved
-                                ? 'border-[#1E3A8A]/20 text-[#64748B] hover:text-[#1E3A8A] hover:border-[#1E3A8A]'
-                                : 'border-[#1E3A8A]/35 bg-[#1E3A8A]/5 text-[#1E3A8A] hover:bg-[#1E3A8A] hover:text-[#1E3A8A]'
+                                ? 'border-slate-200 text-slate-600 hover:text-slate-900 hover:bg-slate-100'
+                                : 'border-[#0066B4]/30 bg-[#0066B4]/10 text-[#0066B4] hover:bg-[#0066B4] hover:text-white'
                             }`}
                             title={review.isApproved ? 'Hide Review' : 'Approve Review'}
                           >
@@ -235,7 +235,7 @@ export default function ReviewsModeratorClient({ initialReviews }: ReviewsModera
                           <button
                             onClick={() => handleDeleteReview(review._id)}
                             disabled={isActionLoading}
-                            className="p-1.5 rounded border border-red-100 text-red-500 hover:bg-red-50 hover:border-red-200 transition-all duration-200 cursor-pointer"
+                            className="p-2 rounded-lg border border-rose-200 text-rose-600 hover:bg-rose-50 transition-all duration-200 cursor-pointer shadow-xs"
                             title="Delete Review"
                           >
                             <Trash2 className="h-4 w-4" />

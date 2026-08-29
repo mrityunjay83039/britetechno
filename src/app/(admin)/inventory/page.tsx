@@ -1,6 +1,5 @@
 import React from 'react';
 import dbConnect from '@/lib/db';
-import { ensureCategoryMigration } from '@/lib/migrateCategories';
 import { Product } from '@/models/Product';
 import { Category } from '@/models/Category';
 import InventoryClient from '@/components/InventoryClient';
@@ -9,13 +8,12 @@ export const revalidate = 0; // force dynamic rendering
 
 export default async function InventoryPage() {
   await dbConnect();
-  await ensureCategoryMigration();
 
-  // Fetch all products, sorted by newest first
-  const rawProducts = await Product.find({}).populate('category').sort({ createdAt: -1 }).lean();
-
-  // Fetch all categories
-  const rawCategories = await Category.find({}).sort({ name: 1 }).lean();
+  // Fetch all products and categories in parallel
+  const [rawProducts, rawCategories] = await Promise.all([
+    Product.find({}).populate('category', 'name slug').sort({ createdAt: -1 }).lean(),
+    Category.find({}).sort({ name: 1 }).lean(),
+  ]);
 
   // Serialize MongoDB documents so they pass React Server-Client boundary checks
   const products = JSON.parse(JSON.stringify(rawProducts));

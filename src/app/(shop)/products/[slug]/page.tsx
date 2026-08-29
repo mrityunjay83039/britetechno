@@ -2,14 +2,13 @@ import React from 'react';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import dbConnect from '@/lib/db';
-import { ensureCategoryMigration } from '@/lib/migrateCategories';
 import { Product, IProductVariant } from '@/models/Product';
 import { Review } from '@/models/Review';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { User } from '@/models/User'; // Ensure User model is loaded for populate
 import ProductDetailClient, { SerializedProduct, SerializedReview } from '@/components/ProductDetailClient';
 
-export const dynamic = 'force-dynamic';
+export const revalidate = 60;
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -20,7 +19,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   await dbConnect();
 
-  const productDoc = await Product.findOne({ slug, isPublished: true }).lean();
+  const productDoc = await Product.findOne({ slug, isPublished: true }).select('title description images').lean();
 
   if (!productDoc) {
     return {
@@ -31,7 +30,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   const title = productDoc.title;
   const description = productDoc.description;
-  const images = productDoc.images.map((imgUrl: string) => ({
+  const images = (productDoc.images || []).map((imgUrl: string) => ({
     url: imgUrl,
     alt: productDoc.title,
   }));
@@ -59,10 +58,9 @@ export default async function ProductPage({ params }: PageProps) {
   const { slug } = await params;
 
   await dbConnect();
-  await ensureCategoryMigration();
 
   // Find the product by its slug and ensure it is published
-  const productDoc = await Product.findOne({ slug, isPublished: true }).populate('category').lean();
+  const productDoc = await Product.findOne({ slug, isPublished: true }).populate('category', 'name slug').lean();
 
   if (!productDoc) {
     notFound();

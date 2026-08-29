@@ -144,43 +144,43 @@ export default function PromosClient({ initialPromos }: PromosClientProps) {
   };
 
   return (
-    <div className="p-8 max-w-7xl mx-auto space-y-6">
+    <div className="space-y-6">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#1E3A8A]/20 pb-6">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200 pb-6">
         <div>
-          <h1 className="font-sans text-3xl font-bold tracking-wide text-[#FFFFFF] flex items-center gap-3">
-            <Ticket className="w-8 h-8 text-[#1E3A8A]" /> Promo Codes
+          <h1 className="font-sans text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-900 flex items-center gap-3">
+            <Ticket className="w-7 h-7 text-[#0066B4]" /> Promo Codes
           </h1>
-          <p className="font-sans text-xs text-[#64748B] mt-1">
-            Generate and manage promotional discounts and coupon codes for checkout campaigns.
+          <p className="font-sans text-xs text-slate-500 mt-1 font-medium">
+            Generate and manage promotional discounts and coupon codes for quote projects and catalog campaigns.
           </p>
         </div>
         <button
           onClick={handleOpenCreateModal}
-          className="bg-[#1E3A8A] text-white font-sans font-bold px-5 py-2.5 rounded-sm text-xs tracking-wider hover:bg-blue-900 transition-all flex items-center gap-2 cursor-pointer shrink-0"
+          className="bg-[#0066B4] text-white font-sans font-bold px-5 py-2.5 rounded-lg text-xs tracking-wider hover:bg-[#005293] transition-all flex items-center gap-2 cursor-pointer shrink-0 shadow-sm"
         >
           <Plus className="w-4 h-4" /> CREATE PROMO CODE
         </button>
       </div>
 
       {/* Promo Codes Data Table */}
-      <div className="bg-[#1E3A8A] border border-[#1E3A8A]/15 rounded-md overflow-hidden shadow-xl">
+      <div className="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-xs">
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse">
             <thead>
-              <tr className="border-b border-[#1E3A8A]/15 bg-black/40 font-sans text-[11px] tracking-wider text-[#1E3A8A] uppercase">
-                <th className="py-4 px-6 font-bold">Code</th>
-                <th className="py-4 px-6 font-bold">Discount</th>
-                <th className="py-4 px-6 font-bold">Usage</th>
-                <th className="py-4 px-6 font-bold">Expiry Date</th>
-                <th className="py-4 px-6 font-bold">Status</th>
-                <th className="py-4 px-6 font-bold text-right">Actions</th>
+              <tr className="border-b border-slate-200 bg-slate-50 font-sans text-xs font-bold uppercase tracking-wider text-slate-600">
+                <th className="py-4 px-6">Code</th>
+                <th className="py-4 px-6">Discount</th>
+                <th className="py-4 px-6">Usage</th>
+                <th className="py-4 px-6">Expiry Date</th>
+                <th className="py-4 px-6">Status</th>
+                <th className="py-4 px-6 text-right">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#1E3A8A]/10 font-sans text-xs">
+            <tbody className="divide-y divide-slate-100 font-sans text-xs">
               {promos.length === 0 ? (
                 <tr>
-                  <td colSpan={6} className="py-12 text-center text-[#64748B]">
+                  <td colSpan={6} className="py-12 text-center text-slate-500 font-medium">
                     No promo codes created yet. Click &quot;Create Promo Code&quot; to generate one.
                   </td>
                 </tr>
@@ -194,65 +194,65 @@ export default function PromosClient({ initialPromos }: PromosClientProps) {
                   return (
                     <tr
                       key={promo._id}
-                      className="hover:bg-white/5 transition-colors text-[#FFFFFF]"
+                      className="hover:bg-slate-50/80 transition-colors text-slate-900"
                     >
-                      <td className="py-4 px-6 font-mono font-bold text-sm tracking-wider text-[#1E3A8A]">
+                      <td className="py-4 px-6 font-mono font-bold text-sm tracking-wider text-[#0066B4]">
                         {promo.code}
                       </td>
                       <td className="py-4 px-6">
-                        <span className="font-semibold">
+                        <span className="font-bold text-slate-900">
                           {promo.discountType === 'percentage'
                             ? `${promo.discountValue}% OFF`
-                            : `₹${promo.discountValue} OFF`}
+                            : `$${promo.discountValue} OFF`}
                         </span>
-                        <span className="block text-[10px] text-[#64748B] uppercase mt-0.5">
+                        <span className="block text-[10px] text-slate-500 uppercase mt-0.5 font-semibold">
                           {promo.discountType === 'percentage' ? 'Percentage' : 'Fixed Amount'}
                         </span>
                       </td>
                       <td className="py-4 px-6">
-                        <span className="font-medium">
+                        <span className="font-semibold text-slate-800">
                           {promo.usedCount}{' '}
-                          <span className="text-[#64748B]">
+                          <span className="text-slate-400">
                             / {promo.usageLimit ? promo.usageLimit : '∞'}
                           </span>
                         </span>
                         {isLimitReached && (
-                          <span className="block text-[10px] text-amber-400 font-bold mt-0.5">
+                          <span className="block text-[10px] text-amber-600 font-bold mt-0.5">
                             Limit Reached
                           </span>
                         )}
                       </td>
-                      <td className="py-4 px-6">
+                      <td className="py-4 px-6 font-medium text-slate-700">
                         {promo.expiryDate ? (
                           <div>
-                            <span>{new Date(promo.expiryDate).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}</span>
+                            <span>{new Date(promo.expiryDate).toLocaleDateString('en-CA', { day: 'numeric', month: 'short', year: 'numeric' })}</span>
                             {isExpired && (
-                              <span className="block text-[10px] text-red-400 font-bold mt-0.5">
+                              <span className="block text-[10px] text-rose-600 font-bold mt-0.5">
                                 Expired
                               </span>
                             )}
                           </div>
                         ) : (
-                          <span className="text-[#64748B]">No Expiry</span>
+                          <span className="text-slate-400">No Expiry</span>
                         )}
                       </td>
                       <td className="py-4 px-6">
                         <button
                           onClick={() => handleToggleActive(promo)}
-                          className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold tracking-wider uppercase transition-all cursor-pointer ${
+                          className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold tracking-wider uppercase transition-all cursor-pointer ${
                             promo.isActive
-                              ? 'bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 hover:bg-emerald-500/25'
-                              : 'bg-zinc-800 text-zinc-400 border border-zinc-700 hover:bg-zinc-700'
+                              ? 'bg-emerald-50 text-emerald-700 border border-emerald-200 hover:bg-emerald-100'
+                              : 'bg-slate-100 text-slate-500 border border-slate-200 hover:bg-slate-200'
                           }`}
                           title="Click to toggle status"
                         >
                           {promo.isActive ? (
                             <>
-                              <CheckCircle className="w-3 h-3 text-emerald-400" /> Active
+                              <CheckCircle className="w-3.5 h-3.5 text-emerald-600" /> Active
                             </>
                           ) : (
                             <>
-                              <XCircle className="w-3 h-3 text-zinc-400" /> Paused
+                              <XCircle className="w-3.5 h-3.5 text-slate-400" /> Paused
                             </>
                           )}
                         </button>
@@ -260,14 +260,14 @@ export default function PromosClient({ initialPromos }: PromosClientProps) {
                       <td className="py-4 px-6 text-right space-x-2">
                         <button
                           onClick={() => handleOpenEditModal(promo)}
-                          className="p-1.5 text-[#64748B] hover:text-[#1E3A8A] transition-colors rounded hover:bg-white/5"
+                          className="p-1.5 text-slate-500 hover:text-[#0066B4] transition-colors rounded-lg hover:bg-slate-100 cursor-pointer"
                           title="Edit Promo Code"
                         >
                           <Edit2 className="w-4 h-4" />
                         </button>
                         <button
                           onClick={() => handleDelete(promo._id)}
-                          className="p-1.5 text-[#64748B] hover:text-red-400 transition-colors rounded hover:bg-white/5"
+                          className="p-1.5 text-slate-500 hover:text-rose-600 transition-colors rounded-lg hover:bg-rose-50 cursor-pointer"
                           title="Delete Promo Code"
                         >
                           <Trash2 className="w-4 h-4" />
@@ -284,37 +284,37 @@ export default function PromosClient({ initialPromos }: PromosClientProps) {
 
       {/* Modal Form for Create / Edit */}
       {isModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
-          <div className="bg-[#1E3A8A] border border-[#1E3A8A]/30 rounded-lg max-w-lg w-full p-6 text-[#FFFFFF] shadow-2xl relative">
-            <h2 className="font-sans text-xl font-bold tracking-wide text-[#1E3A8A] mb-4">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-xs">
+          <div className="bg-white border border-slate-200 rounded-xl max-w-lg w-full p-6 text-slate-900 shadow-2xl relative">
+            <h2 className="font-sans text-lg font-bold tracking-tight text-slate-900 mb-4">
               {editingPromo ? 'Edit Promo Code' : 'Create New Promo Code'}
             </h2>
 
             {errorMsg && (
-              <div className="mb-4 p-3 bg-red-500/10 border border-red-500/30 rounded text-red-400 text-xs flex items-center gap-2">
-                <AlertCircle className="w-4 h-4 shrink-0" />
+              <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg text-red-700 text-xs flex items-center gap-2">
+                <AlertCircle className="w-4 h-4 shrink-0 text-red-600" />
                 <span>{errorMsg}</span>
               </div>
             )}
 
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <label className="block font-sans text-xs font-bold text-[#64748B] tracking-wider uppercase mb-1">
-                  Promo Code
+                <label className="block font-sans text-xs font-bold text-slate-800 tracking-wider uppercase mb-1">
+                  Promo Code *
                 </label>
                 <input
                   type="text"
                   value={code}
                   onChange={(e) => setCode(e.target.value.toUpperCase())}
-                  placeholder="e.g. INSTA10"
-                  className="w-full bg-black/50 border border-[#1E3A8A]/30 rounded px-3 py-2 text-sm font-mono tracking-wider focus:outline-none focus:border-[#1E3A8A] uppercase"
+                  placeholder="e.g. BRITE10"
+                  className="w-full bg-white border border-slate-300 rounded-lg px-3.5 py-2 text-sm font-mono font-bold tracking-wider focus:outline-none focus:border-[#0066B4] text-slate-900 uppercase shadow-xs"
                   required
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block font-sans text-xs font-bold text-[#64748B] tracking-wider uppercase mb-1">
+                  <label className="block font-sans text-xs font-bold text-slate-800 tracking-wider uppercase mb-1">
                     Discount Type
                   </label>
                   <select
@@ -322,15 +322,15 @@ export default function PromosClient({ initialPromos }: PromosClientProps) {
                     onChange={(e) =>
                       setDiscountType(e.target.value as 'percentage' | 'fixedAmount')
                     }
-                    className="w-full bg-black/50 border border-[#1E3A8A]/30 rounded px-3 py-2 text-xs focus:outline-none focus:border-[#1E3A8A]"
+                    className="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-xs focus:outline-none focus:border-[#0066B4] text-slate-900 shadow-xs cursor-pointer"
                   >
                     <option value="percentage">Percentage (%)</option>
-                    <option value="fixedAmount">Fixed Amount (₹)</option>
+                    <option value="fixedAmount">Fixed Amount ($)</option>
                   </select>
                 </div>
 
                 <div>
-                  <label className="block font-sans text-xs font-bold text-[#64748B] tracking-wider uppercase mb-1">
+                  <label className="block font-sans text-xs font-bold text-slate-800 tracking-wider uppercase mb-1">
                     Discount Value
                   </label>
                   <input
@@ -339,8 +339,8 @@ export default function PromosClient({ initialPromos }: PromosClientProps) {
                     step="0.01"
                     value={discountValue}
                     onChange={(e) => setDiscountValue(Number(e.target.value))}
-                    placeholder="10 or 500"
-                    className="w-full bg-black/50 border border-[#1E3A8A]/30 rounded px-3 py-2 text-xs focus:outline-none focus:border-[#1E3A8A]"
+                    placeholder="10 or 50"
+                    className="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-xs focus:outline-none focus:border-[#0066B4] text-slate-900 font-bold shadow-xs"
                     required
                   />
                 </div>
@@ -348,7 +348,7 @@ export default function PromosClient({ initialPromos }: PromosClientProps) {
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block font-sans text-xs font-bold text-[#64748B] tracking-wider uppercase mb-1">
+                  <label className="block font-sans text-xs font-bold text-slate-800 tracking-wider uppercase mb-1">
                     Global Usage Limit (Optional)
                   </label>
                   <input
@@ -357,19 +357,19 @@ export default function PromosClient({ initialPromos }: PromosClientProps) {
                     value={usageLimit}
                     onChange={(e) => setUsageLimit(e.target.value)}
                     placeholder="e.g. 100 (Blank = Unlimited)"
-                    className="w-full bg-black/50 border border-[#1E3A8A]/30 rounded px-3 py-2 text-xs focus:outline-none focus:border-[#1E3A8A]"
+                    className="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-xs focus:outline-none focus:border-[#0066B4] text-slate-900 shadow-xs"
                   />
                 </div>
 
                 <div>
-                  <label className="block font-sans text-xs font-bold text-[#64748B] tracking-wider uppercase mb-1">
+                  <label className="block font-sans text-xs font-bold text-slate-800 tracking-wider uppercase mb-1">
                     Expiry Date (Optional)
                   </label>
                   <input
                     type="date"
                     value={expiryDate}
                     onChange={(e) => setExpiryDate(e.target.value)}
-                    className="w-full bg-black/50 border border-[#1E3A8A]/30 rounded px-3 py-2 text-xs focus:outline-none focus:border-[#1E3A8A]"
+                    className="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-xs focus:outline-none focus:border-[#0066B4] text-slate-900 shadow-xs"
                   />
                 </div>
               </div>
@@ -380,21 +380,21 @@ export default function PromosClient({ initialPromos }: PromosClientProps) {
                   id="isActiveToggle"
                   checked={isActive}
                   onChange={(e) => setIsActive(e.target.checked)}
-                  className="w-4 h-4 accent-[#1E3A8A]"
+                  className="w-4 h-4 border-slate-300 text-[#0066B4] focus:ring-[#0066B4] rounded cursor-pointer"
                 />
                 <label
                   htmlFor="isActiveToggle"
-                  className="font-sans text-xs font-medium text-[#FFFFFF] cursor-pointer"
+                  className="font-sans text-xs font-bold text-slate-800 cursor-pointer"
                 >
                   Campaign Active (Uncheck to pause immediately)
                 </label>
               </div>
 
-              <div className="flex justify-end gap-3 pt-4 border-t border-[#1E3A8A]/15">
+              <div className="flex justify-end gap-3 pt-4 border-t border-slate-200">
                 <button
                   type="button"
                   onClick={() => setIsModalOpen(false)}
-                  className="px-4 py-2 border border-[#64748B]/30 rounded text-xs font-bold text-[#64748B] hover:text-[#FFFFFF] transition-colors"
+                  className="px-4 py-2 border border-slate-300 rounded-lg text-xs font-bold text-slate-700 hover:bg-slate-100 transition-colors cursor-pointer"
                   disabled={isLoading}
                 >
                   CANCEL
@@ -402,10 +402,10 @@ export default function PromosClient({ initialPromos }: PromosClientProps) {
                 <button
                   type="submit"
                   disabled={isLoading}
-                  className="px-5 py-2 bg-[#1E3A8A] text-white rounded text-xs font-bold tracking-wider hover:bg-blue-900 transition-all flex items-center gap-2"
+                  className="px-5 py-2 bg-[#0066B4] text-white rounded-lg text-xs font-bold tracking-wider hover:bg-[#005293] transition-all flex items-center gap-2 cursor-pointer shadow-xs"
                 >
                   {isLoading && (
-                    <span className="w-3.5 h-3.5 border-2 border-[#1E3A8A] border-t-transparent rounded-full animate-spin" />
+                    <span className="w-3.5 h-3.5 border-2 border-white border-t-transparent rounded-full animate-spin" />
                   )}
                   {editingPromo ? 'UPDATE PROMO' : 'CREATE PROMO'}
                 </button>

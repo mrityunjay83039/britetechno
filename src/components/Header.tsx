@@ -1,8 +1,8 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 import { FileText, Menu, X, User, Search, ChevronDown, ArrowRight, Lightbulb } from 'lucide-react';
 import { signOut } from 'next-auth/react';
 import { useQuoteListStore, QuoteListState, QuoteListItem } from '@/store/useQuoteListStore';
@@ -29,12 +29,50 @@ export interface HeaderProps {
 
 export default function Header({ categories = [], session, userName }: HeaderProps) {
   const router = useRouter();
+  const pathname = usePathname();
   const setIsOpen = useQuoteListStore((state) => state.setIsOpen);
   const items = useHydratedStore<QuoteListState, QuoteListItem[]>(useQuoteListStore, (state) => state.items) || [];
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [megaMenuOpen, setMegaMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [userMenuOpen, setUserMenuOpen] = useState(false);
+  const megaMenuTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Auto-close menus on navigation
+  useEffect(() => {
+    if (megaMenuTimeoutRef.current) {
+      clearTimeout(megaMenuTimeoutRef.current);
+      megaMenuTimeoutRef.current = null;
+    }
+    setMegaMenuOpen(false);
+    setMobileMenuOpen(false);
+  }, [pathname]);
+
+  const handleMegaMenuEnter = () => {
+    if (megaMenuTimeoutRef.current) {
+      clearTimeout(megaMenuTimeoutRef.current);
+      megaMenuTimeoutRef.current = null;
+    }
+    setMegaMenuOpen(true);
+  };
+
+  const handleMegaMenuLeave = () => {
+    if (megaMenuTimeoutRef.current) {
+      clearTimeout(megaMenuTimeoutRef.current);
+    }
+    megaMenuTimeoutRef.current = setTimeout(() => {
+      setMegaMenuOpen(false);
+    }, 180);
+  };
+
+  const handleCloseMegaMenuImmediately = () => {
+    if (megaMenuTimeoutRef.current) {
+      clearTimeout(megaMenuTimeoutRef.current);
+      megaMenuTimeoutRef.current = null;
+    }
+    setMegaMenuOpen(false);
+  };
 
   const totalItemCount = items.reduce((sum: number, item: QuoteListItem) => sum + item.quantity, 0);
 
@@ -116,124 +154,163 @@ export default function Header({ categories = [], session, userName }: HeaderPro
             </Link>
 
             {/* SHOP WITH MEGA MENU DROPDOWN */}
-            <div className="relative group/megamenu">
+            <div
+              className="relative py-2 -my-2"
+              onMouseEnter={handleMegaMenuEnter}
+              onMouseLeave={handleMegaMenuLeave}
+            >
               <Link
                 href="/products"
-                className="flex items-center gap-1 py-1 font-sans text-xs font-bold tracking-[0.15em] text-slate-200 group-hover/megamenu:text-[#0066B4] hover:text-[#0066B4] transition-colors uppercase cursor-pointer"
+                prefetch={true}
+                onClick={handleCloseMegaMenuImmediately}
+                className="flex items-center gap-1 py-1 font-sans text-xs font-bold tracking-[0.15em] text-slate-200 hover:text-[#0066B4] transition-colors uppercase cursor-pointer"
               >
                 <span>SHOP</span>
-                <ChevronDown className="w-3.5 h-3.5 text-[#0066B4] transition-transform duration-200 group-hover/megamenu:rotate-180" />
-                <span className="absolute bottom-0 left-0 h-[2px] w-0 bg-[#0066B4] transition-all duration-300 group-hover/megamenu:w-full" />
+                <ChevronDown className={`w-3.5 h-3.5 text-[#0066B4] transition-transform duration-200 ${megaMenuOpen ? 'rotate-180' : ''}`} />
+                <span className={`absolute bottom-1 left-0 h-[2px] bg-[#0066B4] transition-all duration-300 ${megaMenuOpen ? 'w-full' : 'w-0'}`} />
               </Link>
 
-              {/* MEGA MENU CONTAINER */}
-              <div className="absolute -left-12 mt-2 w-[780px] bg-slate-900 border border-slate-800 rounded-xl shadow-2xl opacity-0 invisible group-hover/megamenu:opacity-100 group-hover/megamenu:visible transition-all duration-300 z-50 p-6 animate-in fade-in slide-in-from-top-2">
-                <div className="grid grid-cols-4 gap-6">
-                  
-                  {/* Column 1: Indoor Lighting */}
-                  <div>
-                    <h4 className="font-sans text-[11px] font-extrabold tracking-wider text-[#0066B4] uppercase mb-3 flex items-center gap-1.5 border-b border-slate-800 pb-2">
-                      <Lightbulb className="w-3.5 h-3.5 text-[#0066B4]" />
-                      Indoor Lighting
-                    </h4>
-                    <ul className="space-y-2 text-xs font-sans">
-                      {indoorCategories.slice(0, 6).map((cat) => (
-                        <li key={cat._id}>
-                          <Link
-                            href={`/products?category=${cat.slug}`}
-                            className="text-slate-300 hover:text-white transition-colors block py-0.5"
-                          >
-                            {cat.name}
-                          </Link>
-                        </li>
-                      ))}
-                      {indoorCategories.length === 0 && (
-                        <li>
-                          <Link href="/products" className="text-slate-400 hover:text-white">
-                            High Bay & Panels
-                          </Link>
-                        </li>
-                      )}
-                    </ul>
-                  </div>
-
-                  {/* Column 2: Outdoor Lighting */}
-                  <div>
-                    <h4 className="font-sans text-[11px] font-extrabold tracking-wider text-[#0066B4] uppercase mb-3 flex items-center gap-1.5 border-b border-slate-800 pb-2">
-                      <Lightbulb className="w-3.5 h-3.5 text-[#0066B4]" />
-                      Outdoor Lighting
-                    </h4>
-                    <ul className="space-y-2 text-xs font-sans">
-                      {outdoorCategories.slice(0, 6).map((cat) => (
-                        <li key={cat._id}>
-                          <Link
-                            href={`/products?category=${cat.slug}`}
-                            className="text-slate-300 hover:text-white transition-colors block py-0.5"
-                          >
-                            {cat.name}
-                          </Link>
-                        </li>
-                      ))}
-                      {outdoorCategories.length === 0 && (
-                        <li>
-                          <Link href="/products" className="text-slate-400 hover:text-white">
-                            Parking & Wall Packs
-                          </Link>
-                        </li>
-                      )}
-                    </ul>
-                  </div>
-
-                  {/* Column 3: Emergency & Accessories */}
-                  <div>
-                    <h4 className="font-sans text-[11px] font-extrabold tracking-wider text-[#0066B4] uppercase mb-3 flex items-center gap-1.5 border-b border-slate-800 pb-2">
-                      <Lightbulb className="w-3.5 h-3.5 text-[#0066B4]" />
-                      Specialty & Safety
-                    </h4>
-                    <ul className="space-y-2 text-xs font-sans">
-                      {specialtyCategories.slice(0, 6).map((cat) => (
-                        <li key={cat._id}>
-                          <Link
-                            href={`/products?category=${cat.slug}`}
-                            className="text-slate-300 hover:text-white transition-colors block py-0.5"
-                          >
-                            {cat.name}
-                          </Link>
-                        </li>
-                      ))}
-                      {specialtyCategories.length === 0 && (
-                        <li>
-                          <Link href="/products" className="text-slate-400 hover:text-white">
-                            Emergency & Accessories
-                          </Link>
-                        </li>
-                      )}
-                    </ul>
-                  </div>
-
-                  {/* Column 4: Mega Menu Featured Banner */}
-                  <div className="bg-slate-950 border border-slate-800 p-4 rounded-lg flex flex-col justify-between">
+              {/* MEGA MENU CONTAINER WITH SEAMLESS HOVER BRIDGE */}
+              <div
+                className={`absolute -left-12 top-full pt-2 w-[780px] transition-all duration-200 z-50 ${
+                  megaMenuOpen
+                    ? 'opacity-100 visible translate-y-0 pointer-events-auto'
+                    : 'opacity-0 invisible -translate-y-2 pointer-events-none'
+                }`}
+                onMouseEnter={handleMegaMenuEnter}
+                onMouseLeave={handleMegaMenuLeave}
+              >
+                <div className="bg-slate-900 border border-slate-800 rounded-xl shadow-2xl p-6 relative before:absolute before:-top-3 before:left-0 before:w-full before:h-3 before:content-['']">
+                  <div className="grid grid-cols-4 gap-6">
+                    
+                    {/* Column 1: Indoor Lighting */}
                     <div>
-                      <span className="text-[9px] font-extrabold tracking-widest text-[#0066B4] uppercase block mb-1">
-                        Complete Catalog
-                      </span>
-                      <h5 className="font-sans text-xs font-bold text-white mb-2">
-                        141+ Original & Imported Fixtures
-                      </h5>
-                      <p className="font-sans text-[11px] text-slate-400 leading-relaxed">
-                        Browse technical specifications, wattages, lumens, and request volume pricing.
-                      </p>
+                      <h4 className="font-sans text-[11px] font-extrabold tracking-wider text-[#0066B4] uppercase mb-3 flex items-center gap-1.5 border-b border-slate-800 pb-2">
+                        <Lightbulb className="w-3.5 h-3.5 text-[#0066B4]" />
+                        Indoor Lighting
+                      </h4>
+                      <ul className="space-y-2 text-xs font-sans">
+                        {indoorCategories.slice(0, 6).map((cat) => (
+                          <li key={cat._id}>
+                            <Link
+                              href={`/products?category=${cat.slug}`}
+                              prefetch={true}
+                              onClick={handleCloseMegaMenuImmediately}
+                              className="text-slate-300 hover:text-white transition-colors block py-0.5"
+                            >
+                              {cat.name}
+                            </Link>
+                          </li>
+                        ))}
+                        {indoorCategories.length === 0 && (
+                          <li>
+                            <Link
+                              href="/products"
+                              prefetch={true}
+                              onClick={handleCloseMegaMenuImmediately}
+                              className="text-slate-400 hover:text-white"
+                            >
+                              High Bay & Panels
+                            </Link>
+                          </li>
+                        )}
+                      </ul>
                     </div>
 
-                    <Link
-                      href="/products"
-                      className="mt-4 bg-[#0066B4] hover:bg-[#005293] text-white text-center py-2 px-3 rounded text-[11px] font-bold uppercase tracking-wider transition-colors flex items-center justify-center gap-1.5"
-                    >
-                      <span>View Shop</span>
-                      <ArrowRight className="w-3 h-3" />
-                    </Link>
-                  </div>
+                    {/* Column 2: Outdoor Lighting */}
+                    <div>
+                      <h4 className="font-sans text-[11px] font-extrabold tracking-wider text-[#0066B4] uppercase mb-3 flex items-center gap-1.5 border-b border-slate-800 pb-2">
+                        <Lightbulb className="w-3.5 h-3.5 text-[#0066B4]" />
+                        Outdoor Lighting
+                      </h4>
+                      <ul className="space-y-2 text-xs font-sans">
+                        {outdoorCategories.slice(0, 6).map((cat) => (
+                          <li key={cat._id}>
+                            <Link
+                              href={`/products?category=${cat.slug}`}
+                              prefetch={true}
+                              onClick={handleCloseMegaMenuImmediately}
+                              className="text-slate-300 hover:text-white transition-colors block py-0.5"
+                            >
+                              {cat.name}
+                            </Link>
+                          </li>
+                        ))}
+                        {outdoorCategories.length === 0 && (
+                          <li>
+                            <Link
+                              href="/products"
+                              prefetch={true}
+                              onClick={handleCloseMegaMenuImmediately}
+                              className="text-slate-400 hover:text-white"
+                            >
+                              Parking & Wall Packs
+                            </Link>
+                          </li>
+                        )}
+                      </ul>
+                    </div>
 
+                    {/* Column 3: Emergency & Accessories */}
+                    <div>
+                      <h4 className="font-sans text-[11px] font-extrabold tracking-wider text-[#0066B4] uppercase mb-3 flex items-center gap-1.5 border-b border-slate-800 pb-2">
+                        <Lightbulb className="w-3.5 h-3.5 text-[#0066B4]" />
+                        Specialty & Safety
+                      </h4>
+                      <ul className="space-y-2 text-xs font-sans">
+                        {specialtyCategories.slice(0, 6).map((cat) => (
+                          <li key={cat._id}>
+                            <Link
+                              href={`/products?category=${cat.slug}`}
+                              prefetch={true}
+                              onClick={handleCloseMegaMenuImmediately}
+                              className="text-slate-300 hover:text-white transition-colors block py-0.5"
+                            >
+                              {cat.name}
+                            </Link>
+                          </li>
+                        ))}
+                        {specialtyCategories.length === 0 && (
+                          <li>
+                            <Link
+                              href="/products"
+                              prefetch={true}
+                              onClick={handleCloseMegaMenuImmediately}
+                              className="text-slate-400 hover:text-white"
+                            >
+                              Emergency & Accessories
+                            </Link>
+                          </li>
+                        )}
+                      </ul>
+                    </div>
+
+                    {/* Column 4: Mega Menu Featured Banner */}
+                    <div className="bg-slate-950 border border-slate-800 p-4 rounded-lg flex flex-col justify-between">
+                      <div>
+                        <span className="text-[9px] font-extrabold tracking-widest text-[#0066B4] uppercase block mb-1">
+                          Complete Catalog
+                        </span>
+                        <h5 className="font-sans text-xs font-bold text-white mb-2">
+                          141+ Original & Imported Fixtures
+                        </h5>
+                        <p className="font-sans text-[11px] text-slate-400 leading-relaxed">
+                          Browse technical specifications, wattages, lumens, and request volume pricing.
+                        </p>
+                      </div>
+
+                      <Link
+                        href="/products"
+                        prefetch={true}
+                        onClick={handleCloseMegaMenuImmediately}
+                        className="mt-4 bg-[#0066B4] hover:bg-[#005293] text-white text-center py-2 px-3 rounded text-[11px] font-bold uppercase tracking-wider transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
+                      >
+                        <span>View Shop</span>
+                        <ArrowRight className="w-3 h-3" />
+                      </Link>
+                    </div>
+
+                  </div>
                 </div>
               </div>
             </div>
