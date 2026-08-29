@@ -163,42 +163,42 @@ function VerifyEmailContent() {
   };
 
   return (
-    <div className="min-h-screen bg-[#FAF8F5] flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-[#FFFFFF] flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       {/* Brand Header */}
       <div className="sm:mx-auto w-full max-w-md text-center">
         <Link href="/" className="inline-block transition-transform hover:scale-105">
           <BhavatsyamLogo variant="dark" width={240} height={60} />
         </Link>
-        <h2 className="mt-4 font-serif text-2xl font-bold text-[#0F0F11] tracking-wide">
+        <h2 className="mt-4 font-sans text-2xl font-bold text-[#1E3A8A] tracking-wide">
           Email Verification
         </h2>
-        <p className="font-sans text-xs text-[#8C857B] mt-1 tracking-wider uppercase">
+        <p className="font-sans text-xs text-[#64748B] mt-1 tracking-wider uppercase">
           Enter 6-digit OTP code sent to your email
         </p>
       </div>
 
       {/* Main Content Box */}
       <div className="mt-8 sm:mx-auto w-full max-w-md">
-        <div className="bg-[#0F0F11] text-[#FAF8F5] py-8 px-6 shadow-2xl border border-[#C5A880]/30 rounded-sm sm:px-10">
+        <div className="bg-[#1E3A8A] text-[#FFFFFF] py-8 px-6 shadow-2xl border border-[#1E3A8A]/30 rounded-sm sm:px-10">
           {success ? (
             /* Successful Verification State */
             <div className="space-y-6 text-center animate-in zoom-in duration-300">
               <div className="flex justify-center">
-                <div className="bg-[#C5A880]/15 p-4 rounded-full border border-[#C5A880]/40">
-                  <CheckCircle2 className="w-14 h-14 text-[#C5A880]" />
+                <div className="bg-[#1E3A8A]/15 p-4 rounded-full border border-[#1E3A8A]/40">
+                  <CheckCircle2 className="w-14 h-14 text-[#1E3A8A]" />
                 </div>
               </div>
-              <h3 className="font-serif text-2xl font-bold text-[#C5A880] tracking-wide">
+              <h3 className="font-sans text-2xl font-bold text-[#1E3A8A] tracking-wide">
                 Email Verified Successfully!
               </h3>
-              <p className="font-sans text-xs text-[#FAF8F5]/80 leading-relaxed">
+              <p className="font-sans text-xs text-[#FFFFFF]/80 leading-relaxed">
                 Thank you for verifying your email. Your account is now fully active,
                 and you can proceed to sign in to access your profile and our collections.
               </p>
               <div className="pt-2">
                 <Link
                   href="/login"
-                  className="w-full py-3.5 bg-[#C5A880] text-[#0F0F11] hover:bg-[#FAF8F5] hover:text-[#0F0F11] font-sans text-xs font-bold tracking-widest transition-all duration-300 cursor-pointer uppercase rounded-sm flex items-center justify-center gap-2 font-bold shadow-lg"
+                  className="w-full py-3.5 bg-[#1E3A8A] text-white hover:bg-slate-100 hover:text-[#1E3A8A] font-sans text-xs font-bold tracking-widest transition-all duration-300 cursor-pointer uppercase rounded-sm flex items-center justify-center gap-2 font-bold shadow-lg"
                 >
                   <span>Proceed to Sign In</span>
                   <ArrowRight className="w-4 h-4" />
@@ -216,27 +216,27 @@ function VerifyEmailContent() {
               )}
 
               {infoMessage && (
-                <div className="bg-[#C5A880]/10 border border-[#C5A880]/30 rounded-sm p-3.5 flex items-start gap-2.5 animate-in fade-in">
-                  <ShieldCheck className="w-4 h-4 text-[#C5A880] shrink-0 mt-0.5" />
-                  <p className="font-sans text-xs text-[#C5A880] font-medium leading-relaxed">{infoMessage}</p>
+                <div className="bg-[#1E3A8A]/10 border border-[#1E3A8A]/30 rounded-sm p-3.5 flex items-start gap-2.5 animate-in fade-in">
+                  <ShieldCheck className="w-4 h-4 text-[#1E3A8A] shrink-0 mt-0.5" />
+                  <p className="font-sans text-xs text-[#1E3A8A] font-medium leading-relaxed">{infoMessage}</p>
                 </div>
               )}
 
               {/* Email Address Display / Edit */}
               <div className="space-y-1">
-                <label className="font-sans text-xs font-bold text-[#C5A880] uppercase tracking-wider block">
+                <label className="font-sans text-xs font-bold text-[#1E3A8A] uppercase tracking-wider block">
                   Registered Email Address
                 </label>
                 <div className="relative">
                   <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <Mail className="h-4 w-4 text-[#8C857B]" />
+                    <Mail className="h-4 w-4 text-[#64748B]" />
                   </div>
                   <input
                     type="email"
                     required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="w-full pl-10 pr-3 py-2.5 bg-white text-[#0F0F11] font-semibold text-xs font-sans rounded-sm outline-none border border-[#C5A880]/30 focus:border-[#C5A880] placeholder-[#8C857B]"
+                    className="w-full pl-10 pr-3 py-2.5 bg-white text-[#1E3A8A] font-semibold text-xs font-sans rounded-sm outline-none border border-[#1E3A8A]/30 focus:border-[#1E3A8A] placeholder-[#64748B]"
                     placeholder="yourname@example.com"
                   />
                 </div>
@@ -245,10 +245,10 @@ function VerifyEmailContent() {
               {/* 6-Digit OTP Box Entry */}
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
-                  <label className="font-sans text-xs font-bold text-[#FAF8F5] uppercase tracking-wider block">
+                  <label className="font-sans text-xs font-bold text-[#FFFFFF] uppercase tracking-wider block">
                     6-Digit Verification Code (OTP)
                   </label>
-                  <span className="text-[10px] text-[#8C857B] font-sans">
+                  <span className="text-[10px] text-[#64748B] font-sans">
                     Check your inbox & spam folder
                   </span>
                 </div>
@@ -265,7 +265,7 @@ function VerifyEmailContent() {
                       onChange={(e) => handleDigitChange(idx, e.target.value)}
                       onKeyDown={(e) => handleKeyDown(idx, e)}
                       onPaste={handlePaste}
-                      className="w-11 h-12 text-center text-xl font-mono font-bold bg-white text-[#0F0F11] border border-[#C5A880]/60 rounded-sm focus:border-[#C5A880] focus:ring-2 focus:ring-[#C5A880] outline-none transition-all shadow-inner"
+                      className="w-11 h-12 text-center text-xl font-mono font-bold bg-white text-[#1E3A8A] border border-[#1E3A8A]/60 rounded-sm focus:border-[#1E3A8A] focus:ring-2 focus:ring-[#1E3A8A] outline-none transition-all shadow-inner"
                     />
                   ))}
                 </div>
@@ -276,22 +276,22 @@ function VerifyEmailContent() {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full py-3.5 bg-[#C5A880] text-[#0F0F11] hover:bg-[#FAF8F5] disabled:opacity-50 font-sans text-xs font-bold tracking-widest transition-all duration-300 cursor-pointer uppercase rounded-sm shadow-md"
+                  className="w-full py-3.5 bg-[#1E3A8A] text-white hover:bg-blue-900 disabled:opacity-50 font-sans text-xs font-bold tracking-widest transition-all duration-300 cursor-pointer uppercase rounded-sm shadow-md"
                 >
                   {loading ? 'Verifying OTP Code...' : 'Verify & Activate Account'}
                 </button>
               </div>
 
               {/* Resend OTP Section with Countdown Timer */}
-              <div className="pt-4 border-t border-[#C5A880]/15 text-center flex items-center justify-between">
-                <span className="font-sans text-xs text-[#8C857B]">
+              <div className="pt-4 border-t border-[#1E3A8A]/15 text-center flex items-center justify-between">
+                <span className="font-sans text-xs text-[#64748B]">
                   Didn&apos;t receive the code?
                 </span>
                 <button
                   type="button"
                   onClick={handleResendOtp}
                   disabled={!canResend || resending}
-                  className="inline-flex items-center gap-1.5 font-sans text-xs font-bold text-[#C5A880] hover:text-[#FAF8F5] disabled:text-[#8C857B] disabled:cursor-not-allowed transition-colors"
+                  className="inline-flex items-center gap-1.5 font-sans text-xs font-bold text-[#1E3A8A] hover:text-[#FFFFFF] disabled:text-[#64748B] disabled:cursor-not-allowed transition-colors"
                 >
                   <RefreshCw className={`w-3.5 h-3.5 ${resending ? 'animate-spin' : ''}`} />
                   {canResend ? 'Resend OTP Code' : `Resend OTP in ${countdown}s`}
@@ -302,7 +302,7 @@ function VerifyEmailContent() {
               <div className="pt-2 text-center">
                 <Link
                   href="/login"
-                  className="font-sans text-xs text-[#8C857B] hover:text-[#C5A880] transition-colors"
+                  className="font-sans text-xs text-[#64748B] hover:text-[#1E3A8A] transition-colors"
                 >
                   Return to Sign In
                 </Link>
@@ -319,8 +319,8 @@ export default function VerifyEmailPage() {
   return (
     <Suspense
       fallback={
-        <div className="min-h-screen bg-[#FAF8F5] flex items-center justify-center p-4">
-          <p className="font-serif text-[#C5A880] text-lg font-bold animate-pulse">
+        <div className="min-h-screen bg-[#FFFFFF] flex items-center justify-center p-4">
+          <p className="font-sans text-[#1E3A8A] text-lg font-bold animate-pulse">
             Loading BHAVATSYAM Verification...
           </p>
         </div>

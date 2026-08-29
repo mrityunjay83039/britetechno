@@ -37,7 +37,7 @@ export default async function AccountPage() {
     <div className="space-y-8">
       {/* Overview Title */}
       <div>
-        <h2 className="font-serif text-2xl font-semibold text-[#0F0F11] tracking-wide">
+        <h2 className="font-sans text-2xl font-semibold text-[#1E3A8A] tracking-wide">
           Dashboard Overview
         </h2>
         <p className="font-sans text-xs text-[#8C857B] mt-1">
@@ -68,10 +68,10 @@ export default async function AccountPage() {
             <UserIcon className="h-6 w-6 text-[#C5A880]" />
           </div>
           <div>
-            <span className="font-sans text-[10px] text-[#8C857B] uppercase tracking-wider block font-bold">
+            <span className="font-sans text-[10px] text-[#64748B] uppercase tracking-wider block font-bold">
               Account Status
             </span>
-            <span className="font-sans text-xs font-bold text-[#0F0F11] mt-1 block uppercase tracking-wider">
+            <span className="font-sans text-xs font-bold text-[#1E3A8A] mt-1 block uppercase tracking-wider">
               {role}
             </span>
           </div>
@@ -80,39 +80,39 @@ export default async function AccountPage() {
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-4">
         {/* Profile Card Column */}
-        <div className="bg-[#FAF8F5] border border-[#C5A880]/15 p-6 rounded-sm shadow-sm space-y-4 md:col-span-1">
-          <h3 className="font-serif text-lg font-semibold text-[#0F0F11] tracking-wide border-b border-[#C5A880]/15 pb-3">
+        <div className="bg-[#FFFFFF] border border-[#1E3A8A]/15 p-6 rounded-sm shadow-sm space-y-4 md:col-span-1">
+          <h3 className="font-sans text-lg font-semibold text-[#1E3A8A] tracking-wide border-b border-[#1E3A8A]/15 pb-3">
             Profile summary
           </h3>
           <div className="space-y-3.5">
             <div>
-              <span className="font-sans text-[9px] text-[#8C857B] uppercase tracking-wider block font-bold">
+              <span className="font-sans text-[9px] text-[#64748B] uppercase tracking-wider block font-bold">
                 Full Name
               </span>
-              <span className="font-sans text-sm text-[#0F0F11] mt-1 block font-semibold">
+              <span className="font-sans text-sm text-[#1E3A8A] mt-1 block font-semibold">
                 {name}
               </span>
             </div>
             <div>
-              <span className="font-sans text-[9px] text-[#8C857B] uppercase tracking-wider block font-bold">
+              <span className="font-sans text-[9px] text-[#64748B] uppercase tracking-wider block font-bold">
                 Email Address
               </span>
-              <span className="font-sans text-xs text-[#0F0F11] mt-1 block font-medium select-all">
+              <span className="font-sans text-xs text-[#1E3A8A] mt-1 block font-medium select-all">
                 {email}
               </span>
             </div>
             <div>
-              <span className="font-sans text-[9px] text-[#8C857B] uppercase tracking-wider block font-bold">
+              <span className="font-sans text-[9px] text-[#64748B] uppercase tracking-wider block font-bold">
                 Phone Number
               </span>
-              <span className="font-sans text-xs text-[#0F0F11] mt-1 block font-medium">
-                {mobile || <span className="italic text-[#8C857B]/60">Not provided</span>}
+              <span className="font-sans text-xs text-[#1E3A8A] mt-1 block font-medium">
+                {mobile || <span className="italic text-[#64748B]/60">Not provided</span>}
               </span>
             </div>
             <div>
               <Link
                 href="/account/profile"
-                className="inline-block mt-2 font-sans text-[10px] font-bold text-[#C5A880] hover:text-[#0F0F11] tracking-widest uppercase transition-colors"
+                className="inline-block mt-2 font-sans text-[10px] font-bold text-[#1E3A8A] hover:text-[#1E3A8A] tracking-widest uppercase transition-colors"
               >
                 Edit Profile &rarr;
               </Link>
@@ -129,7 +129,7 @@ export default async function AccountPage() {
             {totalQuotesCount > 0 && (
               <Link
                 href="/account/orders"
-                className="font-sans text-[10px] font-bold text-[#C5A880] hover:text-[#0F0F11] tracking-widest uppercase transition-colors flex items-center gap-1"
+                className="font-sans text-[10px] font-bold text-[#1E3A8A] hover:text-[#1E3A8A] tracking-widest uppercase transition-colors flex items-center gap-1"
               >
                 View All
                 <ArrowRight className="h-3 w-3" />
@@ -144,7 +144,7 @@ export default async function AccountPage() {
               </p>
               <Link
                 href="/products"
-                className="inline-block mt-4 bg-[#0F0F11] text-[#FAF8F5] font-sans text-[10px] font-bold tracking-widest uppercase border border-[#C5A880]/30 hover:bg-[#C5A880] hover:text-[#0F0F11] px-5 py-2.5 transition-all duration-300 rounded-sm"
+                className="inline-block mt-4 bg-[#1E3A8A] text-[#FFFFFF] font-sans text-[10px] font-bold tracking-widest uppercase border border-[#1E3A8A]/30 hover:bg-[#1E3A8A] hover:text-[#1E3A8A] px-5 py-2.5 transition-all duration-300 rounded-sm"
               >
                 Explore Catalog
               </Link>
@@ -161,7 +161,7 @@ export default async function AccountPage() {
                       <span className="font-mono text-xs font-bold text-[#0F0F11]">
                         #{quote._id.toString().slice(-6).toUpperCase()}
                       </span>
-                      <span className="font-sans text-[10px] text-[#8C857B] flex items-center gap-1">
+                      <span className="font-sans text-[10px] text-[#64748B] flex items-center gap-1">
                         <Calendar className="h-3 w-3" />
                         {new Date(quote.createdAt).toLocaleDateString('en-US', {
                           month: 'short',

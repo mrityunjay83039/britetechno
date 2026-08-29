@@ -26,7 +26,7 @@ export default async function DashboardPage() {
     <div className="space-y-8">
       {/* Page Header */}
       <div>
-        <h2 className="font-serif text-3xl font-bold text-[#0F0F11] tracking-wide">
+        <h2 className="font-sans text-3xl font-bold text-[#1E3A8A] tracking-wide">
           Dashboard Overview
         </h2>
         <p className="font-sans text-xs text-[#8C857B] mt-1 uppercase tracking-widest font-semibold">
@@ -73,19 +73,19 @@ export default async function DashboardPage() {
         </div>
 
         {/* Active Products */}
-        <div className="bg-white p-6 rounded-sm border border-[#C5A880]/15 shadow-xs flex items-center justify-between">
+        <div className="bg-white p-6 rounded-sm border border-[#1E3A8A]/15 shadow-xs flex items-center justify-between">
           <div className="space-y-1">
-            <p className="font-sans text-xs font-bold text-[#8C857B] uppercase tracking-wider">
+            <p className="font-sans text-xs font-bold text-[#64748B] uppercase tracking-wider">
               Active Products
             </p>
-            <p className="font-sans text-3xl font-bold text-[#0F0F11]">
+            <p className="font-sans text-3xl font-bold text-[#1E3A8A]">
               {totalActiveProducts}
             </p>
-            <p className="text-[10px] text-[#8C857B] font-sans">
+            <p className="text-[10px] text-[#64748B] font-sans">
               Published on storefront
             </p>
           </div>
-          <div className="w-12 h-12 rounded-sm bg-[#C5A880]/10 flex items-center justify-center text-[#C5A880]">
+          <div className="w-12 h-12 rounded-sm bg-[#1E3A8A]/10 flex items-center justify-center text-[#1E3A8A]">
             <Boxes className="w-6 h-6" />
           </div>
         </div>
@@ -93,9 +93,9 @@ export default async function DashboardPage() {
 
       {/* Maintenance Mode Administration Section */}
       <div className="space-y-4">
-        <div className="border-b border-[#C5A880]/15 pb-2">
-          <h3 className="font-serif text-xl font-bold text-[#0F0F11]">System Configuration</h3>
-          <p className="font-sans text-[10px] text-[#8C857B] uppercase tracking-wider font-semibold">Configure global platform-wide constraints</p>
+        <div className="border-b border-[#1E3A8A]/15 pb-2">
+          <h3 className="font-sans text-xl font-bold text-[#1E3A8A]">System Configuration</h3>
+          <p className="font-sans text-[10px] text-[#64748B] uppercase tracking-wider font-semibold">Configure global platform-wide constraints</p>
         </div>
         <MaintenanceToggle initialEnabled={settings.isMaintenanceModeEnabled} />
       </div>

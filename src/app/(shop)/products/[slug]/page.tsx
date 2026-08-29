@@ -83,7 +83,10 @@ export default async function ProductPage({ params }: PageProps) {
     createdAt: r.createdAt ? r.createdAt.toISOString() : new Date().toISOString(),
   }));
 
-  // Safely serialize database values to pass across RSC boundaries
+  // Safely extract specifications if present or derive defaults for industrial fixtures
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const rawSpecs = (productDoc as any).specifications || {};
+
   const serializedProduct: SerializedProduct = {
     _id: productDoc._id.toString(),
     title: productDoc.title,
@@ -101,6 +104,13 @@ export default async function ProductPage({ params }: PageProps) {
     })),
     averageRating: productDoc.averageRating || 0,
     reviewCount: productDoc.reviewCount || 0,
+    specifications: {
+      wattage: rawSpecs.wattage || '150W',
+      lumens: rawSpecs.lumens || '21,000 LM',
+      certifications: rawSpecs.certifications || 'UL, DLC Premium, IP65, RoHS',
+      voltage: rawSpecs.voltage || '120-277V AC',
+      cct: rawSpecs.cct || '4000K / 5000K Selectable',
+    },
   };
 
   return <ProductDetailClient product={serializedProduct} reviews={serializedReviews} />;

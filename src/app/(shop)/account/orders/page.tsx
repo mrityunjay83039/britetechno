@@ -48,7 +48,7 @@ export default async function AccountQuotesPage() {
           </p>
           <Link
             href="/products"
-            className="inline-block mt-6 bg-[#0F0F11] text-[#FAF8F5] font-sans text-xs font-bold tracking-widest uppercase border border-[#C5A880]/30 hover:bg-[#C5A880] hover:text-[#0F0F11] px-6 py-3 transition-all duration-300 rounded-sm cursor-pointer"
+            className="inline-block mt-6 bg-[#1E3A8A] text-[#FFFFFF] font-sans text-xs font-bold tracking-widest uppercase border border-[#1E3A8A]/30 hover:bg-[#1E3A8A] hover:text-[#1E3A8A] px-6 py-3 transition-all duration-300 rounded-sm cursor-pointer"
           >
             Explore Lighting Catalog
           </Link>
@@ -111,7 +111,7 @@ export default async function AccountQuotesPage() {
                     {quote.items.map((item, idx) => (
                       <div key={idx} className="flex justify-between items-start gap-4">
                         <div className="space-y-1">
-                          <span className="font-sans text-sm font-semibold text-[#0F0F11] block">
+                          <span className="font-sans text-sm font-semibold text-[#1E3A8A] block">
                             {item.title}
                           </span>
                         </div>

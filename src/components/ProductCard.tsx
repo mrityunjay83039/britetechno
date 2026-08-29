@@ -50,7 +50,7 @@ export default function ProductCard({ product }: ProductCardProps) {
   return (
     <Link
       href={`/products/${slug}`}
-      className="group relative flex flex-col bg-white border border-gray-100 overflow-hidden hover:border-[#FF6F61]/35 transition-all duration-500 hover:shadow-[0_8px_30px_rgba(255,111,97,0.06)]"
+      className="group relative flex flex-col bg-white border border-gray-100 overflow-hidden hover:border-[#1E3A8A]/35 transition-all duration-500 hover:shadow-[0_8px_30px_rgba(255,111,97,0.06)]"
     >
       {/* Image container */}
       <div className="relative aspect-[3/4] w-full bg-zinc-50 overflow-hidden">
@@ -68,7 +68,7 @@ export default function ProductCard({ product }: ProductCardProps) {
         {/* Stock Badge (Vibrant joy and clear readability) */}
         {totalStock === 0 && (
           <div className="absolute inset-0 flex items-center justify-center bg-white/70 backdrop-blur-[1px]">
-            <span className="font-sans text-xs font-bold tracking-widest text-[#FF6F61] border border-[#FF6F61] px-4 py-1.5 bg-white">
+            <span className="font-sans text-xs font-bold tracking-widest text-[#1E3A8A] border border-[#1E3A8A] px-4 py-1.5 bg-white">
               OUT OF STOCK
             </span>
           </div>
@@ -76,23 +76,23 @@ export default function ProductCard({ product }: ProductCardProps) {
       </div>
 
       {/* Info Container */}
-      <div className="flex flex-col flex-1 p-4 bg-white text-[#222222]">
+      <div className="flex flex-col flex-1 p-4 bg-white text-[#0F172A]">
         {/* Category */}
         <span className="font-sans text-[10px] tracking-widest text-zinc-400 uppercase font-bold mb-1">
           {category}
         </span>
 
         {/* Title */}
-        <h3 className="font-serif text-base font-medium tracking-wide text-[#222222] line-clamp-1 group-hover:text-[#FF6F61] transition-colors duration-300">
+        <h3 className="font-sans text-base font-medium tracking-wide text-[#0F172A] line-clamp-1 group-hover:text-[#1E3A8A] transition-colors duration-300">
           {title}
         </h3>
 
         {/* Price & Actions Row */}
         <div className="mt-3 flex items-center justify-between">
-          <span className="font-sans text-sm font-semibold text-[#FF6F61]">
+          <span className="font-sans text-sm font-semibold text-[#1E3A8A]">
             {formatPrice(price)}
           </span>
-          <span className="font-sans text-[11px] text-zinc-400 group-hover:text-[#FF6F61] transition-colors duration-300 tracking-wider">
+          <span className="font-sans text-[11px] text-zinc-400 group-hover:text-[#1E3A8A] transition-colors duration-300 tracking-wider">
             VIEW DETAILS →
           </span>
         </div>

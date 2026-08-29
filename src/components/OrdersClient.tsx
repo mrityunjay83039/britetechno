@@ -100,8 +100,8 @@ export default function OrdersClient({ initialOrders }: OrdersClientProps) {
               onClick={() => setFilterStatus(status)}
               className={`px-4 py-2 border rounded-sm font-sans text-xs font-bold tracking-wider transition-all cursor-pointer uppercase ${
                 filterStatus === status
-                  ? 'bg-[#0F0F11] text-[#FAF8F5] border-[#0F0F11]'
-                  : 'bg-white text-[#8C857B] border-[#C5A880]/15 hover:border-[#C5A880]/35 hover:text-[#0F0F11]'
+                  ? 'bg-[#1E3A8A] text-[#FFFFFF] border-[#1E3A8A]'
+                  : 'bg-white text-[#64748B] border-[#1E3A8A]/15 hover:border-[#1E3A8A]/35 hover:text-[#1E3A8A]'
               }`}
             >
               {status}
@@ -188,7 +188,7 @@ export default function OrdersClient({ initialOrders }: OrdersClientProps) {
                   </div>
 
                   {/* Actions / Status dropdown */}
-                  <div className="flex items-center gap-4 border-t lg:border-t-0 pt-4 lg:pt-0 border-[#C5A880]/10">
+                  <div className="flex items-center gap-4 border-t lg:border-t-0 pt-4 lg:pt-0 border-[#1E3A8A]/10">
                     <div className="space-y-1">
                       <span className="text-[10px] text-[#8C857B] font-bold uppercase tracking-wider block">Quote Status</span>
                       <div className="flex items-center gap-2">
@@ -227,7 +227,7 @@ export default function OrdersClient({ initialOrders }: OrdersClientProps) {
 
                 {/* Card Expandable Body */}
                 {isExpanded && (
-                  <div className="p-6 bg-[#FAF8F5]/10 border-t border-[#C5A880]/10 space-y-6 animate-fadeIn">
+                  <div className="p-6 bg-[#FFFFFF]/10 border-t border-[#1E3A8A]/10 space-y-6 animate-fadeIn">
                     <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
                       {/* Requested Products */}
                       <div className="md:col-span-7 space-y-3">
@@ -235,7 +235,7 @@ export default function OrdersClient({ initialOrders }: OrdersClientProps) {
                           <Package className="w-4 h-4 text-[#C5A880]" /> Requested Line Items ({quote.items.length})
                         </h4>
 
-                        <div className="border border-[#C5A880]/15 rounded-sm overflow-hidden bg-white">
+                        <div className="border border-[#1E3A8A]/15 rounded-sm overflow-hidden bg-white">
                           <table className="w-full text-left text-xs">
                             <thead>
                               <tr className="bg-[#FAF8F5] text-[#8C857B] font-bold uppercase tracking-wider border-b border-[#C5A880]/10">

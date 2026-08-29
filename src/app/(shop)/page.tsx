@@ -63,7 +63,7 @@ export default async function HomePage() {
   }));
 
   return (
-    <div className="flex flex-col bg-[#FAFAFA]">
+    <div className="flex flex-col bg-[#FFFFFF]">
       {/* High-Conversion Premium Hero Carousel / Background video */}
       <PremiumHero />
 
@@ -85,7 +85,7 @@ export default async function HomePage() {
 
         {serializedProducts.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-24 text-center">
-            <p className="font-serif text-lg font-medium text-[#222222]">No products available</p>
+            <p className="font-sans text-lg font-medium text-[#0F172A]">No products available</p>
             <p className="font-sans text-sm text-zinc-500 mt-2">
               Our catalog is currently being updated. Please check back soon.
             </p>

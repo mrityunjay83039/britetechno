@@ -38,7 +38,7 @@ export default async function ReceiptPage({ params }: ReceiptPageProps) {
   }
 
   return (
-    <div className="bg-[#FAF8F5] min-h-screen py-12 px-4 sm:px-6 lg:px-8">
+    <div className="bg-[#FFFFFF] min-h-screen py-12 px-4 sm:px-6 lg:px-8">
 
       {/* Print styles inject */}
       <style dangerouslySetInnerHTML={{ __html: `
@@ -58,8 +58,8 @@ export default async function ReceiptPage({ params }: ReceiptPageProps) {
             padding: 0 !important;
           }
           .print-dark-bg {
-            background-color: #0F0F11 !important;
-            color: #FAF8F5 !important;
+            background-color: #1E3A8A !important;
+            color: #FFFFFF !important;
             -webkit-print-color-adjust: exact;
             print-color-adjust: exact;
           }
@@ -72,7 +72,7 @@ export default async function ReceiptPage({ params }: ReceiptPageProps) {
         <div className="no-print flex justify-between items-center">
           <Link
             href="/account/orders"
-            className="inline-flex items-center gap-1 font-sans text-xs font-bold text-[#8C857B] hover:text-[#C5A880] uppercase tracking-widest transition-colors"
+            className="inline-flex items-center gap-1 font-sans text-xs font-bold text-[#64748B] hover:text-[#1E3A8A] uppercase tracking-widest transition-colors"
           >
             <ChevronLeft className="h-4 w-4" />
             Back to Quotes
@@ -155,7 +155,7 @@ export default async function ReceiptPage({ params }: ReceiptPageProps) {
               <div className="overflow-x-auto">
                 <table className="w-full text-left border-collapse font-sans text-xs">
                   <thead>
-                    <tr className="border-b border-[#C5A880]/20 text-[#8C857B] uppercase tracking-wider text-[10px] font-bold">
+                    <tr className="border-b border-[#1E3A8A]/20 text-[#64748B] uppercase tracking-wider text-[10px] font-bold">
                       <th className="py-2.5">Product Title</th>
                       <th className="py-2.5 text-center">Quantity</th>
                     </tr>
