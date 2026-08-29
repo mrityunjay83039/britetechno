@@ -74,32 +74,32 @@ export default function ProfileForm({ initialName, initialMobile, email }: Profi
       <div className="space-y-4">
         {/* Email - Read-Only */}
         <div>
-          <label className="block font-sans text-[10px] font-bold text-[#8C857B] uppercase tracking-wider mb-1.5">
+          <label className="block font-sans text-[10px] font-bold text-[#64748B] uppercase tracking-wider mb-1.5">
             Email Address (Read-Only)
           </label>
           <div className="relative">
-            <span className="absolute inset-y-0 left-0 flex items-center pl-3.5 text-[#8C857B]/50">
+            <span className="absolute inset-y-0 left-0 flex items-center pl-3.5 text-[#64748B]/50">
               <Mail className="h-4 w-4" />
             </span>
             <input
               type="email"
               value={email}
               readOnly
-              className="w-full pl-10 pr-4 py-2.5 bg-[#FAF8F5] border border-[#C5A880]/15 text-[#8C857B] text-xs font-sans rounded-sm select-all outline-none cursor-not-allowed"
+              className="w-full pl-10 pr-4 py-2.5 bg-[#FFFFFF] border border-[#1E3A8A]/15 text-[#64748B] text-xs font-sans rounded-sm select-all outline-none cursor-not-allowed"
             />
           </div>
-          <span className="block font-sans text-[10px] text-[#8C857B]/70 mt-1">
+          <span className="block font-sans text-[10px] text-[#64748B]/70 mt-1">
             Email address verification is linked to authentication and cannot be changed.
           </span>
         </div>
 
         {/* Full Name */}
         <div>
-          <label className="block font-sans text-[10px] font-bold text-[#8C857B] uppercase tracking-wider mb-1.5">
+          <label className="block font-sans text-[10px] font-bold text-[#64748B] uppercase tracking-wider mb-1.5">
             Full Name
           </label>
           <div className="relative">
-            <span className="absolute inset-y-0 left-0 flex items-center pl-3.5 text-[#8C857B]">
+            <span className="absolute inset-y-0 left-0 flex items-center pl-3.5 text-[#64748B]">
               <User className="h-4 w-4" />
             </span>
             <input
@@ -108,18 +108,18 @@ export default function ProfileForm({ initialName, initialMobile, email }: Profi
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="Enter your full name"
-              className="w-full pl-10 pr-4 py-2.5 bg-white border border-[#C5A880]/25 text-[#0F0F11] text-xs font-sans rounded-sm focus:border-[#C5A880] outline-none transition-colors"
+              className="w-full pl-10 pr-4 py-2.5 bg-white border border-[#1E3A8A]/25 text-[#1E3A8A] text-xs font-sans rounded-sm focus:border-[#1E3A8A] outline-none transition-colors"
             />
           </div>
         </div>
 
         {/* Phone Number */}
         <div>
-          <label className="block font-sans text-[10px] font-bold text-[#8C857B] uppercase tracking-wider mb-1.5">
+          <label className="block font-sans text-[10px] font-bold text-[#64748B] uppercase tracking-wider mb-1.5">
             Phone Number
           </label>
           <div className="relative">
-            <span className="absolute inset-y-0 left-0 flex items-center pl-3.5 text-[#8C857B]">
+            <span className="absolute inset-y-0 left-0 flex items-center pl-3.5 text-[#64748B]">
               <Phone className="h-4 w-4" />
             </span>
             <input
@@ -127,7 +127,7 @@ export default function ProfileForm({ initialName, initialMobile, email }: Profi
               value={mobile}
               onChange={(e) => setMobile(e.target.value)}
               placeholder="Enter your phone number"
-              className="w-full pl-10 pr-4 py-2.5 bg-white border border-[#C5A880]/25 text-[#0F0F11] text-xs font-sans rounded-sm focus:border-[#C5A880] outline-none transition-colors"
+              className="w-full pl-10 pr-4 py-2.5 bg-white border border-[#1E3A8A]/25 text-[#1E3A8A] text-xs font-sans rounded-sm focus:border-[#1E3A8A] outline-none transition-colors"
             />
           </div>
         </div>
@@ -136,7 +136,7 @@ export default function ProfileForm({ initialName, initialMobile, email }: Profi
       <button
         type="submit"
         disabled={loading}
-        className="w-full sm:w-auto bg-[#0F0F11] text-[#FAF8F5] border border-[#C5A880]/30 hover:bg-[#C5A880] hover:text-[#0F0F11] font-sans text-xs font-bold tracking-widest py-3 px-8 uppercase transition-all duration-300 flex items-center justify-center gap-2 rounded-sm cursor-pointer disabled:opacity-50"
+        className="w-full sm:w-auto bg-[#1E3A8A] text-[#FFFFFF] border border-[#1E3A8A]/30 hover:bg-[#1E3A8A] hover:text-[#1E3A8A] font-sans text-xs font-bold tracking-widest py-3 px-8 uppercase transition-all duration-300 flex items-center justify-center gap-2 rounded-sm cursor-pointer disabled:opacity-50"
       >
         {loading ? (
           <>

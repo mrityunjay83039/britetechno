@@ -146,29 +146,29 @@ export default function PromosClient({ initialPromos }: PromosClientProps) {
   return (
     <div className="p-8 max-w-7xl mx-auto space-y-6">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#C5A880]/20 pb-6">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#1E3A8A]/20 pb-6">
         <div>
-          <h1 className="font-serif text-3xl font-bold tracking-wide text-[#FAF8F5] flex items-center gap-3">
-            <Ticket className="w-8 h-8 text-[#C5A880]" /> Promo Codes
+          <h1 className="font-sans text-3xl font-bold tracking-wide text-[#FFFFFF] flex items-center gap-3">
+            <Ticket className="w-8 h-8 text-[#1E3A8A]" /> Promo Codes
           </h1>
-          <p className="font-sans text-xs text-[#8C857B] mt-1">
+          <p className="font-sans text-xs text-[#64748B] mt-1">
             Generate and manage promotional discounts and coupon codes for checkout campaigns.
           </p>
         </div>
         <button
           onClick={handleOpenCreateModal}
-          className="bg-[#C5A880] text-[#0F0F11] font-sans font-bold px-5 py-2.5 rounded-sm text-xs tracking-wider hover:bg-[#FAF8F5] transition-all flex items-center gap-2 cursor-pointer shrink-0"
+          className="bg-[#1E3A8A] text-white font-sans font-bold px-5 py-2.5 rounded-sm text-xs tracking-wider hover:bg-blue-900 transition-all flex items-center gap-2 cursor-pointer shrink-0"
         >
           <Plus className="w-4 h-4" /> CREATE PROMO CODE
         </button>
       </div>
 
       {/* Promo Codes Data Table */}
-      <div className="bg-[#0F0F11] border border-[#C5A880]/15 rounded-md overflow-hidden shadow-xl">
+      <div className="bg-[#1E3A8A] border border-[#1E3A8A]/15 rounded-md overflow-hidden shadow-xl">
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse">
             <thead>
-              <tr className="border-b border-[#C5A880]/15 bg-black/40 font-sans text-[11px] tracking-wider text-[#C5A880] uppercase">
+              <tr className="border-b border-[#1E3A8A]/15 bg-black/40 font-sans text-[11px] tracking-wider text-[#1E3A8A] uppercase">
                 <th className="py-4 px-6 font-bold">Code</th>
                 <th className="py-4 px-6 font-bold">Discount</th>
                 <th className="py-4 px-6 font-bold">Usage</th>
@@ -177,10 +177,10 @@ export default function PromosClient({ initialPromos }: PromosClientProps) {
                 <th className="py-4 px-6 font-bold text-right">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#C5A880]/10 font-sans text-xs">
+            <tbody className="divide-y divide-[#1E3A8A]/10 font-sans text-xs">
               {promos.length === 0 ? (
                 <tr>
-                  <td colSpan={6} className="py-12 text-center text-[#8C857B]">
+                  <td colSpan={6} className="py-12 text-center text-[#64748B]">
                     No promo codes created yet. Click &quot;Create Promo Code&quot; to generate one.
                   </td>
                 </tr>
@@ -194,9 +194,9 @@ export default function PromosClient({ initialPromos }: PromosClientProps) {
                   return (
                     <tr
                       key={promo._id}
-                      className="hover:bg-white/5 transition-colors text-[#FAF8F5]"
+                      className="hover:bg-white/5 transition-colors text-[#FFFFFF]"
                     >
-                      <td className="py-4 px-6 font-mono font-bold text-sm tracking-wider text-[#C5A880]">
+                      <td className="py-4 px-6 font-mono font-bold text-sm tracking-wider text-[#1E3A8A]">
                         {promo.code}
                       </td>
                       <td className="py-4 px-6">
@@ -205,14 +205,14 @@ export default function PromosClient({ initialPromos }: PromosClientProps) {
                             ? `${promo.discountValue}% OFF`
                             : `₹${promo.discountValue} OFF`}
                         </span>
-                        <span className="block text-[10px] text-[#8C857B] uppercase mt-0.5">
+                        <span className="block text-[10px] text-[#64748B] uppercase mt-0.5">
                           {promo.discountType === 'percentage' ? 'Percentage' : 'Fixed Amount'}
                         </span>
                       </td>
                       <td className="py-4 px-6">
                         <span className="font-medium">
                           {promo.usedCount}{' '}
-                          <span className="text-[#8C857B]">
+                          <span className="text-[#64748B]">
                             / {promo.usageLimit ? promo.usageLimit : '∞'}
                           </span>
                         </span>
@@ -233,7 +233,7 @@ export default function PromosClient({ initialPromos }: PromosClientProps) {
                             )}
                           </div>
                         ) : (
-                          <span className="text-[#8C857B]">No Expiry</span>
+                          <span className="text-[#64748B]">No Expiry</span>
                         )}
                       </td>
                       <td className="py-4 px-6">
@@ -260,14 +260,14 @@ export default function PromosClient({ initialPromos }: PromosClientProps) {
                       <td className="py-4 px-6 text-right space-x-2">
                         <button
                           onClick={() => handleOpenEditModal(promo)}
-                          className="p-1.5 text-[#8C857B] hover:text-[#C5A880] transition-colors rounded hover:bg-white/5"
+                          className="p-1.5 text-[#64748B] hover:text-[#1E3A8A] transition-colors rounded hover:bg-white/5"
                           title="Edit Promo Code"
                         >
                           <Edit2 className="w-4 h-4" />
                         </button>
                         <button
                           onClick={() => handleDelete(promo._id)}
-                          className="p-1.5 text-[#8C857B] hover:text-red-400 transition-colors rounded hover:bg-white/5"
+                          className="p-1.5 text-[#64748B] hover:text-red-400 transition-colors rounded hover:bg-white/5"
                           title="Delete Promo Code"
                         >
                           <Trash2 className="w-4 h-4" />
@@ -285,8 +285,8 @@ export default function PromosClient({ initialPromos }: PromosClientProps) {
       {/* Modal Form for Create / Edit */}
       {isModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
-          <div className="bg-[#0F0F11] border border-[#C5A880]/30 rounded-lg max-w-lg w-full p-6 text-[#FAF8F5] shadow-2xl relative">
-            <h2 className="font-serif text-xl font-bold tracking-wide text-[#C5A880] mb-4">
+          <div className="bg-[#1E3A8A] border border-[#1E3A8A]/30 rounded-lg max-w-lg w-full p-6 text-[#FFFFFF] shadow-2xl relative">
+            <h2 className="font-sans text-xl font-bold tracking-wide text-[#1E3A8A] mb-4">
               {editingPromo ? 'Edit Promo Code' : 'Create New Promo Code'}
             </h2>
 
@@ -299,7 +299,7 @@ export default function PromosClient({ initialPromos }: PromosClientProps) {
 
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <label className="block font-sans text-xs font-bold text-[#8C857B] tracking-wider uppercase mb-1">
+                <label className="block font-sans text-xs font-bold text-[#64748B] tracking-wider uppercase mb-1">
                   Promo Code
                 </label>
                 <input
@@ -307,14 +307,14 @@ export default function PromosClient({ initialPromos }: PromosClientProps) {
                   value={code}
                   onChange={(e) => setCode(e.target.value.toUpperCase())}
                   placeholder="e.g. INSTA10"
-                  className="w-full bg-black/50 border border-[#C5A880]/30 rounded px-3 py-2 text-sm font-mono tracking-wider focus:outline-none focus:border-[#C5A880] uppercase"
+                  className="w-full bg-black/50 border border-[#1E3A8A]/30 rounded px-3 py-2 text-sm font-mono tracking-wider focus:outline-none focus:border-[#1E3A8A] uppercase"
                   required
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block font-sans text-xs font-bold text-[#8C857B] tracking-wider uppercase mb-1">
+                  <label className="block font-sans text-xs font-bold text-[#64748B] tracking-wider uppercase mb-1">
                     Discount Type
                   </label>
                   <select
@@ -322,7 +322,7 @@ export default function PromosClient({ initialPromos }: PromosClientProps) {
                     onChange={(e) =>
                       setDiscountType(e.target.value as 'percentage' | 'fixedAmount')
                     }
-                    className="w-full bg-black/50 border border-[#C5A880]/30 rounded px-3 py-2 text-xs focus:outline-none focus:border-[#C5A880]"
+                    className="w-full bg-black/50 border border-[#1E3A8A]/30 rounded px-3 py-2 text-xs focus:outline-none focus:border-[#1E3A8A]"
                   >
                     <option value="percentage">Percentage (%)</option>
                     <option value="fixedAmount">Fixed Amount (₹)</option>
@@ -330,7 +330,7 @@ export default function PromosClient({ initialPromos }: PromosClientProps) {
                 </div>
 
                 <div>
-                  <label className="block font-sans text-xs font-bold text-[#8C857B] tracking-wider uppercase mb-1">
+                  <label className="block font-sans text-xs font-bold text-[#64748B] tracking-wider uppercase mb-1">
                     Discount Value
                   </label>
                   <input
@@ -340,7 +340,7 @@ export default function PromosClient({ initialPromos }: PromosClientProps) {
                     value={discountValue}
                     onChange={(e) => setDiscountValue(Number(e.target.value))}
                     placeholder="10 or 500"
-                    className="w-full bg-black/50 border border-[#C5A880]/30 rounded px-3 py-2 text-xs focus:outline-none focus:border-[#C5A880]"
+                    className="w-full bg-black/50 border border-[#1E3A8A]/30 rounded px-3 py-2 text-xs focus:outline-none focus:border-[#1E3A8A]"
                     required
                   />
                 </div>
@@ -348,7 +348,7 @@ export default function PromosClient({ initialPromos }: PromosClientProps) {
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block font-sans text-xs font-bold text-[#8C857B] tracking-wider uppercase mb-1">
+                  <label className="block font-sans text-xs font-bold text-[#64748B] tracking-wider uppercase mb-1">
                     Global Usage Limit (Optional)
                   </label>
                   <input
@@ -357,19 +357,19 @@ export default function PromosClient({ initialPromos }: PromosClientProps) {
                     value={usageLimit}
                     onChange={(e) => setUsageLimit(e.target.value)}
                     placeholder="e.g. 100 (Blank = Unlimited)"
-                    className="w-full bg-black/50 border border-[#C5A880]/30 rounded px-3 py-2 text-xs focus:outline-none focus:border-[#C5A880]"
+                    className="w-full bg-black/50 border border-[#1E3A8A]/30 rounded px-3 py-2 text-xs focus:outline-none focus:border-[#1E3A8A]"
                   />
                 </div>
 
                 <div>
-                  <label className="block font-sans text-xs font-bold text-[#8C857B] tracking-wider uppercase mb-1">
+                  <label className="block font-sans text-xs font-bold text-[#64748B] tracking-wider uppercase mb-1">
                     Expiry Date (Optional)
                   </label>
                   <input
                     type="date"
                     value={expiryDate}
                     onChange={(e) => setExpiryDate(e.target.value)}
-                    className="w-full bg-black/50 border border-[#C5A880]/30 rounded px-3 py-2 text-xs focus:outline-none focus:border-[#C5A880]"
+                    className="w-full bg-black/50 border border-[#1E3A8A]/30 rounded px-3 py-2 text-xs focus:outline-none focus:border-[#1E3A8A]"
                   />
                 </div>
               </div>
@@ -380,21 +380,21 @@ export default function PromosClient({ initialPromos }: PromosClientProps) {
                   id="isActiveToggle"
                   checked={isActive}
                   onChange={(e) => setIsActive(e.target.checked)}
-                  className="w-4 h-4 accent-[#C5A880]"
+                  className="w-4 h-4 accent-[#1E3A8A]"
                 />
                 <label
                   htmlFor="isActiveToggle"
-                  className="font-sans text-xs font-medium text-[#FAF8F5] cursor-pointer"
+                  className="font-sans text-xs font-medium text-[#FFFFFF] cursor-pointer"
                 >
                   Campaign Active (Uncheck to pause immediately)
                 </label>
               </div>
 
-              <div className="flex justify-end gap-3 pt-4 border-t border-[#C5A880]/15">
+              <div className="flex justify-end gap-3 pt-4 border-t border-[#1E3A8A]/15">
                 <button
                   type="button"
                   onClick={() => setIsModalOpen(false)}
-                  className="px-4 py-2 border border-[#8C857B]/30 rounded text-xs font-bold text-[#8C857B] hover:text-[#FAF8F5] transition-colors"
+                  className="px-4 py-2 border border-[#64748B]/30 rounded text-xs font-bold text-[#64748B] hover:text-[#FFFFFF] transition-colors"
                   disabled={isLoading}
                 >
                   CANCEL
@@ -402,10 +402,10 @@ export default function PromosClient({ initialPromos }: PromosClientProps) {
                 <button
                   type="submit"
                   disabled={isLoading}
-                  className="px-5 py-2 bg-[#C5A880] text-[#0F0F11] rounded text-xs font-bold tracking-wider hover:bg-[#FAF8F5] transition-all flex items-center gap-2"
+                  className="px-5 py-2 bg-[#1E3A8A] text-white rounded text-xs font-bold tracking-wider hover:bg-blue-900 transition-all flex items-center gap-2"
                 >
                   {isLoading && (
-                    <span className="w-3.5 h-3.5 border-2 border-[#0F0F11] border-t-transparent rounded-full animate-spin" />
+                    <span className="w-3.5 h-3.5 border-2 border-[#1E3A8A] border-t-transparent rounded-full animate-spin" />
                   )}
                   {editingPromo ? 'UPDATE PROMO' : 'CREATE PROMO'}
                 </button>

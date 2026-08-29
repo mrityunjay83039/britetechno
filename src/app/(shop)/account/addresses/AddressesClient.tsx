@@ -162,7 +162,7 @@ export default function AddressesClient({ initialAddresses }: AddressesClientPro
       {!showForm && (
         <div className="space-y-6">
           <div className="flex justify-between items-center">
-            <h3 className="font-serif text-lg font-semibold text-[#0F0F11] tracking-wide">
+            <h3 className="font-sans text-lg font-semibold text-[#1E3A8A] tracking-wide">
               Saved Delivery Addresses
             </h3>
             <button
@@ -170,7 +170,7 @@ export default function AddressesClient({ initialAddresses }: AddressesClientPro
                 resetForm();
                 setShowForm(true);
               }}
-              className="flex items-center gap-2 bg-[#0F0F11] text-[#FAF8F5] border border-[#C5A880]/30 hover:bg-[#C5A880] hover:text-[#0F0F11] font-sans text-[10px] font-bold tracking-widest px-4 py-2.5 uppercase transition-all duration-300 rounded-sm cursor-pointer"
+              className="flex items-center gap-2 bg-[#1E3A8A] text-[#FFFFFF] border border-[#1E3A8A]/30 hover:bg-[#1E3A8A] hover:text-[#1E3A8A] font-sans text-[10px] font-bold tracking-widest px-4 py-2.5 uppercase transition-all duration-300 rounded-sm cursor-pointer"
             >
               <Plus className="h-4 w-4" />
               Add Address
@@ -178,9 +178,9 @@ export default function AddressesClient({ initialAddresses }: AddressesClientPro
           </div>
 
           {addresses.length === 0 ? (
-            <div className="border border-dashed border-[#C5A880]/20 bg-[#FAF8F5]/30 rounded-sm p-12 text-center">
-              <MapPin className="h-10 w-10 text-[#C5A880]/40 mx-auto mb-3" />
-              <p className="font-sans text-xs text-[#8C857B]">
+            <div className="border border-dashed border-[#1E3A8A]/20 bg-[#FFFFFF]/30 rounded-sm p-12 text-center">
+              <MapPin className="h-10 w-10 text-[#1E3A8A]/40 mx-auto mb-3" />
+              <p className="font-sans text-xs text-[#64748B]">
                 No delivery addresses saved yet. Save addresses for faster checkouts.
               </p>
             </div>
@@ -191,44 +191,44 @@ export default function AddressesClient({ initialAddresses }: AddressesClientPro
                   key={addr._id}
                   className={`border p-5 rounded-sm relative flex flex-col justify-between transition-all duration-300 ${
                     addr.isDefault
-                      ? 'border-[#C5A880] bg-[#FAF8F5]'
-                      : 'border-[#C5A880]/15 bg-white hover:border-[#C5A880]/35'
+                      ? 'border-[#1E3A8A] bg-[#FFFFFF]'
+                      : 'border-[#1E3A8A]/15 bg-white hover:border-[#1E3A8A]/35'
                   }`}
                 >
                   <div className="space-y-2.5">
                     <div className="flex items-center justify-between gap-2.5">
-                      <span className="font-sans text-sm font-bold text-[#0F0F11]">
+                      <span className="font-sans text-sm font-bold text-[#1E3A8A]">
                         {addr.fullName}
                       </span>
                       {addr.isDefault && (
-                        <span className="bg-[#C5A880]/10 text-[#C5A880] border border-[#C5A880]/30 font-sans text-[9px] font-bold tracking-wider uppercase px-2 py-0.5 rounded-sm flex items-center gap-1">
+                        <span className="bg-[#1E3A8A]/10 text-[#1E3A8A] border border-[#1E3A8A]/30 font-sans text-[9px] font-bold tracking-wider uppercase px-2 py-0.5 rounded-sm flex items-center gap-1">
                           <Check className="h-3 w-3" />
                           Default
                         </span>
                       )}
                     </div>
 
-                    <p className="font-sans text-xs text-[#8C857B] leading-relaxed">
+                    <p className="font-sans text-xs text-[#64748B] leading-relaxed">
                       {addr.streetAddress}<br />
                       {addr.city}, {addr.state} - {addr.pincode}
                     </p>
 
-                    <p className="font-sans text-xs text-[#8C857B]">
-                      <span className="font-semibold text-[#0F0F11]">Phone:</span> {addr.phoneNumber}
+                    <p className="font-sans text-xs text-[#64748B]">
+                      <span className="font-semibold text-[#1E3A8A]">Phone:</span> {addr.phoneNumber}
                     </p>
                   </div>
 
-                  <div className="flex justify-end gap-4 border-t border-[#C5A880]/10 pt-4 mt-5">
+                  <div className="flex justify-end gap-4 border-t border-[#1E3A8A]/10 pt-4 mt-5">
                     <button
                       onClick={() => handleEditInit(addr)}
-                      className="text-[#8C857B] hover:text-[#C5A880] font-sans text-[10px] font-bold uppercase tracking-widest flex items-center gap-1 cursor-pointer transition-colors"
+                      className="text-[#64748B] hover:text-[#1E3A8A] font-sans text-[10px] font-bold uppercase tracking-widest flex items-center gap-1 cursor-pointer transition-colors"
                     >
                       <Edit2 className="h-3.5 w-3.5" />
                       Edit
                     </button>
                     <button
                       onClick={() => addr._id && handleDelete(addr._id)}
-                      className="text-[#8C857B] hover:text-red-500 font-sans text-[10px] font-bold uppercase tracking-widest flex items-center gap-1 cursor-pointer transition-colors"
+                      className="text-[#64748B] hover:text-red-500 font-sans text-[10px] font-bold uppercase tracking-widest flex items-center gap-1 cursor-pointer transition-colors"
                     >
                       <Trash2 className="h-3.5 w-3.5" />
                       Delete
@@ -243,14 +243,14 @@ export default function AddressesClient({ initialAddresses }: AddressesClientPro
 
       {/* Inline Address Creation / Editing Form */}
       {showForm && (
-        <div className="bg-[#FAF8F5]/50 border border-[#C5A880]/15 p-6 rounded-sm">
-          <div className="flex justify-between items-center border-b border-[#C5A880]/10 pb-3 mb-5">
-            <h3 className="font-serif text-lg font-semibold text-[#0F0F11]">
+        <div className="bg-[#FFFFFF]/50 border border-[#1E3A8A]/15 p-6 rounded-sm">
+          <div className="flex justify-between items-center border-b border-[#1E3A8A]/10 pb-3 mb-5">
+            <h3 className="font-sans text-lg font-semibold text-[#1E3A8A]">
               {editingId ? 'Edit Delivery Address' : 'Add New Delivery Address'}
             </h3>
             <button
               onClick={resetForm}
-              className="p-1 text-[#8C857B] hover:text-[#0F0F11] cursor-pointer"
+              className="p-1 text-[#64748B] hover:text-[#1E3A8A] cursor-pointer"
             >
               <X className="h-5 w-5" />
             </button>
@@ -260,7 +260,7 @@ export default function AddressesClient({ initialAddresses }: AddressesClientPro
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {/* Full Name */}
               <div className="sm:col-span-1">
-                <label className="block font-sans text-[10px] font-bold text-[#8C857B] uppercase tracking-wider mb-1">
+                <label className="block font-sans text-[10px] font-bold text-[#64748B] uppercase tracking-wider mb-1">
                   Full Name
                 </label>
                 <input
@@ -269,13 +269,13 @@ export default function AddressesClient({ initialAddresses }: AddressesClientPro
                   value={fullName}
                   onChange={(e) => setFullName(e.target.value)}
                   placeholder="Receiver's name"
-                  className="w-full px-3.5 py-2.5 bg-white border border-[#C5A880]/25 text-[#0F0F11] text-xs font-sans rounded-sm focus:border-[#C5A880] outline-none"
+                  className="w-full px-3.5 py-2.5 bg-white border border-[#1E3A8A]/25 text-[#1E3A8A] text-xs font-sans rounded-sm focus:border-[#1E3A8A] outline-none"
                 />
               </div>
 
               {/* Phone Number */}
               <div className="sm:col-span-1">
-                <label className="block font-sans text-[10px] font-bold text-[#8C857B] uppercase tracking-wider mb-1">
+                <label className="block font-sans text-[10px] font-bold text-[#64748B] uppercase tracking-wider mb-1">
                   Phone Number
                 </label>
                 <input
@@ -284,13 +284,13 @@ export default function AddressesClient({ initialAddresses }: AddressesClientPro
                   value={phoneNumber}
                   onChange={(e) => setPhoneNumber(e.target.value)}
                   placeholder="10-digit mobile number"
-                  className="w-full px-3.5 py-2.5 bg-white border border-[#C5A880]/25 text-[#0F0F11] text-xs font-sans rounded-sm focus:border-[#C5A880] outline-none"
+                  className="w-full px-3.5 py-2.5 bg-white border border-[#1E3A8A]/25 text-[#1E3A8A] text-xs font-sans rounded-sm focus:border-[#1E3A8A] outline-none"
                 />
               </div>
 
               {/* Street Address */}
               <div className="sm:col-span-2">
-                <label className="block font-sans text-[10px] font-bold text-[#8C857B] uppercase tracking-wider mb-1">
+                <label className="block font-sans text-[10px] font-bold text-[#64748B] uppercase tracking-wider mb-1">
                   Street Address
                 </label>
                 <input
@@ -299,13 +299,13 @@ export default function AddressesClient({ initialAddresses }: AddressesClientPro
                   value={streetAddress}
                   onChange={(e) => setStreetAddress(e.target.value)}
                   placeholder="Flat, House no., Building, Company, Street, Area"
-                  className="w-full px-3.5 py-2.5 bg-white border border-[#C5A880]/25 text-[#0F0F11] text-xs font-sans rounded-sm focus:border-[#C5A880] outline-none"
+                  className="w-full px-3.5 py-2.5 bg-white border border-[#1E3A8A]/25 text-[#1E3A8A] text-xs font-sans rounded-sm focus:border-[#1E3A8A] outline-none"
                 />
               </div>
 
               {/* City */}
               <div>
-                <label className="block font-sans text-[10px] font-bold text-[#8C857B] uppercase tracking-wider mb-1">
+                <label className="block font-sans text-[10px] font-bold text-[#64748B] uppercase tracking-wider mb-1">
                   City
                 </label>
                 <input
@@ -314,13 +314,13 @@ export default function AddressesClient({ initialAddresses }: AddressesClientPro
                   value={city}
                   onChange={(e) => setCity(e.target.value)}
                   placeholder="Town/City"
-                  className="w-full px-3.5 py-2.5 bg-white border border-[#C5A880]/25 text-[#0F0F11] text-xs font-sans rounded-sm focus:border-[#C5A880] outline-none"
+                  className="w-full px-3.5 py-2.5 bg-white border border-[#1E3A8A]/25 text-[#1E3A8A] text-xs font-sans rounded-sm focus:border-[#1E3A8A] outline-none"
                 />
               </div>
 
               {/* State */}
               <div>
-                <label className="block font-sans text-[10px] font-bold text-[#8C857B] uppercase tracking-wider mb-1">
+                <label className="block font-sans text-[10px] font-bold text-[#64748B] uppercase tracking-wider mb-1">
                   State
                 </label>
                 <input
@@ -329,13 +329,13 @@ export default function AddressesClient({ initialAddresses }: AddressesClientPro
                   value={stateName}
                   onChange={(e) => setStateName(e.target.value)}
                   placeholder="State Name"
-                  className="w-full px-3.5 py-2.5 bg-white border border-[#C5A880]/25 text-[#0F0F11] text-xs font-sans rounded-sm focus:border-[#C5A880] outline-none"
+                  className="w-full px-3.5 py-2.5 bg-white border border-[#1E3A8A]/25 text-[#1E3A8A] text-xs font-sans rounded-sm focus:border-[#1E3A8A] outline-none"
                 />
               </div>
 
               {/* Pincode */}
               <div>
-                <label className="block font-sans text-[10px] font-bold text-[#8C857B] uppercase tracking-wider mb-1">
+                <label className="block font-sans text-[10px] font-bold text-[#64748B] uppercase tracking-wider mb-1">
                   Pincode (ZIP)
                 </label>
                 <input
@@ -344,7 +344,7 @@ export default function AddressesClient({ initialAddresses }: AddressesClientPro
                   value={pincode}
                   onChange={(e) => setPincode(e.target.value)}
                   placeholder="6-digit pincode"
-                  className="w-full px-3.5 py-2.5 bg-white border border-[#C5A880]/25 text-[#0F0F11] text-xs font-sans rounded-sm focus:border-[#C5A880] outline-none"
+                  className="w-full px-3.5 py-2.5 bg-white border border-[#1E3A8A]/25 text-[#1E3A8A] text-xs font-sans rounded-sm focus:border-[#1E3A8A] outline-none"
                 />
               </div>
 
@@ -355,9 +355,9 @@ export default function AddressesClient({ initialAddresses }: AddressesClientPro
                   id="defaultAddressCheckbox"
                   checked={isDefault}
                   onChange={(e) => setIsDefault(e.target.checked)}
-                  className="h-4 w-4 rounded border-[#C5A880]/30 text-[#C5A880] focus:ring-[#C5A880] cursor-pointer"
+                  className="h-4 w-4 rounded border-[#1E3A8A]/30 text-[#1E3A8A] focus:ring-[#1E3A8A] cursor-pointer"
                 />
-                <label htmlFor="defaultAddressCheckbox" className="font-sans text-xs text-[#8C857B] select-none cursor-pointer">
+                <label htmlFor="defaultAddressCheckbox" className="font-sans text-xs text-[#64748B] select-none cursor-pointer">
                   Set as default shipping address
                 </label>
               </div>
@@ -367,7 +367,7 @@ export default function AddressesClient({ initialAddresses }: AddressesClientPro
               <button
                 type="submit"
                 disabled={loading}
-                className="bg-[#0F0F11] text-[#FAF8F5] border border-[#C5A880]/30 hover:bg-[#C5A880] hover:text-[#0F0F11] font-sans text-[10px] font-bold tracking-widest py-3 px-6 uppercase transition-all duration-300 flex items-center gap-2 rounded-sm cursor-pointer disabled:opacity-50"
+                className="bg-[#1E3A8A] text-[#FFFFFF] border border-[#1E3A8A]/30 hover:bg-[#1E3A8A] hover:text-[#1E3A8A] font-sans text-[10px] font-bold tracking-widest py-3 px-6 uppercase transition-all duration-300 flex items-center gap-2 rounded-sm cursor-pointer disabled:opacity-50"
               >
                 {loading ? (
                   <>
@@ -381,7 +381,7 @@ export default function AddressesClient({ initialAddresses }: AddressesClientPro
               <button
                 type="button"
                 onClick={resetForm}
-                className="border border-[#C5A880]/20 hover:bg-black/5 text-[#8C857B] font-sans text-[10px] font-bold tracking-widest py-3 px-6 uppercase transition-all duration-300 rounded-sm cursor-pointer"
+                className="border border-[#1E3A8A]/20 hover:bg-black/5 text-[#64748B] font-sans text-[10px] font-bold tracking-widest py-3 px-6 uppercase transition-all duration-300 rounded-sm cursor-pointer"
               >
                 Cancel
               </button>

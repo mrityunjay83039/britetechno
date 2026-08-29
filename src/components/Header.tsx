@@ -60,7 +60,7 @@ export default function Header({ categories = [], session, userName }: HeaderPro
           <div className="flex md:hidden items-center">
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="inline-flex items-center justify-center rounded-lg p-2 text-[#222222] hover:bg-gray-100 hover:text-[#FF6F61] transition-all cursor-pointer"
+              className="inline-flex items-center justify-center rounded-lg p-2 text-[#0F172A] hover:bg-gray-100 hover:text-[#1E3A8A] transition-all cursor-pointer"
               aria-label="Toggle Navigation Menu"
             >
               {mobileMenuOpen ? (
@@ -82,23 +82,23 @@ export default function Header({ categories = [], session, userName }: HeaderPro
           <nav className="hidden md:flex items-center gap-10">
             <Link
               href="/products"
-              className="group relative py-1 font-sans text-xs font-bold tracking-[0.22em] text-[#222222] hover:text-[#FF6F61] transition-colors uppercase"
+              className="group relative py-1 font-sans text-xs font-bold tracking-[0.22em] text-[#0F172A] hover:text-[#1E3A8A] transition-colors uppercase"
             >
               COLLECTIONS
-              <span className="absolute bottom-0 left-0 h-[2px] w-0 bg-[#FF6F61] transition-all duration-300 group-hover:w-full" />
+              <span className="absolute bottom-0 left-0 h-[2px] w-0 bg-[#1E3A8A] transition-all duration-300 group-hover:w-full" />
             </Link>
 
             {/* Shop by Category Dropdown Menu */}
             <div className="relative group/dropdown">
-              <button className="flex items-center gap-1.5 py-1 font-sans text-xs font-bold tracking-[0.22em] text-[#222222] group-hover/dropdown:text-[#FF6F61] hover:text-[#FF6F61] transition-colors uppercase outline-none cursor-pointer">
+              <button className="flex items-center gap-1.5 py-1 font-sans text-xs font-bold tracking-[0.22em] text-[#0F172A] group-hover/dropdown:text-[#1E3A8A] hover:text-[#1E3A8A] transition-colors uppercase outline-none cursor-pointer">
                 <span>SHOP BY CATEGORY</span>
-                <ChevronDown className="w-3.5 h-3.5 text-[#FF6F61] transition-transform duration-200 group-hover/dropdown:rotate-180" />
-                <span className="absolute bottom-0 left-0 h-[2px] w-0 bg-[#FF6F61] transition-all duration-300 group-hover/dropdown:w-full" />
+                <ChevronDown className="w-3.5 h-3.5 text-[#1E3A8A] transition-transform duration-200 group-hover/dropdown:rotate-180" />
+                <span className="absolute bottom-0 left-0 h-[2px] w-0 bg-[#1E3A8A] transition-all duration-300 group-hover/dropdown:w-full" />
               </button>
               <div className="absolute left-0 mt-2 w-56 bg-white border border-gray-200 rounded-sm shadow-xl opacity-0 invisible group-hover/dropdown:opacity-100 group-hover/dropdown:visible transition-all duration-300 z-50 py-2">
                 <Link
                   href="/products"
-                  className="block px-4 py-2.5 font-sans text-[11px] font-bold tracking-wider text-[#FF6F61] hover:bg-[#FF6F61]/5 transition-all duration-200 uppercase border-b border-gray-100"
+                  className="block px-4 py-2.5 font-sans text-[11px] font-bold tracking-wider text-[#1E3A8A] hover:bg-[#1E3A8A]/5 transition-all duration-200 uppercase border-b border-gray-100"
                 >
                   All Categories
                 </Link>
@@ -107,13 +107,13 @@ export default function Header({ categories = [], session, userName }: HeaderPro
                     <Link
                       key={cat._id}
                       href={`/products?category=${cat.slug}`}
-                      className="block px-4 py-2.5 font-sans text-[11px] font-semibold tracking-wider text-[#222222]/80 hover:text-[#FF6F61] hover:bg-gray-50 transition-all duration-200 uppercase"
+                      className="block px-4 py-2.5 font-sans text-[11px] font-semibold tracking-wider text-[#0F172A]/80 hover:text-[#1E3A8A] hover:bg-gray-50 transition-all duration-200 uppercase"
                     >
                       {cat.name}
                     </Link>
                   ))
                 ) : (
-                  <div className="px-4 py-2 text-[11px] font-sans text-[#8C857B]">
+                  <div className="px-4 py-2 text-[11px] font-sans text-[#64748B]">
                     No active categories
                   </div>
                 )}
@@ -131,13 +131,13 @@ export default function Header({ categories = [], session, userName }: HeaderPro
                   placeholder="Search collections..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-44 md:w-52 px-3.5 py-1.5 bg-gray-50 border border-gray-200 focus:border-[#FF6F61] text-[#222222] text-xs font-sans outline-none rounded-sm transition-all duration-300 animate-in slide-in-from-right-4"
+                  className="w-44 md:w-52 px-3.5 py-1.5 bg-gray-50 border border-gray-200 focus:border-[#1E3A8A] text-[#0F172A] text-xs font-sans outline-none rounded-sm transition-all duration-300 animate-in slide-in-from-right-4"
                   autoFocus
                 />
                 <button
                   type="button"
                   onClick={() => setSearchOpen(false)}
-                  className="absolute right-2 text-[#8C857B] hover:text-[#FF6F61] p-1 cursor-pointer"
+                  className="absolute right-2 text-[#64748B] hover:text-[#1E3A8A] p-1 cursor-pointer"
                 >
                   <X className="h-3.5 w-3.5" />
                 </button>
@@ -145,7 +145,7 @@ export default function Header({ categories = [], session, userName }: HeaderPro
             ) : (
               <button
                 onClick={() => setSearchOpen(true)}
-                className="inline-flex items-center justify-center p-2 rounded-full text-[#222222] hover:text-[#FF6F61] hover:bg-gray-50 transition-all cursor-pointer"
+                className="inline-flex items-center justify-center p-2 rounded-full text-[#0F172A] hover:text-[#1E3A8A] hover:bg-gray-50 transition-all cursor-pointer"
                 aria-label="Search items"
               >
                 <Search className="h-5 w-5" />
@@ -157,10 +157,10 @@ export default function Header({ categories = [], session, userName }: HeaderPro
               <div className="relative">
                 <button
                   onClick={() => setUserMenuOpen(!userMenuOpen)}
-                  className="flex items-center gap-1.5 py-1.5 px-3 font-sans text-xs font-bold tracking-[0.15em] text-[#222222] hover:text-[#FF6F61] hover:border-[#FF6F61]/60 transition-all uppercase outline-none cursor-pointer border border-gray-200 rounded-sm"
+                  className="flex items-center gap-1.5 py-1.5 px-3 font-sans text-xs font-bold tracking-[0.15em] text-[#0F172A] hover:text-[#1E3A8A] hover:border-[#1E3A8A]/60 transition-all uppercase outline-none cursor-pointer border border-gray-200 rounded-sm"
                 >
                   <span>Hi, {firstName}</span>
-                  <ChevronDown className={`w-3.5 h-3.5 text-[#FF6F61] transition-transform duration-200 ${userMenuOpen ? 'rotate-180' : ''}`} />
+                  <ChevronDown className={`w-3.5 h-3.5 text-[#1E3A8A] transition-transform duration-200 ${userMenuOpen ? 'rotate-180' : ''}`} />
                 </button>
                 {userMenuOpen && (
                   <>
@@ -172,21 +172,21 @@ export default function Header({ categories = [], session, userName }: HeaderPro
                       <Link
                         href="/account"
                         onClick={() => setUserMenuOpen(false)}
-                        className="block px-4 py-2 font-sans text-[11px] font-semibold tracking-wider text-[#222222]/80 hover:text-[#FF6F61] hover:bg-gray-50 transition-all duration-200 uppercase"
+                        className="block px-4 py-2 font-sans text-[11px] font-semibold tracking-wider text-[#0F172A]/80 hover:text-[#1E3A8A] hover:bg-gray-50 transition-all duration-200 uppercase"
                       >
                         Dashboard
                       </Link>
                       <Link
                         href="/account/profile"
                         onClick={() => setUserMenuOpen(false)}
-                        className="block px-4 py-2 font-sans text-[11px] font-semibold tracking-wider text-[#222222]/80 hover:text-[#FF6F61] hover:bg-gray-50 transition-all duration-200 uppercase"
+                        className="block px-4 py-2 font-sans text-[11px] font-semibold tracking-wider text-[#0F172A]/80 hover:text-[#1E3A8A] hover:bg-gray-50 transition-all duration-200 uppercase"
                       >
                         My Profile
                       </Link>
                       <Link
                         href="/account/orders"
                         onClick={() => setUserMenuOpen(false)}
-                        className="block px-4 py-2 font-sans text-[11px] font-semibold tracking-wider text-[#222222]/80 hover:text-[#FF6F61] hover:bg-gray-50 transition-all duration-200 uppercase"
+                        className="block px-4 py-2 font-sans text-[11px] font-semibold tracking-wider text-[#0F172A]/80 hover:text-[#1E3A8A] hover:bg-gray-50 transition-all duration-200 uppercase"
                       >
                         My Orders
                       </Link>
@@ -194,7 +194,7 @@ export default function Header({ categories = [], session, userName }: HeaderPro
                         <Link
                           href="/admin/dashboard"
                           onClick={() => setUserMenuOpen(false)}
-                          className="block px-4 py-2 font-sans text-[11px] font-bold tracking-wider text-[#FF6F61] hover:bg-[#FF6F61]/5 transition-all duration-200 uppercase border-t border-gray-100 mt-1"
+                          className="block px-4 py-2 font-sans text-[11px] font-bold tracking-wider text-[#1E3A8A] hover:bg-[#1E3A8A]/5 transition-all duration-200 uppercase border-t border-gray-100 mt-1"
                         >
                           Admin Panel
                         </Link>
@@ -215,7 +215,7 @@ export default function Header({ categories = [], session, userName }: HeaderPro
             ) : (
               <Link
                 href="/login"
-                className="inline-flex items-center justify-center p-2 rounded-full text-[#222222] hover:text-[#FF6F61] hover:bg-gray-50 transition-all"
+                className="inline-flex items-center justify-center p-2 rounded-full text-[#0F172A] hover:text-[#1E3A8A] hover:bg-gray-50 transition-all"
                 aria-label="Account details"
               >
                 <User className="h-5 w-5" />
@@ -225,14 +225,14 @@ export default function Header({ categories = [], session, userName }: HeaderPro
             {/* Shopping Bag Trigger */}
             <button
               onClick={() => setIsOpen(true)}
-              className="group relative flex items-center justify-center rounded-full p-2.5 text-[#222222] hover:bg-gray-50 transition-all duration-300 cursor-pointer"
+              className="group relative flex items-center justify-center rounded-full p-2.5 text-[#0F172A] hover:bg-gray-50 transition-all duration-300 cursor-pointer"
               aria-label="Open Cart Drawer"
             >
-              <ShoppingBag className="h-6 w-6 text-[#222222] group-hover:text-[#FF6F61] group-hover:scale-110 transition-all duration-300" />
+              <ShoppingBag className="h-6 w-6 text-[#0F172A] group-hover:text-[#1E3A8A] group-hover:scale-110 transition-all duration-300" />
               
               {/* Cart Item Badge */}
               {totalItemCount > 0 && (
-                <span className="absolute -top-0.5 -right-0.5 flex h-5 w-5 items-center justify-center rounded-full bg-[#FF6F61] text-[10px] font-bold text-white ring-2 ring-white transition-transform duration-300 animate-in zoom-in">
+                <span className="absolute -top-0.5 -right-0.5 flex h-5 w-5 items-center justify-center rounded-full bg-[#1E3A8A] text-[10px] font-bold text-white ring-2 ring-white transition-transform duration-300 animate-in zoom-in">
                   {totalItemCount}
                 </span>
               )}
@@ -252,11 +252,11 @@ export default function Header({ categories = [], session, userName }: HeaderPro
               placeholder="Search collections..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full px-3.5 py-2 bg-gray-50 border border-gray-200 focus:border-[#FF6F61] text-[#222222] text-xs font-sans outline-none rounded-sm"
+              className="w-full px-3.5 py-2 bg-gray-50 border border-gray-200 focus:border-[#1E3A8A] text-[#0F172A] text-xs font-sans outline-none rounded-sm"
             />
             <button
               type="submit"
-              className="absolute right-3 text-[#8C857B] hover:text-[#FF6F61] p-1 cursor-pointer"
+              className="absolute right-3 text-[#64748B] hover:text-[#1E3A8A] p-1 cursor-pointer"
             >
               <Search className="h-4 w-4" />
             </button>
@@ -265,21 +265,21 @@ export default function Header({ categories = [], session, userName }: HeaderPro
           <Link
             href="/products"
             onClick={() => setMobileMenuOpen(false)}
-            className="block font-sans text-sm font-bold tracking-[0.25em] text-[#222222] hover:text-[#FF6F61] transition-colors border-b border-gray-100 pb-3"
+            className="block font-sans text-sm font-bold tracking-[0.25em] text-[#0F172A] hover:text-[#1E3A8A] transition-colors border-b border-gray-100 pb-3"
           >
             COLLECTIONS
           </Link>
 
           {/* Mobile Category list */}
           <div className="border-b border-gray-100 pb-3">
-            <span className="block font-sans text-[10px] font-bold tracking-[0.2em] text-[#8C857B] mb-2 uppercase">
+            <span className="block font-sans text-[10px] font-bold tracking-[0.2em] text-[#64748B] mb-2 uppercase">
               SHOP BY CATEGORY
             </span>
             <div className="grid grid-cols-2 gap-2.5 pl-2">
               <Link
                 href="/products"
                 onClick={() => setMobileMenuOpen(false)}
-                className="block font-sans text-xs font-bold tracking-wider text-[#FF6F61] hover:text-[#FF6F61]/80 transition-colors uppercase col-span-2"
+                className="block font-sans text-xs font-bold tracking-wider text-[#1E3A8A] hover:text-[#1E3A8A]/80 transition-colors uppercase col-span-2"
               >
                 All Categories
               </Link>
@@ -288,7 +288,7 @@ export default function Header({ categories = [], session, userName }: HeaderPro
                   key={cat._id}
                   href={`/products?category=${cat.slug}`}
                   onClick={() => setMobileMenuOpen(false)}
-                  className="block font-sans text-xs font-semibold tracking-wider text-[#222222]/80 hover:text-[#FF6F61] transition-colors uppercase"
+                  className="block font-sans text-xs font-semibold tracking-wider text-[#0F172A]/80 hover:text-[#1E3A8A] transition-colors uppercase"
                 >
                   {cat.name}
                 </Link>
@@ -299,28 +299,28 @@ export default function Header({ categories = [], session, userName }: HeaderPro
           {/* Mobile User Profile Section */}
           {session?.user ? (
             <div className="border-t border-gray-100 pt-4">
-              <span className="block font-sans text-[10px] font-bold tracking-[0.2em] text-[#8C857B] mb-2 uppercase">
+              <span className="block font-sans text-[10px] font-bold tracking-[0.2em] text-[#64748B] mb-2 uppercase">
                 Welcome, {displayName}
               </span>
               <div className="space-y-3.5 pl-2">
                 <Link
                   href="/account"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="block font-sans text-xs font-bold tracking-wider text-[#222222] hover:text-[#FF6F61] transition-colors uppercase"
+                  className="block font-sans text-xs font-bold tracking-wider text-[#0F172A] hover:text-[#1E3A8A] transition-colors uppercase"
                 >
                   Dashboard
                 </Link>
                 <Link
                   href="/account/profile"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="block font-sans text-xs font-bold tracking-wider text-[#222222] hover:text-[#FF6F61] transition-colors uppercase"
+                  className="block font-sans text-xs font-bold tracking-wider text-[#0F172A] hover:text-[#1E3A8A] transition-colors uppercase"
                 >
                   My Profile
                 </Link>
                 <Link
                   href="/account/orders"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="block font-sans text-xs font-bold tracking-wider text-[#222222] hover:text-[#FF6F61] transition-colors uppercase"
+                  className="block font-sans text-xs font-bold tracking-wider text-[#0F172A] hover:text-[#1E3A8A] transition-colors uppercase"
                 >
                   My Orders
                 </Link>
@@ -328,7 +328,7 @@ export default function Header({ categories = [], session, userName }: HeaderPro
                   <Link
                     href="/admin/dashboard"
                     onClick={() => setMobileMenuOpen(false)}
-                    className="block font-sans text-xs font-bold tracking-wider text-[#FF6F61] hover:text-[#FF6F61]/80 transition-colors uppercase"
+                    className="block font-sans text-xs font-bold tracking-wider text-[#1E3A8A] hover:text-[#1E3A8A]/80 transition-colors uppercase"
                   >
                     Admin Panel
                   </Link>
@@ -348,7 +348,7 @@ export default function Header({ categories = [], session, userName }: HeaderPro
             <Link
               href="/login"
               onClick={() => setMobileMenuOpen(false)}
-              className="block font-sans text-sm font-bold tracking-[0.25em] text-[#FF6F61] hover:text-[#FF6F61]/80 transition-colors pt-1 uppercase"
+              className="block font-sans text-sm font-bold tracking-[0.25em] text-[#1E3A8A] hover:text-[#1E3A8A]/80 transition-colors pt-1 uppercase"
             >
               ACCOUNT & ORDERS
             </Link>

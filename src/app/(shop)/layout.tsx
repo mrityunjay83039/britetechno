@@ -49,10 +49,10 @@ export default async function ShopLayout({ children }: { children: React.ReactNo
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#FAFAFA]">
+    <div className="min-h-screen flex flex-col bg-[#FFFFFF]">
       {/* Floating banner for maintenance mode admin bypass */}
       {settings?.isMaintenanceModeEnabled && isAdmin && (
-        <div className="sticky top-0 z-50 bg-[#FF6F61] text-white font-sans text-[10px] sm:text-xs font-bold tracking-widest text-center py-2 px-4 uppercase flex items-center justify-center gap-2 select-none shadow-md animate-pulse">
+        <div className="sticky top-0 z-50 bg-[#1E3A8A] text-white font-sans text-[10px] sm:text-xs font-bold tracking-widest text-center py-2 px-4 uppercase flex items-center justify-center gap-2 select-none shadow-md animate-pulse">
           <span className="w-2.5 h-2.5 rounded-full bg-white shrink-0" />
           <span>Maintenance Mode Active - Admin View</span>
         </div>
@@ -65,7 +65,7 @@ export default async function ShopLayout({ children }: { children: React.ReactNo
       <CartDrawer />
 
       {/* Expanded Premium Footer (Bright, Airy, and Spacious) */}
-      <footer className="bg-white border-t border-gray-200 pt-16 pb-12 text-[#222222]">
+      <footer className="bg-white border-t border-gray-200 pt-16 pb-12 text-[#0F172A]">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8 pb-12 border-b border-gray-100">
             {/* Column 1: Brand */}
@@ -81,7 +81,7 @@ export default async function ShopLayout({ children }: { children: React.ReactNo
                   href="https://www.instagram.com/bhavatsyam/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-8 h-8 rounded-full border border-gray-200 flex items-center justify-center text-zinc-500 hover:text-[#FF6F61] hover:border-[#FF6F61] transition-all duration-300 group"
+                  className="w-8 h-8 rounded-full border border-gray-200 flex items-center justify-center text-zinc-500 hover:text-[#1E3A8A] hover:border-[#1E3A8A] transition-all duration-300 group"
                   aria-label="Instagram Profile"
                 >
                   <svg
@@ -103,7 +103,7 @@ export default async function ShopLayout({ children }: { children: React.ReactNo
                   href="https://www.facebook.com/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-8 h-8 rounded-full border border-gray-200 flex items-center justify-center text-zinc-500 hover:text-[#FF6F61] hover:border-[#FF6F61] transition-all duration-300 group"
+                  className="w-8 h-8 rounded-full border border-gray-200 flex items-center justify-center text-zinc-500 hover:text-[#1E3A8A] hover:border-[#1E3A8A] transition-all duration-300 group"
                   aria-label="Facebook Page"
                 >
                   <svg
@@ -122,7 +122,7 @@ export default async function ShopLayout({ children }: { children: React.ReactNo
                   href="https://www.flipkart.com/clothing-and-accessories/coords/bhavatsyam~brand/pr?sid=clo,l1l&marketplace=FLIPKART"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-8 h-8 rounded-full border border-gray-200 flex items-center justify-center text-zinc-500 hover:text-[#FF6F61] hover:border-[#FF6F61] transition-all duration-300 group"
+                  className="w-8 h-8 rounded-full border border-gray-200 flex items-center justify-center text-zinc-500 hover:text-[#1E3A8A] hover:border-[#1E3A8A] transition-all duration-300 group"
                   aria-label="Flipkart Brand Store"
                 >
                   <Globe className="w-4 h-4 transition-transform group-hover:scale-110" />
@@ -132,22 +132,22 @@ export default async function ShopLayout({ children }: { children: React.ReactNo
 
             {/* Column 2: Shop */}
             <div className="space-y-5">
-              <h4 className="font-sans text-xs font-bold tracking-[0.2em] text-[#FF6F61] uppercase">
+              <h4 className="font-sans text-xs font-bold tracking-[0.2em] text-[#1E3A8A] uppercase">
                 Shop Collections
               </h4>
               <ul className="space-y-2.5 font-sans text-xs text-zinc-600">
                 <li>
-                  <Link href="/products" className="hover:text-[#FF6F61] transition-colors uppercase">
+                  <Link href="/products" className="hover:text-[#1E3A8A] transition-colors uppercase">
                     All Products
                   </Link>
                 </li>
                 <li>
-                  <Link href="/products?category=co-ord-sets" className="hover:text-[#FF6F61] transition-colors uppercase">
+                  <Link href="/products?category=co-ord-sets" className="hover:text-[#1E3A8A] transition-colors uppercase">
                     Co-ord Sets
                   </Link>
                 </li>
                 <li>
-                  <Link href="/products?sort=newest" className="hover:text-[#FF6F61] transition-colors uppercase">
+                  <Link href="/products?sort=newest" className="hover:text-[#1E3A8A] transition-colors uppercase">
                     New Arrivals
                   </Link>
                 </li>
@@ -156,27 +156,27 @@ export default async function ShopLayout({ children }: { children: React.ReactNo
 
             {/* Column 3: Customer Care */}
             <div className="space-y-5">
-              <h4 className="font-sans text-xs font-bold tracking-[0.2em] text-[#FF6F61] uppercase">
+              <h4 className="font-sans text-xs font-bold tracking-[0.2em] text-[#1E3A8A] uppercase">
                 Customer Care
               </h4>
               <ul className="space-y-2.5 font-sans text-xs text-zinc-600">
                 <li>
-                  <Link href="/about" className="hover:text-[#FF6F61] transition-colors uppercase">
+                  <Link href="/about" className="hover:text-[#1E3A8A] transition-colors uppercase">
                     About Us
                   </Link>
                 </li>
                 <li>
-                  <Link href="/contact" className="hover:text-[#FF6F61] transition-colors uppercase">
+                  <Link href="/contact" className="hover:text-[#1E3A8A] transition-colors uppercase">
                     Contact Us
                   </Link>
                 </li>
                 <li>
-                  <Link href="/faq" className="hover:text-[#FF6F61] transition-colors uppercase">
+                  <Link href="/faq" className="hover:text-[#1E3A8A] transition-colors uppercase">
                     FAQs
                   </Link>
                 </li>
                 <li>
-                  <Link href="/shipping-returns" className="hover:text-[#FF6F61] transition-colors uppercase">
+                  <Link href="/shipping-returns" className="hover:text-[#1E3A8A] transition-colors uppercase">
                     Shipping & Returns
                   </Link>
                 </li>
@@ -185,23 +185,23 @@ export default async function ShopLayout({ children }: { children: React.ReactNo
 
             {/* Column 4: Legal & Contact */}
             <div className="space-y-5">
-              <h4 className="font-sans text-xs font-bold tracking-[0.2em] text-[#FF6F61] uppercase">
+              <h4 className="font-sans text-xs font-bold tracking-[0.2em] text-[#1E3A8A] uppercase">
                 Legal & Atelier
               </h4>
               <ul className="space-y-2.5 font-sans text-xs text-zinc-600">
                 <li>
-                  <Link href="/privacy-policy" className="hover:text-[#FF6F61] transition-colors uppercase">
+                  <Link href="/privacy-policy" className="hover:text-[#1E3A8A] transition-colors uppercase">
                     Privacy Policy
                   </Link>
                 </li>
                 <li>
-                  <Link href="/terms-conditions" className="hover:text-[#FF6F61] transition-colors uppercase">
+                  <Link href="/terms-conditions" className="hover:text-[#1E3A8A] transition-colors uppercase">
                     Terms & Conditions
                   </Link>
                 </li>
                 <li className="pt-2 border-t border-gray-100 flex flex-col gap-1 text-[11px] font-sans">
                   <span className="text-zinc-500 uppercase tracking-wider font-semibold">Atelier Inquiries:</span>
-                  <a href="mailto:info@bhavatsyam.com" className="text-[#FF6F61] hover:underline flex items-center gap-1.5 mt-0.5">
+                  <a href="mailto:info@bhavatsyam.com" className="text-[#1E3A8A] hover:underline flex items-center gap-1.5 mt-0.5">
                     <Mail className="w-3.5 h-3.5 shrink-0" />
                     <span>info@bhavatsyam.com</span>
                   </a>
@@ -216,8 +216,8 @@ export default async function ShopLayout({ children }: { children: React.ReactNo
               &copy; {new Date().getFullYear()} BHAVATSYAM. All Rights Reserved.
             </div>
             <div className="flex gap-6 font-sans text-[10px] text-zinc-500 tracking-wider uppercase">
-              <Link href="/privacy-policy" className="hover:text-[#FF6F61] transition-colors">PRIVACY POLICY</Link>
-              <Link href="/terms-conditions" className="hover:text-[#FF6F61] transition-colors">TERMS OF SERVICE</Link>
+              <Link href="/privacy-policy" className="hover:text-[#1E3A8A] transition-colors">PRIVACY POLICY</Link>
+              <Link href="/terms-conditions" className="hover:text-[#1E3A8A] transition-colors">TERMS OF SERVICE</Link>
             </div>
           </div>
         </div>

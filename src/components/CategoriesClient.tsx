@@ -134,7 +134,7 @@ export default function CategoriesClient({ initialCategories }: CategoriesClient
       <div className="flex justify-end">
         <button
           onClick={handleOpenCreateModal}
-          className="flex items-center gap-2 px-5 py-3 bg-[#0F0F11] text-[#FAF8F5] border border-[#C5A880]/30 hover:bg-[#C5A880] hover:text-[#0F0F11] font-sans text-xs font-bold tracking-wider transition-all duration-300 cursor-pointer uppercase"
+          className="flex items-center gap-2 px-5 py-3 bg-[#1E3A8A] text-[#FFFFFF] border border-[#1E3A8A]/30 hover:bg-[#1E3A8A] hover:text-[#1E3A8A] font-sans text-xs font-bold tracking-wider transition-all duration-300 cursor-pointer uppercase"
         >
           <Plus className="w-4 h-4" />
           Create New Category
@@ -157,11 +157,11 @@ export default function CategoriesClient({ initialCategories }: CategoriesClient
       )}
 
       {/* Data Table */}
-      <div className="bg-white border border-[#C5A880]/15 rounded-sm overflow-hidden shadow-xs">
+      <div className="bg-white border border-[#1E3A8A]/15 rounded-sm overflow-hidden shadow-xs">
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse">
             <thead>
-              <tr className="bg-[#FAF8F5] border-b border-[#C5A880]/15 text-[#8C857B] font-sans text-[10px] font-bold uppercase tracking-wider">
+              <tr className="bg-[#FFFFFF] border-b border-[#1E3A8A]/15 text-[#64748B] font-sans text-[10px] font-bold uppercase tracking-wider">
                 <th className="py-4 px-6">Category Name</th>
                 <th className="py-4 px-6">Slug / Reference</th>
                 <th className="py-4 px-6">Description</th>
@@ -169,26 +169,26 @@ export default function CategoriesClient({ initialCategories }: CategoriesClient
                 <th className="py-4 px-6 text-right">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#C5A880]/10 font-sans text-sm">
+            <tbody className="divide-y divide-[#1E3A8A]/10 font-sans text-sm">
               {categories.length === 0 ? (
                 <tr>
-                  <td colSpan={5} className="py-12 text-center text-[#8C857B] font-medium">
+                  <td colSpan={5} className="py-12 text-center text-[#64748B] font-medium">
                     No categories found. Create a category to get started.
                   </td>
                 </tr>
               ) : (
                 categories.map((cat) => {
                   return (
-                    <tr key={cat._id} className="hover:bg-[#FAF8F5]/40 transition-colors">
-                      <td className="py-4 px-6 font-semibold text-[#0F0F11]">
+                    <tr key={cat._id} className="hover:bg-blue-900/40 transition-colors">
+                      <td className="py-4 px-6 font-semibold text-[#1E3A8A]">
                         {cat.name}
                       </td>
                       <td className="py-4 px-6">
-                        <span className="text-xs bg-[#FAF8F5] border border-[#C5A880]/20 px-2.5 py-1 text-[#C5A880] font-mono rounded-sm">
+                        <span className="text-xs bg-[#FFFFFF] border border-[#1E3A8A]/20 px-2.5 py-1 text-[#1E3A8A] font-mono rounded-sm">
                           {cat.slug}
                         </span>
                       </td>
-                      <td className="py-4 px-6 text-[#8C857B] max-w-xs truncate">
+                      <td className="py-4 px-6 text-[#64748B] max-w-xs truncate">
                         {cat.description || '—'}
                       </td>
                       <td className="py-4 px-6">
@@ -204,7 +204,7 @@ export default function CategoriesClient({ initialCategories }: CategoriesClient
                         <div className="flex items-center justify-end gap-2.5">
                           <button
                             onClick={() => handleOpenEditModal(cat)}
-                            className="p-1.5 text-zinc-500 hover:text-[#C5A880] hover:bg-zinc-50 rounded-sm transition-colors cursor-pointer"
+                            className="p-1.5 text-zinc-500 hover:text-[#1E3A8A] hover:bg-zinc-50 rounded-sm transition-colors cursor-pointer"
                             title="Edit Category"
                           >
                             <Edit3 className="w-4 h-4" />
@@ -230,20 +230,20 @@ export default function CategoriesClient({ initialCategories }: CategoriesClient
       {/* Create / Edit Modal */}
       {isModalOpen && (
         <div className="fixed inset-0 z-50 overflow-y-auto flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs">
-          <div className="relative bg-white w-full max-w-lg rounded-sm border border-[#C5A880]/20 shadow-2xl overflow-hidden flex flex-col">
+          <div className="relative bg-white w-full max-w-lg rounded-sm border border-[#1E3A8A]/20 shadow-2xl overflow-hidden flex flex-col">
             {/* Modal Header */}
-            <div className="bg-[#0F0F11] px-6 py-4 flex items-center justify-between border-b border-[#C5A880]/15">
+            <div className="bg-[#1E3A8A] px-6 py-4 flex items-center justify-between border-b border-[#1E3A8A]/15">
               <div>
-                <h3 className="font-serif text-lg font-bold text-[#C5A880] tracking-wide">
+                <h3 className="font-sans text-lg font-bold text-[#1E3A8A] tracking-wide">
                   {editingCategory ? 'Edit Category' : 'Create New Category'}
                 </h3>
-                <p className="font-sans text-[10px] text-[#8C857B] uppercase tracking-widest mt-0.5">
+                <p className="font-sans text-[10px] text-[#64748B] uppercase tracking-widest mt-0.5">
                   Organize and group your premium clothing catalog
                 </p>
               </div>
               <button
                 onClick={() => setIsModalOpen(false)}
-                className="text-[#8C857B] hover:text-[#FAF8F5] transition-colors cursor-pointer p-1"
+                className="text-[#64748B] hover:text-[#FFFFFF] transition-colors cursor-pointer p-1"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -266,7 +266,7 @@ export default function CategoriesClient({ initialCategories }: CategoriesClient
               )}
 
               <div className="space-y-1">
-                <label className="font-sans text-xs font-bold text-[#0F0F11] uppercase tracking-wider">
+                <label className="font-sans text-xs font-bold text-[#1E3A8A] uppercase tracking-wider">
                   Category Name *
                 </label>
                 <input
@@ -275,12 +275,12 @@ export default function CategoriesClient({ initialCategories }: CategoriesClient
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="e.g. Co-ord Sets"
-                  className="w-full px-3 py-2 bg-white border border-[#C5A880]/30 focus:border-[#C5A880] focus:ring-1 focus:ring-[#C5A880] text-sm font-sans outline-none rounded-sm"
+                  className="w-full px-3 py-2 bg-white border border-[#1E3A8A]/30 focus:border-[#1E3A8A] focus:ring-1 focus:ring-[#1E3A8A] text-sm font-sans outline-none rounded-sm"
                 />
               </div>
 
               <div className="space-y-1">
-                <label className="font-sans text-xs font-bold text-[#0F0F11] uppercase tracking-wider">
+                <label className="font-sans text-xs font-bold text-[#1E3A8A] uppercase tracking-wider">
                   Custom Slug (Optional)
                 </label>
                 <input
@@ -288,12 +288,12 @@ export default function CategoriesClient({ initialCategories }: CategoriesClient
                   value={slug}
                   onChange={(e) => setSlug(e.target.value)}
                   placeholder="e.g. co-ord-sets (auto-generated if empty)"
-                  className="w-full px-3 py-2 bg-white border border-[#C5A880]/30 focus:border-[#C5A880] focus:ring-1 focus:ring-[#C5A880] text-sm font-sans outline-none rounded-sm font-mono"
+                  className="w-full px-3 py-2 bg-white border border-[#1E3A8A]/30 focus:border-[#1E3A8A] focus:ring-1 focus:ring-[#1E3A8A] text-sm font-sans outline-none rounded-sm font-mono"
                 />
               </div>
 
               <div className="space-y-1">
-                <label className="font-sans text-xs font-bold text-[#0F0F11] uppercase tracking-wider">
+                <label className="font-sans text-xs font-bold text-[#1E3A8A] uppercase tracking-wider">
                   Description
                 </label>
                 <textarea
@@ -301,7 +301,7 @@ export default function CategoriesClient({ initialCategories }: CategoriesClient
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
                   placeholder="Describe this category's style or material details..."
-                  className="w-full px-3 py-2 bg-white border border-[#C5A880]/30 focus:border-[#C5A880] focus:ring-1 focus:ring-[#C5A880] text-sm font-sans outline-none rounded-sm"
+                  className="w-full px-3 py-2 bg-white border border-[#1E3A8A]/30 focus:border-[#1E3A8A] focus:ring-1 focus:ring-[#1E3A8A] text-sm font-sans outline-none rounded-sm"
                 />
               </div>
 
@@ -311,26 +311,26 @@ export default function CategoriesClient({ initialCategories }: CategoriesClient
                   id="isActive"
                   checked={isActive}
                   onChange={(e) => setIsActive(e.target.checked)}
-                  className="w-4 h-4 border-[#C5A880]/30 text-[#C5A880] focus:ring-[#C5A880] rounded-sm"
+                  className="w-4 h-4 border-[#1E3A8A]/30 text-[#1E3A8A] focus:ring-[#1E3A8A] rounded-sm"
                 />
-                <label htmlFor="isActive" className="font-sans text-xs font-bold text-[#0F0F11] uppercase tracking-wider select-none cursor-pointer">
+                <label htmlFor="isActive" className="font-sans text-xs font-bold text-[#1E3A8A] uppercase tracking-wider select-none cursor-pointer">
                   Category is Active (Visible on Shop Storefront)
                 </label>
               </div>
 
               {/* Modal Footer */}
-              <div className="border-t border-[#C5A880]/15 pt-4 mt-6 flex justify-end gap-3">
+              <div className="border-t border-[#1E3A8A]/15 pt-4 mt-6 flex justify-end gap-3">
                 <button
                   type="button"
                   onClick={() => setIsModalOpen(false)}
-                  className="px-5 py-2.5 border border-[#C5A880]/30 text-[#8C857B] hover:text-[#0F0F11] hover:bg-[#FAF8F5] font-sans text-xs font-bold tracking-wider transition-all cursor-pointer uppercase"
+                  className="px-5 py-2.5 border border-[#1E3A8A]/30 text-[#64748B] hover:text-[#1E3A8A] hover:bg-blue-900 font-sans text-xs font-bold tracking-wider transition-all cursor-pointer uppercase"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={loading}
-                  className="px-6 py-2.5 bg-[#0F0F11] text-[#FAF8F5] border border-[#C5A880]/30 hover:bg-[#C5A880] hover:text-[#0F0F11] disabled:opacity-50 font-sans text-xs font-bold tracking-wider transition-all cursor-pointer uppercase flex items-center gap-2"
+                  className="px-6 py-2.5 bg-[#1E3A8A] text-[#FFFFFF] border border-[#1E3A8A]/30 hover:bg-[#1E3A8A] hover:text-[#1E3A8A] disabled:opacity-50 font-sans text-xs font-bold tracking-wider transition-all cursor-pointer uppercase flex items-center gap-2"
                 >
                   {loading ? 'Saving...' : 'Save Category'}
                 </button>

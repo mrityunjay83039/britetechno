@@ -45,7 +45,7 @@ export default async function ReceiptPage({ params }: ReceiptPageProps) {
   const customerMobile = customer?.mobile || '';
 
   return (
-    <div className="bg-[#FAF8F5] min-h-screen py-12 px-4 sm:px-6 lg:px-8">
+    <div className="bg-[#FFFFFF] min-h-screen py-12 px-4 sm:px-6 lg:px-8">
 
       {/* Print styles inject */}
       <style dangerouslySetInnerHTML={{ __html: `
@@ -65,8 +65,8 @@ export default async function ReceiptPage({ params }: ReceiptPageProps) {
             padding: 0 !important;
           }
           .print-dark-bg {
-            background-color: #0F0F11 !important;
-            color: #FAF8F5 !important;
+            background-color: #1E3A8A !important;
+            color: #FFFFFF !important;
             -webkit-print-color-adjust: exact;
             print-color-adjust: exact;
           }
@@ -79,7 +79,7 @@ export default async function ReceiptPage({ params }: ReceiptPageProps) {
         <div className="no-print flex justify-between items-center">
           <Link
             href="/account/orders"
-            className="inline-flex items-center gap-1 font-sans text-xs font-bold text-[#8C857B] hover:text-[#C5A880] uppercase tracking-widest transition-colors"
+            className="inline-flex items-center gap-1 font-sans text-xs font-bold text-[#64748B] hover:text-[#1E3A8A] uppercase tracking-widest transition-colors"
           >
             <ChevronLeft className="h-4 w-4" />
             Back to Orders
@@ -89,17 +89,17 @@ export default async function ReceiptPage({ params }: ReceiptPageProps) {
         </div>
 
         {/* Invoice Card Container */}
-        <div className="print-card bg-white border border-[#C5A880]/15 rounded-sm shadow-xl overflow-hidden">
+        <div className="print-card bg-white border border-[#1E3A8A]/15 rounded-sm shadow-xl overflow-hidden">
 
           {/* Header Banner - Luxury Branded Dark Area */}
-          <div className="print-dark-bg bg-[#0F0F11] text-[#FAF8F5] px-8 py-10 border-b border-[#C5A880]/20 text-center space-y-2">
-            <span className="font-sans text-[10px] tracking-[0.4em] text-[#8C857B] uppercase font-bold block">
+          <div className="print-dark-bg bg-[#1E3A8A] text-[#FFFFFF] px-8 py-10 border-b border-[#1E3A8A]/20 text-center space-y-2">
+            <span className="font-sans text-[10px] tracking-[0.4em] text-[#64748B] uppercase font-bold block">
               Luxury Craftsmanship
             </span>
-            <h1 className="font-serif text-3xl sm:text-4xl font-bold text-[#C5A880] tracking-widest uppercase">
+            <h1 className="font-sans text-3xl sm:text-4xl font-bold text-[#1E3A8A] tracking-widest uppercase">
               BHAVATSYAM
             </h1>
-            <p className="font-sans text-[9px] tracking-[0.25em] text-[#FAF8F5]/60 uppercase">
+            <p className="font-sans text-[9px] tracking-[0.25em] text-[#FFFFFF]/60 uppercase">
               Heritage & Modernity
             </p>
           </div>
@@ -107,16 +107,16 @@ export default async function ReceiptPage({ params }: ReceiptPageProps) {
           <div className="p-8 sm:p-10 space-y-8">
 
             {/* Invoice Details Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 text-xs font-sans border-b border-[#C5A880]/15 pb-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 text-xs font-sans border-b border-[#1E3A8A]/15 pb-6">
               <div className="space-y-1">
-                <span className="text-[#8C857B] uppercase tracking-wider block font-bold text-[10px]">
+                <span className="text-[#64748B] uppercase tracking-wider block font-bold text-[10px]">
                   Order Details
                 </span>
-                <p className="text-[#0F0F11]">
+                <p className="text-[#1E3A8A]">
                   <strong className="font-semibold text-gray-500 uppercase">Receipt Reference:</strong><br />
-                  <span className="font-mono text-xs font-bold text-[#C5A880]">#{order._id.toString().toUpperCase()}</span>
+                  <span className="font-mono text-xs font-bold text-[#1E3A8A]">#{order._id.toString().toUpperCase()}</span>
                 </p>
-                <p className="text-[#0F0F11]">
+                <p className="text-[#1E3A8A]">
                   <strong className="font-semibold text-gray-500 uppercase">Date of Purchase:</strong><br />
                   {new Date(order.createdAt).toLocaleDateString('en-US', {
                     month: 'long',
@@ -129,10 +129,10 @@ export default async function ReceiptPage({ params }: ReceiptPageProps) {
               </div>
 
               <div className="space-y-1 sm:text-right">
-                <span className="text-[#8C857B] uppercase tracking-wider block font-bold text-[10px]">
+                <span className="text-[#64748B] uppercase tracking-wider block font-bold text-[10px]">
                   Customer Profile
                 </span>
-                <p className="text-[#0F0F11] font-semibold text-sm">
+                <p className="text-[#1E3A8A] font-semibold text-sm">
                   {customerName}
                 </p>
                 <p className="text-gray-500 font-medium select-all">
@@ -148,13 +148,13 @@ export default async function ReceiptPage({ params }: ReceiptPageProps) {
 
             {/* Items Ordered List Table */}
             <div className="space-y-3">
-              <span className="font-sans text-[10px] text-[#8C857B] uppercase tracking-wider font-bold block mb-4">
+              <span className="font-sans text-[10px] text-[#64748B] uppercase tracking-wider font-bold block mb-4">
                 Items Commissioned
               </span>
               <div className="overflow-x-auto">
                 <table className="w-full text-left border-collapse font-sans text-xs">
                   <thead>
-                    <tr className="border-b border-[#C5A880]/20 text-[#8C857B] uppercase tracking-wider text-[10px] font-bold">
+                    <tr className="border-b border-[#1E3A8A]/20 text-[#64748B] uppercase tracking-wider text-[10px] font-bold">
                       <th className="py-2.5">Product Title</th>
                       <th className="py-2.5 text-center">Color</th>
                       <th className="py-2.5 text-center">Size</th>
@@ -165,13 +165,13 @@ export default async function ReceiptPage({ params }: ReceiptPageProps) {
                   </thead>
                   <tbody className="divide-y divide-gray-100">
                     {order.items.map((item, index) => (
-                      <tr key={index} className="text-[#0F0F11]">
+                      <tr key={index} className="text-[#1E3A8A]">
                         <td className="py-3 font-semibold text-sm">{item.title}</td>
                         <td className="py-3 text-center text-gray-500">{item.color}</td>
                         <td className="py-3 text-center text-gray-500">{item.size}</td>
                         <td className="py-3 text-center font-bold">{item.quantity}</td>
                         <td className="py-3 text-right text-gray-500">₹{item.priceAtPurchase.toLocaleString('en-IN')}</td>
-                        <td className="py-3 text-right font-serif text-sm font-semibold">
+                        <td className="py-3 text-right font-sans text-sm font-semibold">
                           ₹{(item.priceAtPurchase * item.quantity).toLocaleString('en-IN')}
                         </td>
                       </tr>
@@ -182,7 +182,7 @@ export default async function ReceiptPage({ params }: ReceiptPageProps) {
             </div>
 
             {/* Totals Summary */}
-            <div className="border-t border-[#C5A880]/15 pt-6 flex justify-end">
+            <div className="border-t border-[#1E3A8A]/15 pt-6 flex justify-end">
               <div className="w-full sm:w-64 space-y-2.5 text-xs font-sans text-right">
                 <div className="flex justify-between text-gray-500">
                   <span>Subtotal</span>
@@ -192,22 +192,22 @@ export default async function ReceiptPage({ params }: ReceiptPageProps) {
                   <span>Shipping & Delivery</span>
                   <span className="uppercase text-[10px] font-bold text-emerald-600">Complimentary</span>
                 </div>
-                <div className="flex justify-between border-t border-[#C5A880]/10 pt-2.5 font-serif text-base font-bold text-[#0F0F11]">
+                <div className="flex justify-between border-t border-[#1E3A8A]/10 pt-2.5 font-sans text-base font-bold text-[#1E3A8A]">
                   <span>Total Amount Paid</span>
-                  <span className="text-[#C5A880]">₹{order.totalAmount.toLocaleString('en-IN')}</span>
+                  <span className="text-[#1E3A8A]">₹{order.totalAmount.toLocaleString('en-IN')}</span>
                 </div>
               </div>
             </div>
 
             {/* Shipping details and payment references */}
-            <div className="border-t border-[#C5A880]/15 pt-6 grid grid-cols-1 sm:grid-cols-2 gap-6 text-xs font-sans">
+            <div className="border-t border-[#1E3A8A]/15 pt-6 grid grid-cols-1 sm:grid-cols-2 gap-6 text-xs font-sans">
 
               {/* Delivery destination */}
               <div className="space-y-2">
-                <span className="text-[#8C857B] uppercase tracking-wider block font-bold text-[10px]">
+                <span className="text-[#64748B] uppercase tracking-wider block font-bold text-[10px]">
                   Shipping Address
                 </span>
-                <p className="text-[#0F0F11] leading-relaxed">
+                <p className="text-[#1E3A8A] leading-relaxed">
                   <strong>{customerName}</strong><br />
                   {order.shippingAddress.street},<br />
                   {order.shippingAddress.city}, {order.shippingAddress.state} {order.shippingAddress.postalCode},<br />
@@ -217,10 +217,10 @@ export default async function ReceiptPage({ params }: ReceiptPageProps) {
 
               {/* Payment Details */}
               <div className="space-y-3">
-                <span className="text-[#8C857B] uppercase tracking-wider block font-bold text-[10px]">
+                <span className="text-[#64748B] uppercase tracking-wider block font-bold text-[10px]">
                   Payment Information
                 </span>
-                <div className="space-y-1.5 text-[#0F0F11]">
+                <div className="space-y-1.5 text-[#1E3A8A]">
                   <p className="flex justify-between">
                     <span className="text-gray-500">Payment Status:</span>
                     <span className="font-bold text-emerald-600 tracking-wider uppercase text-[10px]">
@@ -244,7 +244,7 @@ export default async function ReceiptPage({ params }: ReceiptPageProps) {
                   {order.razorpayPaymentId && (
                     <p className="flex justify-between">
                       <span className="text-gray-500">Razorpay Payment ID:</span>
-                      <span className="font-mono text-xs text-[#C5A880] select-all font-semibold">
+                      <span className="font-mono text-xs text-[#1E3A8A] select-all font-semibold">
                         {order.razorpayPaymentId}
                       </span>
                     </p>
@@ -255,13 +255,13 @@ export default async function ReceiptPage({ params }: ReceiptPageProps) {
             </div>
 
             {/* Quality assurance note / Footer */}
-            <div className="border-t border-[#C5A880]/10 pt-8 text-center space-y-2">
-              <p className="font-serif italic text-xs text-[#8C857B]">
+            <div className="border-t border-[#1E3A8A]/10 pt-8 text-center space-y-2">
+              <p className="font-sans italic text-xs text-[#64748B]">
                 &ldquo;A perfect blend of heritage and modernity.&rdquo;
               </p>
               <p className="font-sans text-[10px] text-gray-400">
                 Each BHAVATSYAM piece is meticulously hand-crafted by master artisans with the finest care. Thank you for your commission.<br />
-                For enquiries, please contact <a href="mailto:info@bhavatsyam.com" className="text-[#C5A880] underline">info@bhavatsyam.com</a>
+                For enquiries, please contact <a href="mailto:info@bhavatsyam.com" className="text-[#1E3A8A] underline">info@bhavatsyam.com</a>
               </p>
             </div>
 

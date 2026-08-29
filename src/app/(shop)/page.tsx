@@ -78,7 +78,7 @@ export default async function HomePage() {
   }));
 
   return (
-    <div className="flex flex-col bg-[#FAFAFA]">
+    <div className="flex flex-col bg-[#FFFFFF]">
       {/* High-Conversion Premium Hero Carousel / Background video */}
       <PremiumHero />
 
@@ -86,7 +86,7 @@ export default async function HomePage() {
       <section id="collection" className="mx-auto w-full max-w-7xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
         <div className="border-b border-gray-100 pb-6 mb-12 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
           <div>
-            <h2 className="font-serif text-2xl sm:text-3xl font-medium tracking-wide text-[#222222]">
+            <h2 className="font-sans text-2xl sm:text-3xl font-medium tracking-wide text-[#0F172A]">
               The Signature Pieces
             </h2>
             <p className="font-sans text-xs text-zinc-500 mt-1.5 uppercase tracking-wider">
@@ -100,7 +100,7 @@ export default async function HomePage() {
 
         {serializedProducts.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-24 text-center">
-            <p className="font-serif text-lg font-medium text-[#222222]">No products available</p>
+            <p className="font-sans text-lg font-medium text-[#0F172A]">No products available</p>
             <p className="font-sans text-sm text-zinc-500 mt-2">
               Our curated collection is currently being updated. Please check back soon.
             </p>
@@ -120,11 +120,11 @@ export default async function HomePage() {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom,rgba(255,111,97,0.03)_0,transparent_100%)] pointer-events-none" />
 
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mb-10 text-center relative z-10">
-          <span className="font-sans text-[10px] sm:text-xs font-bold tracking-[0.4em] text-[#FF6F61] uppercase block mb-3">
+          <span className="font-sans text-[10px] sm:text-xs font-bold tracking-[0.4em] text-[#1E3A8A] uppercase block mb-3">
             Atelier Life
           </span>
-          <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-light text-[#222222] tracking-wide">
-            Follow Us <a href="https://www.instagram.com/bhavatsyam/" target="_blank" rel="noopener noreferrer" className="italic text-[#FF6F61] hover:text-[#FF6F61]/80 transition-colors">@bhavatsyam</a>
+          <h2 className="font-sans text-2xl sm:text-3xl lg:text-4xl font-light text-[#0F172A] tracking-wide">
+            Follow Us <a href="https://www.instagram.com/bhavatsyam/" target="_blank" rel="noopener noreferrer" className="italic text-[#1E3A8A] hover:text-[#1E3A8A]/80 transition-colors">@bhavatsyam</a>
           </h2>
           <p className="font-sans text-xs sm:text-sm text-zinc-600 mt-3.5 max-w-md mx-auto leading-relaxed">
             Gain exclusive access to behind-the-scenes handweaving, new style launches, and real customer stories from our Delhi studio.
@@ -151,7 +151,7 @@ export default async function HomePage() {
                 />
 
                 {/* Glassmorphic Hover Overlay using Warm Coral accent */}
-                <div className="absolute inset-0 bg-[#FF6F61]/80 backdrop-blur-3xs opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center">
+                <div className="absolute inset-0 bg-[#1E3A8A]/80 backdrop-blur-3xs opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center">
                   <div className="w-12 h-12 rounded-full border border-white/50 bg-white/10 flex items-center justify-center text-white scale-90 group-hover:scale-100 transition-transform duration-500">
                     <svg
                       className="w-5 h-5"

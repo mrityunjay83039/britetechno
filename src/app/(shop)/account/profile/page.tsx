@@ -24,15 +24,15 @@ export default async function ProfilePage() {
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="font-serif text-2xl font-semibold text-[#0F0F11] tracking-wide">
+        <h2 className="font-sans text-2xl font-semibold text-[#1E3A8A] tracking-wide">
           Personal Details
         </h2>
-        <p className="font-sans text-xs text-[#8C857B] mt-1">
+        <p className="font-sans text-xs text-[#64748B] mt-1">
           Keep your contact information up-to-date for smooth order deliveries.
         </p>
       </div>
 
-      <div className="border-t border-[#C5A880]/15 pt-6">
+      <div className="border-t border-[#1E3A8A]/15 pt-6">
         <ProfileForm
           initialName={user.name}
           initialMobile={user.mobile || ''}

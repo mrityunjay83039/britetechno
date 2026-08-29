@@ -3,42 +3,42 @@ import Link from 'next/link';
 
 export default function TermsConditionsPage() {
   return (
-    <div className="bg-[#FAF8F5] min-h-screen py-16 px-4 sm:px-6 lg:px-8">
+    <div className="bg-[#FFFFFF] min-h-screen py-16 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
         {/* Breadcrumbs */}
-        <nav className="mb-8 text-xs font-sans font-bold tracking-wider text-[#8C857B] uppercase">
-          <Link href="/" className="hover:text-[#C5A880] transition-colors">Home</Link>
+        <nav className="mb-8 text-xs font-sans font-bold tracking-wider text-[#64748B] uppercase">
+          <Link href="/" className="hover:text-[#1E3A8A] transition-colors">Home</Link>
           <span className="mx-2">/</span>
-          <span className="text-[#0F0F11]">Terms & Conditions</span>
+          <span className="text-[#1E3A8A]">Terms & Conditions</span>
         </nav>
 
         {/* Content Header */}
-        <header className="border-b border-[#C5A880]/15 pb-8 mb-10">
-          <span className="font-sans text-xs tracking-[0.3em] text-[#C5A880] uppercase font-bold block mb-3">
+        <header className="border-b border-[#1E3A8A]/15 pb-8 mb-10">
+          <span className="font-sans text-xs tracking-[0.3em] text-[#1E3A8A] uppercase font-bold block mb-3">
             Atelier Governance
           </span>
-          <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl font-light tracking-wide text-[#0F0F11]">
+          <h1 className="font-sans text-3xl sm:text-4xl md:text-5xl font-light tracking-wide text-[#1E3A8A]">
             Terms & Conditions
           </h1>
-          <p className="font-serif italic text-[#8C857B] mt-3 text-lg">
+          <p className="font-sans italic text-[#64748B] mt-3 text-lg">
             Last Updated: {new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
           </p>
         </header>
 
         {/* Terms and Conditions Content */}
-        <div className="font-sans text-[#0F0F11] text-sm leading-relaxed space-y-8">
+        <div className="font-sans text-[#1E3A8A] text-sm leading-relaxed space-y-8">
 
           <section className="space-y-3">
-            <h2 className="font-serif text-xl font-medium tracking-wide text-[#0F0F11]">
+            <h2 className="font-sans text-xl font-medium tracking-wide text-[#1E3A8A]">
               1. Acceptance of Terms
             </h2>
             <p>
-              By accessing, browsing, registering an account, or purchasing from the BHAVATSYAM website (<a href="https://bhavatsyam.com" className="text-[#C5A880] hover:underline">bhavatsyam.com</a>), you explicitly agree to be bound by these Terms and Conditions. If you object to any portion of these conditions, we kindly ask you to discontinue storefront use.
+              By accessing, browsing, registering an account, or purchasing from the BHAVATSYAM website (<a href="https://bhavatsyam.com" className="text-[#1E3A8A] hover:underline">bhavatsyam.com</a>), you explicitly agree to be bound by these Terms and Conditions. If you object to any portion of these conditions, we kindly ask you to discontinue storefront use.
             </p>
           </section>
 
           <section className="space-y-3">
-            <h2 className="font-serif text-xl font-medium tracking-wide text-[#0F0F11]">
+            <h2 className="font-sans text-xl font-medium tracking-wide text-[#1E3A8A]">
               2. Intellectual Property Rights
             </h2>
             <p>
@@ -47,7 +47,7 @@ export default function TermsConditionsPage() {
           </section>
 
           <section className="space-y-3">
-            <h2 className="font-serif text-xl font-medium tracking-wide text-[#0F0F11]">
+            <h2 className="font-sans text-xl font-medium tracking-wide text-[#1E3A8A]">
               3. Pricing and Product Display Accuracy
             </h2>
             <p>
@@ -59,7 +59,7 @@ export default function TermsConditionsPage() {
           </section>
 
           <section className="space-y-3">
-            <h2 className="font-serif text-xl font-medium tracking-wide text-[#0F0F11]">
+            <h2 className="font-sans text-xl font-medium tracking-wide text-[#1E3A8A]">
               4. Payment & Orders
             </h2>
             <p>
@@ -68,7 +68,7 @@ export default function TermsConditionsPage() {
           </section>
 
           <section className="space-y-3">
-            <h2 className="font-serif text-xl font-medium tracking-wide text-[#0F0F11]">
+            <h2 className="font-sans text-xl font-medium tracking-wide text-[#1E3A8A]">
               5. Governing Jurisdiction
             </h2>
             <p>

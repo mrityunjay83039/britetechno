@@ -49,18 +49,18 @@ export default function MaintenanceToggle({ initialEnabled }: MaintenanceToggleP
   };
 
   return (
-    <div className="bg-white p-6 rounded-sm border border-[#C5A880]/15 shadow-xs max-w-xl">
+    <div className="bg-white p-6 rounded-sm border border-[#1E3A8A]/15 shadow-xs max-w-xl">
       <div className="flex items-start justify-between gap-4">
         <div className="space-y-1.5 flex-1">
           <div className="flex items-center gap-2">
-            <h3 className="font-serif text-lg font-bold text-[#0F0F11]">
+            <h3 className="font-sans text-lg font-bold text-[#1E3A8A]">
               Global Maintenance Mode
             </h3>
             {isPending && (
-              <RefreshCw className="w-4 h-4 text-[#C5A880] animate-spin" />
+              <RefreshCw className="w-4 h-4 text-[#1E3A8A] animate-spin" />
             )}
           </div>
-          <p className="font-sans text-xs text-[#8C857B] leading-relaxed">
+          <p className="font-sans text-xs text-[#64748B] leading-relaxed">
             Activating maintenance mode will immediately block access to the public storefront, displaying a branded landing page to visitors. Logged-in administrators will bypass this restriction to continue browsing and testing.
           </p>
         </div>
@@ -75,7 +75,7 @@ export default function MaintenanceToggle({ initialEnabled }: MaintenanceToggleP
               disabled={isPending}
               onChange={(e) => handleToggle(e.target.checked)}
             />
-            <div className="w-12 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#C5A880] disabled:opacity-50"></div>
+            <div className="w-12 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#1E3A8A] disabled:opacity-50"></div>
           </label>
         </div>
       </div>
